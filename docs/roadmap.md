@@ -5,7 +5,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | # | Bosqich | Natija | Holat |
 |---|---|---|---|
 | 0 | **Poydevor** | Vite + React + TS strict, Tailwind + shadcn/ui, tema, ESLint + Prettier + Sheriff + izoh tekshiruvi, Vitest, `@core` / `@shared` / `@features` alias'lari, Vite proxy, `CLAUDE.md`, `docs/`, README | Tayyor |
-| 1 | **core** | `http` (api-client, ApiError, paging), `i18n` (uz/ru/en typed), `feedback` (toast, confirm) va ularning testlari | |
+| 1 | **core** | `http` (api-client, ApiError, paging), `i18n` (uz/ru/en typed), `feedback` (toast, confirm) va ularning testlari | Tayyor |
 | 2 | **Auth va shell** | login, sessiyani tiklash, 401 → refresh, rol guard'i, chiqish, parolni almashtirish, admin layout va rolga qarab menyu, 403/404 sahifalari | |
 | 3 | **QR anketa `/royxat`** | mobil forma, galereya/kamera, 3:4 kesish, anonim yuklash, rozilik, kod ekrani, rate limit va validatsiya xabarlari | |
 | 4 | **Arizalar navbati** | ro'yxat (status, qidiruv), SignalR (toast, ovoz, yangilash), kartochka va rasm, tahrirlash, tasdiqlash → kitobxonga o'tish, rad etish, "hujjat allaqachon bor" ogohlantirishi | |
