@@ -106,7 +106,7 @@ export default defineConfig([
   },
   {
     files: ['src/**/*.ts'],
-    ignores: ['src/**/*.test.ts', 'src/test-setup.ts'],
+    ignores: ['src/**/*.test.ts', 'src/test/**'],
     rules: {
       'max-lines-per-function': ['error', { max: MAX_FUNCTION_LINES, skipBlankLines: true }],
     },
@@ -121,6 +121,7 @@ export default defineConfig([
     files: ['src/shared/ui/**/*.tsx'],
     rules: {
       'react-refresh/only-export-components': 'off',
+      'max-lines': 'off',
     },
   },
   {

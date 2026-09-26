@@ -93,7 +93,7 @@ from `<feature>.routes.tsx`; `routes/app-routes.tsx` only lazy-loads them.
 | `core` | other `core/` folders, `shared` | `features` |
 | `shared` | `shared`, `core/http`, `core/feedback`, `core/i18n` | `features`, other `core/` folders |
 | `features/<x>` | `core`, `shared`, its own files (relative imports) | other features |
-| `routes` | `features` (lazy), `core/auth`, `core/layout` | `shared` |
+| `routes` | `features` (their `*.routes.ts`, pages load lazily), `core/auth`, `core/layout`, `core/config` | `shared` |
 
 - Enforced by Sheriff (`sheriff.config.ts`, `npm run lint:boundaries`), which follows the real file an
   import resolves to, so relative imports across folders are caught too. Sheriff walks from
@@ -161,8 +161,13 @@ page / component  →  queries hook  →  service  →  core/http api-client  �
 
 - Access token in memory only (never `localStorage` / `sessionStorage`). Refresh token is the
   `HttpOnly` cookie on `/api/auth`; JavaScript never sees it.
-- On app start: `POST /api/auth/refresh` restores the session. On `401`: one shared (single-flight)
-  refresh, then retry once; a second `401` ends the session.
+- `core/auth/session.ts` holds the single `SessionStore` and connects it to `apiClient`. Components read
+  it through `useSession()` / `useAuth()` only.
+- The session is restored (`POST /api/auth/refresh`, once, even under StrictMode) only when an admin
+  route is entered (`RequireAuth`, `GuestOnly`); the public `/royxat` never calls `/api/auth/*`.
+  On `401`: one shared (single-flight) refresh, then retry once; a failed refresh ends the session.
+- The login page shows why the session ended (`reason`: expired, outside the library network, ...).
+  The return path is kept only when the session ended by itself, not after "Sign out".
 - Profile comes from the `user` object of the login/refresh response, not from token claims.
 - Roles: `Receptionist` and `Admin`. Hiding a button is UX, not security; the backend enforces.
 
@@ -191,6 +196,8 @@ page / component  →  queries hook  →  service  →  core/http api-client  �
 - Hook and component tests mock the feature service with `vi.mock`, never `fetch`
   (`core/http` and `core/auth` tests are the exception: they test the transport itself).
 - Test file next to the code: `readers.mapper.test.ts`. Test names: `should <result> when <condition>`.
+- Shared test helpers live in `src/test` (`@test/*`, e.g. `renderWithProviders`). Production code never
+  imports them (Sheriff tag `type:test`).
 
 ## 10. How to work on a request
 

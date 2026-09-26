@@ -23,7 +23,8 @@
     "paths": {
       "@core/*": ["./src/core/*"],
       "@shared/*": ["./src/shared/*"],
-      "@features/*": ["./src/features/*"]
+      "@features/*": ["./src/features/*"],
+      "@test/*": ["./src/test/*"]
     }
   },
   "include": ["src"]

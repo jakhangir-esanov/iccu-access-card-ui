@@ -15,6 +15,7 @@ export default defineConfig({
       '@core': fromSrc('core'),
       '@shared': fromSrc('shared'),
       '@features': fromSrc('features'),
+      '@test': fromSrc('test'),
     },
   },
   server: {
@@ -38,7 +39,7 @@ export default defineConfig({
           name: 'app',
           include: ['src/**/*.test.{ts,tsx}'],
           environment: 'jsdom',
-          setupFiles: ['./src/test-setup.ts'],
+          setupFiles: ['./src/test/setup.ts'],
           css: false,
         },
       },

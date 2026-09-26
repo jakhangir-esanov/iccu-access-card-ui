@@ -19,6 +19,52 @@ export const en: Dictionary = {
     retry: 'Try again',
     loading: 'Loading...',
   },
+  roles: {
+    receptionist: 'Receptionist',
+    admin: 'Administrator',
+  },
+  nav: {
+    dashboard: 'Home',
+    registrationRequests: 'Requests',
+    readers: 'Readers',
+    reports: 'Reports',
+    users: 'Users',
+  },
+  layout: {
+    language: 'Language',
+    changePassword: 'Change password',
+    signOut: 'Sign out',
+  },
+  auth: {
+    login: {
+      title: 'Sign in',
+      subtitle: 'Reader registration and access cards',
+      username: 'Username',
+      password: 'Password',
+      submit: 'Sign in',
+    },
+    password: {
+      title: 'Change password',
+      hint: 'After the change every session on every device is closed and you need to sign in again.',
+      current: 'Current password',
+      next: 'New password',
+      confirm: 'Repeat the new password',
+      submit: 'Change',
+      changed: 'Password changed. Sign in with the new password.',
+    },
+    forbidden: {
+      title: 'No access',
+      description: 'This page is for administrators only.',
+    },
+  },
+  dashboard: {
+    welcome: 'Welcome, {name}',
+  },
+  notFound: {
+    title: 'Page not found',
+    description: 'This page does not exist or has moved.',
+    home: 'Back to home',
+  },
   confirm: {
     title: 'Are you sure?',
   },
@@ -37,6 +83,8 @@ export const en: Dictionary = {
     tooLong: 'The value is too long.',
     tooShort: 'The value is too short.',
     invalidLength: 'The value has the wrong length.',
+    password: '8-128 characters with at least one letter and one digit.',
+    passwordsMismatch: 'The passwords do not match.',
     invalid: 'The value is invalid.',
   },
 };

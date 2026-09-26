@@ -62,6 +62,12 @@ Sabab: feature'lar bir-biridan mustaqil qoladi, feature'ni o'chirish faqat uning
 9. **Karta chop etish**: 85 × 55 mm, CSS `@page`, alohida print sahifasi. Dizayn Figma'dagi `A4-13` (old tomoni) va `A4-11` (orqa tomoni) freymlarida.
 10. **Tillar**: uz / ru / en, typed kalitlar. Yetishmagan tarjima build'ni buzadi.
 11. **Izohsiz kod**: ESLint qoidasi (`iccu/no-comments`) va `scripts/check-no-comments.mjs` (JSON, CSS, Dockerfile va boshqalar).
+12. **Sessiya** (`core/auth`): bitta `SessionStore` (oddiy TS klass, React'dan tashqarida), `useSyncExternalStore` bilan o'qiladi. Sabablari:
+    - Refresh token har ishlatilganda almashadi va eski token qayta kelsa backend **barcha** sessiyalarni bekor qiladi. Shuning uchun refresh qat'iy bitta bo'lishi kerak: `restore()` va `refresh()` umumiy promise qaytaradi, StrictMode'dagi ikki marta effekt ham bitta so'rov yuboradi.
+    - `apiClient` 401 da shu store'ning `refresh()` ini chaqiradi, shuning uchun store React daraxtidan oldin, modul darajasida ulanadi (`session.ts`).
+    - Sessiya faqat admin route'iga kirilganda tiklanadi. `/royxat` internetdan ochiladi va u yerda `/api/auth/*` nginx'da yopiq.
+    - Chiqishda `queryClient.clear()` qilinadi (boshqa xodim oldingi ma'lumotni ko'rmasin). "Chiqish" bosilganda qaytish yo'li saqlanmaydi, sessiya o'zi tugaganda saqlanadi.
+13. **Route'lar**: har feature o'z `*.routes.ts` faylida route obyektlarini beradi, sahifalar `lazy: { Component }` bilan alohida chunk bo'lib yuklanadi. Yo'llar `core/config/app-paths.ts` da.
 
 ---
 

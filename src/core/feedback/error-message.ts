@@ -37,14 +37,14 @@ export function describeError(error: unknown): MessageSource {
   if (!isApiError(error)) {
     return byKey('errors.unexpected');
   }
-  const transportKey = TRANSPORT_ERROR_KEYS[error.code];
-  if (transportKey !== undefined) {
-    return byKey(transportKey);
-  }
-  if (error.messages !== null) {
+  if (TRANSPORT_ERROR_KEYS[error.code] === undefined && error.messages !== null) {
     return { kind: 'localized', messages: error.messages };
   }
-  return byKey(FALLBACK_ERROR_KEYS[error.code] ?? 'errors.unexpected');
+  return describeErrorCode(error.code);
+}
+
+export function describeErrorCode(code: string): MessageSource {
+  return byKey(TRANSPORT_ERROR_KEYS[code] ?? FALLBACK_ERROR_KEYS[code] ?? 'errors.unexpected');
 }
 
 export function describeFieldError(fieldError: FieldError): MessageSource {

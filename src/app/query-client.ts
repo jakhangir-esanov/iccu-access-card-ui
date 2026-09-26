@@ -1,4 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
+import { sessionStore } from '@core/auth/session';
 
 const STALE_TIME_MS = 30_000;
 
@@ -13,4 +14,8 @@ export const queryClient = new QueryClient({
       retry: false,
     },
   },
+});
+
+sessionStore.onSignedOut(() => {
+  queryClient.clear();
 });
