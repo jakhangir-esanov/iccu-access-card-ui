@@ -7,7 +7,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 0 | **Poydevor** | Vite + React + TS strict, Tailwind + shadcn/ui, tema, ESLint + Prettier + Sheriff + izoh tekshiruvi, Vitest, `@core` / `@shared` / `@features` alias'lari, Vite proxy, `CLAUDE.md`, `docs/`, README | Tayyor |
 | 1 | **core** | `http` (api-client, ApiError, paging), `i18n` (uz/ru/en typed), `feedback` (toast, confirm) va ularning testlari | Tayyor |
 | 2 | **Auth va shell** | login, sessiyani tiklash, 401 → refresh, rol guard'i, chiqish, parolni almashtirish, admin layout va rolga qarab menyu, 403/404 sahifalari | Tayyor |
-| 3 | **QR anketa `/royxat`** | mobil forma, galereya/kamera, 3:4 kesish, anonim yuklash, rozilik, kod ekrani, rate limit va validatsiya xabarlari | |
+| 3 | **QR anketa `/royxat`** | mobil forma, galereya/kamera, 3:4 kesish, anonim yuklash, rozilik, kod ekrani, rate limit va validatsiya xabarlari | Tayyor |
 | 4 | **Arizalar navbati** | ro'yxat (status, qidiruv), SignalR (toast, ovoz, yangilash), kartochka va rasm, tahrirlash, tasdiqlash → kitobxonga o'tish, rad etish, "hujjat allaqachon bor" ogohlantirishi | |
 | 5 | **Kitobxonlar** | jadval (server paging/sort, filtrlar, qidiruv), kartochka, yaratish/tahrirlash rasm bilan, uzaytirish, o'chirish va eksport (Admin) | |
 | 6 | **Karta chop etish** | 85 × 55 mm print sahifasi (Figma `A4-13` old, `A4-11` orqa), chop etishni qayd qilish | |
@@ -29,6 +29,8 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 - **Menyu**: arizalar, kitobxonlar, hisobotlar va foydalanuvchilar bandlari bor, lekin sahifalari tegishli bosqichlarda qo'shiladi (hozir admin layout ichida 404).
 - **`RequireAdmin`**: 8-bosqichda (foydalanuvchilar) qo'shiladi, 403 sahifasi tayyor.
 - **Bundle**: asosiy chunk ~517 kB (gzip ~165 kB), Vite ogohlantiradi. 9-bosqichda vendor chunk'larga bo'linadi.
+- **Rozilik matni**: "Shaxsiy ma'lumotlarim kutubxona kartasini rasmiylashtirish uchun qayta ishlanishiga roziman." (uz/ru/en). Yuridik matn kutubxona bilan tasdiqlanishi kerak.
+- **Lokal test arizasi**: 3-bosqich tekshiruvida `0001` kodli ariza yaratildi (Karimova Gulnoza, Talaba). 4-bosqichda navbatni sinash uchun ishlatiladi.
 - **Lokal seed**: lokal bazada faqat `admin` bor edi. `resepshn` / `Resep12345` (Receptionist) 2026-09-26 da `POST /users` orqali qo'shildi.
 
 ## Ochiq savollar

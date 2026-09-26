@@ -67,7 +67,9 @@ Sabab: feature'lar bir-biridan mustaqil qoladi, feature'ni o'chirish faqat uning
     - `apiClient` 401 da shu store'ning `refresh()` ini chaqiradi, shuning uchun store React daraxtidan oldin, modul darajasida ulanadi (`session.ts`).
     - Sessiya faqat admin route'iga kirilganda tiklanadi. `/royxat` internetdan ochiladi va u yerda `/api/auth/*` nginx'da yopiq.
     - Chiqishda `queryClient.clear()` qilinadi (boshqa xodim oldingi ma'lumotni ko'rmasin). "Chiqish" bosilganda qaytish yo'li saqlanmaydi, sessiya o'zi tugaganda saqlanadi.
-13. **Route'lar**: har feature o'z `*.routes.ts` faylida route obyektlarini beradi, sahifalar `lazy: { Component }` bilan alohida chunk bo'lib yuklanadi. Yo'llar `core/config/app-paths.ts` da.
+13. **Rasm oqimi** (`shared/components/photo`): galereya yoki kamera (`capture="user"`) → brauzer rasmni ocha olishini tekshirish → `react-easy-crop` bilan 3:4 kesish → canvas orqali **600 × 800 JPEG (sifat 0.9)** → yuklash → `photoFileId`. Rasm har doim qayta kodlanadi, shuning uchun brauzer ocha oladigan har qanday format ishlaydi va hajm 8 MB chegarasidan ancha kichik bo'ladi. Yuklash funksiyasi prop sifatida beriladi: QR anketa `/public/files`, admin panel `/files` ishlatadi.
+14. **PersonDetails** (`shared/person-details`): Zod sxemasi backend'dagi `PersonDetailsValidator` va normalizatsiyani takrorlaydi (telefon `+998...`, hujjat raqami katta harf va ajratgichlarsiz). Forma qiymatlari satr (select), sxema chiqishi esa backend DTO'si bilan bir xil turda. "Bugun" Toshkent sanasi bo'yicha, parametr sifatida beriladi.
+15. **Route'lar**: har feature o'z `*.routes.ts` faylida route obyektlarini beradi, sahifalar `lazy: { Component }` bilan alohida chunk bo'lib yuklanadi. Yo'llar `core/config/app-paths.ts` da.
 
 ---
 
