@@ -16,6 +16,7 @@ import {
   loginFormSchema,
   type LoginFormValues,
 } from '../models/login-form.schema';
+import { PasswordField } from './password-field';
 
 function useAlertMessage(loginError: unknown): string | null {
   const session = useSession();
@@ -48,27 +49,32 @@ export function LoginForm() {
   });
 
   return (
-    <form noValidate onSubmit={(event) => void submit(event)} className="grid gap-4">
+    <form noValidate onSubmit={(event) => void submit(event)} className="grid gap-6">
       <FormAlert message={alert} />
       <FormField id="username" label="auth.login.username" error={errors.username?.message}>
         <Input
           id="username"
           autoComplete="username"
           autoFocus
+          className="h-11 text-base"
           aria-invalid={errors.username !== undefined}
           {...register('username')}
         />
       </FormField>
-      <FormField id="password" label="auth.login.password" error={errors.password?.message}>
-        <Input
-          id="password"
-          type="password"
-          autoComplete="current-password"
-          aria-invalid={errors.password !== undefined}
-          {...register('password')}
-        />
-      </FormField>
-      <Button type="submit" size="lg" className="mt-2" disabled={login.isPending}>
+      <PasswordField
+        id="password"
+        label="auth.login.password"
+        autoComplete="current-password"
+        error={errors.password?.message}
+        className="h-11 text-base"
+        registration={register('password')}
+      />
+      <Button
+        type="submit"
+        size="lg"
+        className="mt-3 h-11 w-full text-base font-semibold"
+        disabled={login.isPending}
+      >
         {t('auth.login.submit')}
       </Button>
     </form>

@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { FormField } from '@shared/components/form/form-field';
-import { Input } from '@shared/ui/input';
+import { PasswordInput } from '@shared/components/form/password-input';
 
 interface PasswordPair {
   readonly newPassword: string;
@@ -13,9 +13,8 @@ export function PasswordPairFields() {
   return (
     <>
       <FormField id="newPassword" label="users.form.password" error={errors.newPassword?.message}>
-        <Input
+        <PasswordInput
           id="newPassword"
-          type="password"
           autoComplete="new-password"
           aria-invalid={errors.newPassword !== undefined}
           {...register('newPassword')}
@@ -26,9 +25,8 @@ export function PasswordPairFields() {
         label="users.form.confirmPassword"
         error={errors.confirmPassword?.message}
       >
-        <Input
+        <PasswordInput
           id="confirmPassword"
-          type="password"
           autoComplete="new-password"
           aria-invalid={errors.confirmPassword !== undefined}
           {...register('confirmPassword')}

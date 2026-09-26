@@ -1,7 +1,7 @@
 import type { UseFormRegisterReturn } from 'react-hook-form';
 import type { TranslationKey } from '@core/i18n/translations/dictionary';
 import { FormField } from '@shared/components/form/form-field';
-import { Input } from '@shared/ui/input';
+import { PasswordInput } from '@shared/components/form/password-input';
 
 interface PasswordFieldProps {
   readonly id: string;
@@ -9,6 +9,7 @@ interface PasswordFieldProps {
   readonly autoComplete: 'current-password' | 'new-password';
   readonly error: string | undefined;
   readonly registration: UseFormRegisterReturn;
+  readonly className?: string;
 }
 
 export function PasswordField({
@@ -17,14 +18,15 @@ export function PasswordField({
   autoComplete,
   error,
   registration,
+  className,
 }: PasswordFieldProps) {
   return (
     <FormField id={id} label={label} error={error}>
-      <Input
+      <PasswordInput
         id={id}
-        type="password"
         autoComplete={autoComplete}
         aria-invalid={error !== undefined}
+        className={className}
         {...registration}
       />
     </FormField>

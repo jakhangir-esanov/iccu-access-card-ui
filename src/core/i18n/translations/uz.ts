@@ -2,6 +2,7 @@ export const uz = {
   app: {
     name: 'ICCU',
     fullName: "O'zbekiston Islom sivilizatsiyasi markazi kutubxonasi",
+    center: "O'zbekistondagi Islom sivilizatsiyasi markazi",
   },
   locale: {
     uz: "O'zbekcha",
@@ -34,6 +35,12 @@ export const uz = {
     changePassword: "Parolni o'zgartirish",
     signOut: 'Chiqish',
   },
+  theme: {
+    title: 'Mavzu',
+    light: 'Kungi rejim',
+    dark: 'Tungi rejim',
+    system: 'Tizim',
+  },
   auth: {
     login: {
       title: 'Tizimga kirish',
@@ -50,6 +57,8 @@ export const uz = {
       confirm: 'Yangi parolni takrorlang',
       submit: "O'zgartirish",
       changed: "Parol o'zgartirildi. Yangi parol bilan kiring.",
+      show: "Parolni ko'rsatish",
+      hide: 'Parolni yashirish',
     },
     forbidden: {
       title: "Ruxsat yo'q",

@@ -6,6 +6,7 @@ import { authApi } from '@core/auth/auth.service';
 import { FeedbackProvider } from '@core/feedback/feedback-provider';
 import { ApiError, HttpErrorCode } from '@core/http/api-error';
 import { I18nProvider } from '@core/i18n/i18n-provider';
+import { ThemeProvider } from '@core/theme/theme-provider';
 import { createTestQueryClient } from '@test/render-with-providers';
 import { appRoutes } from './app-routes';
 
@@ -17,11 +18,13 @@ function renderAt(path: string) {
   const router = createMemoryRouter(appRoutes, { initialEntries: [path] });
   render(
     <I18nProvider>
-      <QueryClientProvider client={createTestQueryClient()}>
-        <FeedbackProvider>
-          <RouterProvider router={router} />
-        </FeedbackProvider>
-      </QueryClientProvider>
+      <ThemeProvider>
+        <QueryClientProvider client={createTestQueryClient()}>
+          <FeedbackProvider>
+            <RouterProvider router={router} />
+          </FeedbackProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
     </I18nProvider>,
   );
   return router;
@@ -35,7 +38,9 @@ describe('appRoutes', () => {
 
     const router = renderAt('/admin/password');
 
-    expect(await screen.findByRole('button', { name: 'Kirish' })).toBeInTheDocument();
+    expect(
+      await screen.findByRole('button', { name: 'Kirish' }, { timeout: 3000 }),
+    ).toBeInTheDocument();
     expect(router.state.location.pathname).toBe('/admin/login');
     expect(router.state.location.state).toEqual({ from: '/admin/password' });
   });

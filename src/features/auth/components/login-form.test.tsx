@@ -73,4 +73,17 @@ describe('LoginForm', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent("So'rovlar juda ko'p");
   });
+
+  it('should toggle password visibility when clicking the eye button', async () => {
+    renderWithProviders(<LoginForm />);
+
+    const passwordInput = screen.getByLabelText('Parol');
+    expect(passwordInput).toHaveAttribute('type', 'password');
+
+    const toggleButton = screen.getByRole('button', { name: "Parolni ko'rsatish" });
+    await userEvent.click(toggleButton);
+
+    expect(passwordInput).toHaveAttribute('type', 'text');
+    expect(screen.getByRole('button', { name: 'Parolni yashirish' })).toBeInTheDocument();
+  });
 });

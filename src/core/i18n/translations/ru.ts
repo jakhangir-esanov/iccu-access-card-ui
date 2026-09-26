@@ -4,6 +4,7 @@ export const ru: Dictionary = {
   app: {
     name: 'ICCU',
     fullName: 'Библиотека Центра исламской цивилизации в Узбекистане',
+    center: 'Центр исламской цивилизации в Узбекистане',
   },
   locale: {
     uz: "O'zbekcha",
@@ -36,6 +37,12 @@ export const ru: Dictionary = {
     changePassword: 'Сменить пароль',
     signOut: 'Выйти',
   },
+  theme: {
+    title: 'Тема',
+    light: 'Дневной режим',
+    dark: 'Ночной режим',
+    system: 'Системная',
+  },
   auth: {
     login: {
       title: 'Вход в систему',
@@ -52,6 +59,8 @@ export const ru: Dictionary = {
       confirm: 'Повторите новый пароль',
       submit: 'Сменить',
       changed: 'Пароль изменён. Войдите с новым паролем.',
+      show: 'Показать пароль',
+      hide: 'Скрыть пароль',
     },
     forbidden: {
       title: 'Нет доступа',
