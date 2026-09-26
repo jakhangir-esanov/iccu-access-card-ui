@@ -13,7 +13,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 6 | **Karta chop etish** | 85,6 × 54 mm (CR80) print sahifasi (Figma `A4-13` old, `A4-11` orqa), Code 128 shtrix-kod, chop etishni tasdiqlab qayd qilish | Tayyor |
 | 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | Tayyor |
 | 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | Tayyor |
-| 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | |
+| 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | Tayyor |
 
 ---
 
@@ -26,9 +26,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 
 ## Eslatmalar
 
-- **Dashboard**: hozircha `/admin` da faqat salomlashish sahifasi. To'liq dashboard 7-bosqichda.
-- **Menyu**: arizalar, kitobxonlar, hisobotlar va foydalanuvchilar bandlari bor, lekin sahifalari tegishli bosqichlarda qo'shiladi (hozir admin layout ichida 404).
-- **Bundle**: asosiy chunk ~517 kB (gzip ~165 kB), Vite ogohlantiradi. 9-bosqichda vendor chunk'larga bo'linadi.
+- **Bundle**: vendor chunk'larga ajratildi (`vendor-react`, `vendor-charts`, `vendor-tanstack`, `vendor-signalr`, `vendor-ui`), asosiy chunk 169 kB (gzip ~54 kB), Vite ogohlantirishlari yo'q.
 - **Rozilik matni**: "Shaxsiy ma'lumotlarim kutubxona kartasini rasmiylashtirish uchun qayta ishlanishiga roziman." (uz/ru/en). Yuridik matn kutubxona bilan tasdiqlanishi kerak.
 - **Lokal test arizasi**: 3-bosqich tekshiruvida `0001` kodli ariza yaratildi (Karimova Gulnoza, Talaba). 4-bosqichda navbatni sinash uchun ishlatiladi.
 - **Lokal test kitobxoni**: 5-bosqich tekshiruvida `0000002` (Toshmatov Botir) yaratilib, o'chirildi. Karta raqamlari qayta berilmagani uchun lokal bazada keyingi kitobxon `0000003` oladi.
