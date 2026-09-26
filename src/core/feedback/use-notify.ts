@@ -1,11 +1,16 @@
 import { useMemo } from 'react';
-import { toast } from 'sonner';
-import type { TranslationParams } from '@core/i18n/translate';
+import { toast, type ExternalToast } from 'sonner';
+import type { Translate, TranslationParams } from '@core/i18n/translate';
 import type { TranslationKey } from '@core/i18n/translations/dictionary';
 import { useT } from '@core/i18n/use-i18n';
 import { useErrorMessage } from './use-message';
 
-type NotifyByKey = (key: TranslationKey, params?: TranslationParams) => void;
+export interface NotifyAction {
+  readonly label: TranslationKey;
+  readonly onClick: () => void;
+}
+
+type NotifyByKey = (key: TranslationKey, params?: TranslationParams, action?: NotifyAction) => void;
 
 export interface Notify {
   readonly success: NotifyByKey;
@@ -15,15 +20,22 @@ export interface Notify {
   readonly failure: (error: unknown) => void;
 }
 
+function toastOptions(t: Translate, action: NotifyAction | undefined): ExternalToast {
+  if (action === undefined) {
+    return {};
+  }
+  return { action: { label: t(action.label), onClick: action.onClick } };
+}
+
 export function useNotify(): Notify {
   const t = useT();
   const errorMessage = useErrorMessage();
   return useMemo(
     () => ({
-      success: (key, params) => toast.success(t(key, params)),
-      info: (key, params) => toast.info(t(key, params)),
-      warning: (key, params) => toast.warning(t(key, params)),
-      error: (key, params) => toast.error(t(key, params)),
+      success: (key, params, action) => toast.success(t(key, params), toastOptions(t, action)),
+      info: (key, params, action) => toast.info(t(key, params), toastOptions(t, action)),
+      warning: (key, params, action) => toast.warning(t(key, params), toastOptions(t, action)),
+      error: (key, params, action) => toast.error(t(key, params), toastOptions(t, action)),
       failure: (error) => toast.error(errorMessage(error)),
     }),
     [t, errorMessage],

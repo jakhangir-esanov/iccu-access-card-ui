@@ -181,6 +181,7 @@ page / component  →  queries hook  →  service  →  core/http api-client  �
   `Manager`, `CommonService`, `DataService`, `data` (except the backend's own `data` field in DTOs), `item2`.
 - File names kebab-case (`reader-form-page.tsx`), components PascalCase (`ReaderFormPage`).
 - Functions ≤ 25 lines (ESLint in `.ts` files), files ≤ 200 lines (ESLint `max-lines`), components ≤ 200 lines.
+  Exempt: generated `src/shared/ui` (shadcn), dictionaries in `src/core/i18n/translations` (data), tests.
 - No magic strings/numbers: constants, `const` objects or union types.
 - No UI text in code: every label, message, toast, title and placeholder is a typed `core/i18n` key with
   `uz`, `ru` and `en` values. A missing translation breaks the build.

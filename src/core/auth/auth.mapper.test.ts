@@ -12,6 +12,7 @@ describe('toAuthSession', () => {
   it('should map the token and the user when the response is valid', () => {
     expect(toAuthSession(dto(1))).toEqual({
       accessToken: 'jwt',
+      expiresAt: '2026-09-26T14:32:15.8763086Z',
       user: { id: 'u1', username: 'admin', fullName: 'Administrator', role: UserRole.Admin },
     });
   });

@@ -14,5 +14,6 @@ export interface Credentials {
 
 export interface AuthSession {
   readonly accessToken: string;
+  readonly expiresAt: string;
   readonly user: AuthUser;
 }

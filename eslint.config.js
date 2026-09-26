@@ -112,6 +112,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['src/core/i18n/translations/*.ts'],
+    rules: {
+      'max-lines': 'off',
+    },
+  },
+  {
     files: ['src/**/*.test.{ts,tsx}'],
     rules: {
       'max-lines': 'off',

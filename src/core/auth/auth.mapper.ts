@@ -12,5 +12,5 @@ export function toAuthUser(dto: AuthUserDto): AuthUser {
 }
 
 export function toAuthSession(dto: AuthResponseDto): AuthSession {
-  return { accessToken: dto.accessToken, user: toAuthUser(dto.user) };
+  return { accessToken: dto.accessToken, expiresAt: dto.expiresAt, user: toAuthUser(dto.user) };
 }

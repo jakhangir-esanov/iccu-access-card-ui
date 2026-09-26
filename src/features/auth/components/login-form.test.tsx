@@ -41,6 +41,7 @@ describe('LoginForm', () => {
   it('should sign in with trimmed credentials when the form is valid', async () => {
     vi.mocked(authApi.login).mockResolvedValue({
       accessToken: 'jwt',
+      expiresAt: '2026-09-26T15:00:00Z',
       user: { id: 'u1', username: 'admin', fullName: 'Administrator', role: UserRole.Admin },
     });
     renderWithProviders(<LoginForm />);

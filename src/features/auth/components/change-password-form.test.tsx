@@ -17,6 +17,7 @@ vi.mock('@core/auth/auth.service', () => ({
 async function signIn() {
   vi.mocked(authApi.login).mockResolvedValue({
     accessToken: 'jwt',
+    expiresAt: '2026-09-26T15:00:00Z',
     user: { id: 'u1', username: 'resepshn', fullName: 'Resepshn', role: UserRole.Receptionist },
   });
   await sessionStore.login({ username: 'resepshn', password: 'x' });

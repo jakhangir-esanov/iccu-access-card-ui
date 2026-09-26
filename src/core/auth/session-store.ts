@@ -15,6 +15,7 @@ export type SessionState =
 type Listener = () => void;
 
 const UNAUTHORIZED_STATUS = 401;
+const TOKEN_RENEWAL_MARGIN_MS = 60_000;
 
 export class SessionStore {
   readonly #api: AuthApi;
@@ -22,6 +23,7 @@ export class SessionStore {
   readonly #signedOutListeners = new Set<Listener>();
   #state: SessionState = { status: 'unknown' };
   #token: string | null = null;
+  #tokenExpiresAt = 0;
   #restoring: Promise<void> | null = null;
   #refreshing: Promise<boolean> | null = null;
 
@@ -43,6 +45,13 @@ export class SessionStore {
 
   accessToken(): string | null {
     return this.#token;
+  }
+
+  async freshAccessToken(now: number = Date.now()): Promise<string | null> {
+    if (this.#token !== null && this.#tokenExpiresAt - now > TOKEN_RENEWAL_MARGIN_MS) {
+      return this.#token;
+    }
+    return (await this.refresh()) ? this.#token : null;
   }
 
   restore(): Promise<void> {
@@ -94,6 +103,7 @@ export class SessionStore {
 
   #start(session: AuthSession): void {
     this.#token = session.accessToken;
+    this.#tokenExpiresAt = Date.parse(session.expiresAt);
     this.#setState({ status: 'authenticated', user: session.user });
   }
 

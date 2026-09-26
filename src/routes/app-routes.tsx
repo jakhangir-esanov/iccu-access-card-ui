@@ -8,6 +8,7 @@ import { changePasswordRoute, forbiddenRoute, loginRoute } from '@features/auth/
 import { dashboardRoute } from '@features/dashboard/dashboard.routes';
 import { notFoundRoute } from '@features/not-found/not-found.routes';
 import { publicRegistrationRoute } from '@features/public-registration/public-registration.routes';
+import { registrationRequestsRoutes } from '@features/registration-requests/registration-requests.routes';
 
 const adminRoutes: RouteObject = {
   path: AppSegment.admin,
@@ -18,7 +19,13 @@ const adminRoutes: RouteObject = {
       children: [
         {
           element: <AdminLayout />,
-          children: [dashboardRoute, changePasswordRoute, forbiddenRoute, notFoundRoute],
+          children: [
+            dashboardRoute,
+            registrationRequestsRoutes,
+            changePasswordRoute,
+            forbiddenRoute,
+            notFoundRoute,
+          ],
         },
       ],
     },

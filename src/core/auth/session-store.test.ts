@@ -7,6 +7,7 @@ import { SessionStore } from './session-store';
 
 const session = (accessToken: string): AuthSession => ({
   accessToken,
+  expiresAt: '2099-01-01T00:00:00Z',
   user: { id: 'u1', username: 'admin', fullName: 'Administrator', role: UserRole.Admin },
 });
 
@@ -116,5 +117,41 @@ describe('SessionStore', () => {
 
     expect(listener).toHaveBeenCalled();
     expect(store.getState()).toMatchObject({ user: { fullName: 'Administrator' } });
+  });
+});
+
+describe('SessionStore.freshAccessToken', () => {
+  const LOGIN_AT = Date.parse('2026-09-26T14:00:00Z');
+  const expiringSession: AuthSession = {
+    ...session('login-token'),
+    expiresAt: '2026-09-26T14:15:00Z',
+  };
+
+  it('should return the current token when it is valid for more than a minute', async () => {
+    const api = fakeApi({ login: vi.fn().mockResolvedValue(expiringSession) });
+    const store = new SessionStore(api);
+    await store.login({ username: 'admin', password: 'x' });
+
+    const token = await store.freshAccessToken(LOGIN_AT);
+
+    expect(token).toBe('login-token');
+    expect(api.refresh).not.toHaveBeenCalled();
+  });
+
+  it('should refresh first when the token expires within a minute', async () => {
+    const api = fakeApi({ login: vi.fn().mockResolvedValue(expiringSession) });
+    const store = new SessionStore(api);
+    await store.login({ username: 'admin', password: 'x' });
+
+    const token = await store.freshAccessToken(Date.parse('2026-09-26T14:14:30Z'));
+
+    expect(token).toBe('refresh-token');
+    expect(api.refresh).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return null when the refresh fails', async () => {
+    const store = new SessionStore(fakeApi({ refresh: vi.fn().mockRejectedValue(unauthorized()) }));
+
+    expect(await store.freshAccessToken(LOGIN_AT)).toBeNull();
   });
 });
