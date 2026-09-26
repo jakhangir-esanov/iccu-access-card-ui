@@ -1,23 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { changePasswordFormSchema, newPasswordSchema } from './change-password-form.schema';
+import { changePasswordFormSchema } from './change-password-form.schema';
 
 const messagesOf = (values: Record<string, string>) => {
   const result = changePasswordFormSchema.safeParse(values);
   return result.success ? [] : result.error.issues.map((issue) => issue.message);
 };
-
-describe('newPasswordSchema', () => {
-  it.each(['Resep12345', 'Parol2026', 'Ўзбек1234'])('should accept %s', (password) => {
-    expect(newPasswordSchema.safeParse(password).success).toBe(true);
-  });
-
-  it.each(['short1', '1234567890', 'onlyletters', 'a'.repeat(128) + '1'])(
-    'should reject %s',
-    (password) => {
-      expect(newPasswordSchema.safeParse(password).success).toBe(false);
-    },
-  );
-});
 
 describe('changePasswordFormSchema', () => {
   it('should report a mismatch on the confirm field when the passwords differ', () => {

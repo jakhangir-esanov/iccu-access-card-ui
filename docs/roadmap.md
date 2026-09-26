@@ -12,7 +12,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 5 | **Kitobxonlar** | jadval (server paging/sort, filtrlar, qidiruv), kartochka, yaratish/tahrirlash rasm bilan, uzaytirish, o'chirish va eksport (Admin) | Tayyor |
 | 6 | **Karta chop etish** | 85,6 × 54 mm (CR80) print sahifasi (Figma `A4-13` old, `A4-11` orqa), Code 128 shtrix-kod, chop etishni tasdiqlab qayd qilish | Tayyor |
 | 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | Tayyor |
-| 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | |
+| 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | Tayyor |
 | 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | |
 
 ---
@@ -28,7 +28,6 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 
 - **Dashboard**: hozircha `/admin` da faqat salomlashish sahifasi. To'liq dashboard 7-bosqichda.
 - **Menyu**: arizalar, kitobxonlar, hisobotlar va foydalanuvchilar bandlari bor, lekin sahifalari tegishli bosqichlarda qo'shiladi (hozir admin layout ichida 404).
-- **`RequireAdmin`**: 8-bosqichda (foydalanuvchilar) qo'shiladi, 403 sahifasi tayyor.
 - **Bundle**: asosiy chunk ~517 kB (gzip ~165 kB), Vite ogohlantiradi. 9-bosqichda vendor chunk'larga bo'linadi.
 - **Rozilik matni**: "Shaxsiy ma'lumotlarim kutubxona kartasini rasmiylashtirish uchun qayta ishlanishiga roziman." (uz/ru/en). Yuridik matn kutubxona bilan tasdiqlanishi kerak.
 - **Lokal test arizasi**: 3-bosqich tekshiruvida `0001` kodli ariza yaratildi (Karimova Gulnoza, Talaba). 4-bosqichda navbatni sinash uchun ishlatiladi.
@@ -36,6 +35,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 - **Karta holati**: ro'yxat va kartochkada `cardStatusOf(expiresOn, bugun)` bilan hisoblanadi (backend qoidasi: `expires_on < bugun` — muddati o'tgan, 30 kun ichida — tez orada tugaydi).
 - **Printer kalibrovkasi**: Canon modeli ma'lum bo'lgach haqiqiy kartada tekshiriladi (hoshiya, chetsiz chop etish, ikki tomonlama tartib).
 - **Hisobot davrlari**: backend `byPeriod` da faqat ma'lumot bor kun/oylarni qaytaradi, frontend bo'sh davrlarni nol bilan to'ldiradi (`fillPeriods`). Dashboard'dagi `lastDays` esa har doim 30 kunni to'liq beradi.
+- **Lokal test foydalanuvchisi**: 8-bosqich tekshiruvida `kutubxonachi1` (Resepshn) yaratildi, keyin o'chirildi (faolsizlantirildi) va paroli tiklandi.
 - **Lokal seed**: lokal bazada faqat `admin` bor edi. `resepshn` / `Resep12345` (Receptionist) 2026-09-26 da `POST /users` orqali qo'shildi.
 
 ## Ochiq savollar

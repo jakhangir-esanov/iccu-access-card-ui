@@ -1,5 +1,6 @@
 import { Navigate, type RouteObject } from 'react-router';
 import { GuestOnly } from '@core/auth/guest-only';
+import { RequireAdmin } from '@core/auth/require-admin';
 import { RequireAuth } from '@core/auth/require-auth';
 import { AppPath, AppSegment } from '@core/config/app-paths';
 import { AdminLayout } from '@core/layout/admin-layout';
@@ -9,6 +10,7 @@ import { dashboardRoute } from '@features/dashboard/dashboard.routes';
 import { notFoundRoute } from '@features/not-found/not-found.routes';
 import { readersRoutes } from '@features/readers/readers.routes';
 import { reportsRoute } from '@features/reports/reports.routes';
+import { usersRoute } from '@features/users/users.routes';
 import { publicRegistrationRoute } from '@features/public-registration/public-registration.routes';
 import { registrationRequestsRoutes } from '@features/registration-requests/registration-requests.routes';
 
@@ -26,6 +28,7 @@ const adminRoutes: RouteObject = {
             registrationRequestsRoutes,
             readersRoutes,
             reportsRoute,
+            { element: <RequireAdmin />, children: [usersRoute] },
             changePasswordRoute,
             forbiddenRoute,
             notFoundRoute,

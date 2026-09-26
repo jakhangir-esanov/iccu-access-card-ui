@@ -7,6 +7,8 @@ export const UserRole = {
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 
+export const USER_ROLES: readonly UserRole[] = Object.values(UserRole);
+
 export const USER_ROLE_LABELS: Readonly<Record<UserRole, TranslationKey>> = {
   [UserRole.Receptionist]: 'roles.receptionist',
   [UserRole.Admin]: 'roles.admin',

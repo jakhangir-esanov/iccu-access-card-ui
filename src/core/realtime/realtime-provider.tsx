@@ -6,7 +6,7 @@ import { REGISTRATIONS_HUB_URL } from './registration-events';
 
 function createConnection(): HubConnection {
   return new HubConnectionBuilder()
-    .withUrl(REGISTRATIONS_HUB_URL, {
+    .withUrl(new URL(REGISTRATIONS_HUB_URL, window.location.origin).href, {
       accessTokenFactory: async () => (await sessionStore.freshAccessToken()) ?? '',
     })
     .withAutomaticReconnect()
