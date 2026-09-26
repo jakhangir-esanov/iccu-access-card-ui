@@ -1,11 +1,8 @@
 import { Outlet } from 'react-router';
 import { RealtimeProvider } from '@core/realtime/realtime-provider';
 import { RegistrationAlerts } from '@core/realtime/registration-alerts';
-import { ThemeToggle } from '@core/theme/theme-toggle';
 import { AdminSidebar } from './admin-sidebar';
-import { LocaleSwitcher } from './locale-switcher';
-import { RealtimeIndicator } from './realtime-indicator';
-import { UserMenu } from './user-menu';
+import { AdminTopbar } from './admin-topbar';
 
 export function AdminLayout() {
   return (
@@ -16,14 +13,11 @@ export function AdminLayout() {
           <AdminSidebar />
         </div>
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex h-14 items-center justify-end gap-1 border-b bg-card px-6 print:hidden">
-            <RealtimeIndicator />
-            <ThemeToggle />
-            <LocaleSwitcher />
-            <UserMenu />
-          </header>
-          <main className="flex-1 p-6 print:p-0">
-            <Outlet />
+          <AdminTopbar />
+          <main className="flex-1">
+            <div className="mx-auto w-full max-w-[90rem] px-10 pt-8 pb-12 print:max-w-none print:p-0">
+              <Outlet />
+            </div>
           </main>
         </div>
       </div>

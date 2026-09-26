@@ -3,6 +3,7 @@ import { AppPath, readerPath } from '@core/config/app-paths';
 import { useNotify } from '@core/feedback/use-notify';
 import { useT } from '@core/i18n/use-i18n';
 import { AuthorizedImage } from '@shared/components/authorized-image';
+import { PageHeader } from '@shared/components/page-header';
 import { useCreateReader, useReader, useUpdateReader } from '../api/readers.queries';
 import { ReaderForm } from '../components/reader-form';
 import { EMPTY_READER_FORM, toReaderFormInput } from '../models/reader-form.schema';
@@ -13,8 +14,8 @@ export function NewReaderPage() {
   const notify = useNotify();
   const create = useCreateReader();
   return (
-    <section className="grid gap-4">
-      <h1 className="text-2xl font-semibold">{t('readers.form.createTitle')}</h1>
+    <section className="grid gap-6">
+      <PageHeader title={t('readers.form.createTitle')} />
       <ReaderForm
         initialValues={EMPTY_READER_FORM}
         isPending={create.isPending}
@@ -43,8 +44,8 @@ export function EditReaderPage() {
     return <p className="text-destructive">{t('readers.notFound')}</p>;
   }
   return (
-    <section className="grid gap-4">
-      <h1 className="text-2xl font-semibold">{t('readers.form.editTitle')}</h1>
+    <section className="grid gap-6">
+      <PageHeader title={t('readers.form.editTitle')} description={reader.data.fullName} />
       <ReaderForm
         initialValues={toReaderFormInput(reader.data)}
         currentPhoto={

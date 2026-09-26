@@ -70,8 +70,8 @@ export function PhotoField({ id, onChange, upload, error, currentPhoto }: PhotoF
   return (
     <div className="grid gap-2">
       <Label htmlFor={`${id}-gallery`}>{t('photo.label')}</Label>
-      <div className="flex items-center gap-4">
-        <div className="relative flex aspect-[3/4] w-28 shrink-0 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-border bg-muted">
+      <div className="flex items-center gap-5">
+        <div className="relative flex aspect-[3/4] w-32 shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-border bg-muted">
           {preview !== null ? (
             <img src={preview} alt={t('photo.preview')} className="size-full object-cover" />
           ) : (

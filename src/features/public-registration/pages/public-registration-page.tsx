@@ -20,10 +20,12 @@ export function PublicRegistrationPage() {
   }
 
   return (
-    <section className="grid gap-5 rounded-xl border border-t-4 border-t-gold bg-card p-4 shadow-sm sm:p-6 [&_[data-slot=input]]:h-10 [&_[data-slot=native-select]]:h-10">
-      <header className="grid gap-1">
-        <h1 className="text-xl font-semibold">{t('publicRegistration.title')}</h1>
-        <p className="text-sm text-muted-foreground">{t('publicRegistration.subtitle')}</p>
+    <section className="grid gap-6 rounded-2xl border border-t-4 border-t-gold bg-card p-5 shadow-sm sm:p-7">
+      <header className="grid gap-2">
+        <h1 className="font-display text-3xl leading-tight font-semibold">
+          {t('publicRegistration.title')}
+        </h1>
+        <p className="text-[0.9375rem] text-muted-foreground">{t('publicRegistration.subtitle')}</p>
       </header>
       <RegistrationForm
         onSubmitted={(submitted) => {

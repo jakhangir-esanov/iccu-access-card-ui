@@ -10,6 +10,7 @@ import { ColumnChart } from '@shared/components/charts/column-chart';
 import { HorizontalBarChart } from '@shared/components/charts/horizontal-bar-chart';
 import { FormAlert } from '@shared/components/form/form-alert';
 import { dashboardKeys, useDashboard } from '../api/dashboard.queries';
+import { DashboardHero } from '../components/dashboard-hero';
 import { DashboardTiles } from '../components/dashboard-tiles';
 import { COUNT_SERIES_ID, toDayRows } from '../models/dashboard-charts';
 
@@ -35,13 +36,11 @@ export function DashboardPage() {
 
   return (
     <section className="grid gap-6">
-      <h1 className="text-2xl font-semibold">
-        {t('dashboard.welcome', { name: user?.fullName ?? '' })}
-      </h1>
+      <DashboardHero name={user?.fullName ?? ''} pendingRequests={data?.pendingRequests ?? null} />
       <FormAlert message={dashboard.isError ? t('dashboard.loadFailed') : null} />
       {data !== undefined && (
         <>
-          <DashboardTiles totals={data.totals} pendingRequests={data.pendingRequests} />
+          <DashboardTiles totals={data.totals} />
           <div className="grid gap-6 xl:grid-cols-[3fr_2fr]">
             <ChartCard
               title={t('dashboard.lastDays.title')}

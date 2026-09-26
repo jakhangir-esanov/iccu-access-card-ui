@@ -21,7 +21,7 @@ export function ReaderDetails({ reader }: { readonly reader: Reader }) {
     { label: 'person.documentType', value: t(DOCUMENT_TYPE_LABELS[reader.documentType]) },
     {
       label: 'person.documentNumber',
-      value: <span className="font-mono">{reader.documentNumber}</span>,
+      value: <span className="tracking-[0.04em] tabular-nums">{reader.documentNumber}</span>,
     },
   ];
   const record: readonly DetailRow[] = [
@@ -36,7 +36,7 @@ export function ReaderDetails({ reader }: { readonly reader: Reader }) {
   return (
     <div className="grid gap-6">
       <DetailList rows={person} />
-      <div className="border-t pt-4">
+      <div className="border-t pt-6">
         <DetailList rows={record} />
       </div>
     </div>

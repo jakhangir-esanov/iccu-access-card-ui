@@ -60,25 +60,29 @@ export function ReaderForm({
 
   return (
     <FormProvider {...form}>
-      <form noValidate onSubmit={(event) => void submit(event)} className="grid max-w-2xl gap-5">
-        <Controller
-          control={form.control}
-          name="photoFileId"
-          render={({ field, fieldState }) => (
-            <PhotoField
-              id="photo"
-              upload={upload.mutateAsync}
-              currentPhoto={currentPhoto}
-              error={fieldState.error?.message}
-              onChange={(fileId) => {
-                field.onChange(fileId ?? initialValues.photoFileId);
-              }}
-            />
-          )}
-        />
-        <PersonDetailsFields today={today} />
+      <form noValidate onSubmit={(event) => void submit(event)} className="grid max-w-4xl gap-6">
+        <div className="grid gap-7 rounded-2xl border bg-card p-7">
+          <Controller
+            control={form.control}
+            name="photoFileId"
+            render={({ field, fieldState }) => (
+              <PhotoField
+                id="photo"
+                upload={upload.mutateAsync}
+                currentPhoto={currentPhoto}
+                error={fieldState.error?.message}
+                onChange={(fileId) => {
+                  field.onChange(fileId ?? initialValues.photoFileId);
+                }}
+              />
+            )}
+          />
+          <div className="border-t pt-7">
+            <PersonDetailsFields today={today} />
+          </div>
+        </div>
         <FormAlert message={failure === null ? null : message(describeError(failure))} />
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-3">
           <Button type="button" variant="outline" disabled={isPending} onClick={onCancel}>
             {t('common.cancel')}
           </Button>

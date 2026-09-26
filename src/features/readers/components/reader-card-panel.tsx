@@ -14,17 +14,19 @@ interface ReaderCardPanelProps {
 export function ReaderCardPanel({ reader, today }: ReaderCardPanelProps) {
   const t = useT();
   return (
-    <section className="grid gap-4 rounded-lg border border-t-4 border-t-gold bg-card p-5">
+    <section className="grid content-start gap-6 rounded-2xl border border-t-4 border-t-gold bg-card p-6">
       <header className="flex items-center justify-between gap-3">
-        <h2 className="flex items-center gap-2 font-semibold">
-          <IdCardIcon className="size-5 text-primary" aria-hidden />
+        <h2 className="flex items-center gap-2.5 font-display text-2xl font-semibold">
+          <IdCardIcon className="size-5 text-gold-ink" aria-hidden />
           {t('readers.detail.card')}
         </h2>
         <CardStatusBadge status={cardStatusOf(reader.expiresOn, today)} />
       </header>
-      <div className="grid gap-1">
-        <span className="text-xs text-muted-foreground">{t('readers.detail.cardNumber')}</span>
-        <span className="font-mono text-4xl font-bold tracking-[0.15em] text-primary tabular-nums">
+      <div className="ornament-girih grid gap-2 overflow-hidden rounded-xl bg-deep px-5 py-4 text-deep-foreground [--ornament-opacity:0.16]">
+        <span className="text-[0.6875rem] font-bold tracking-[0.12em] text-gold uppercase">
+          {t('readers.detail.cardNumber')}
+        </span>
+        <span className="text-4xl font-extrabold tracking-[0.14em] tabular-nums">
           {reader.cardNumber}
         </span>
       </div>

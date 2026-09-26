@@ -14,6 +14,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | Tayyor |
 | 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | Tayyor |
 | 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | Tayyor |
+| 10 | **Dizayn** | "Temuriy kutubxona" dizayn tizimi: tokenlar, shriftlar, girih naqshlari, login, admin shell, akkaunt menyusi, sahifa sarlavhalari, filtr panellari, kattaroq komponentlar, kartochka va forma sahifalari, dialoglar | Tayyor |
 
 ---
 

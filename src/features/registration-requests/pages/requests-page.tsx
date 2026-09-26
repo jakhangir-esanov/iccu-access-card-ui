@@ -6,6 +6,7 @@ import { useRegistrationSubmitted } from '@core/realtime/use-registration-submit
 import { DataTablePager } from '@shared/components/data-table/data-table-pager';
 import { useTableSearchParams } from '@shared/components/data-table/use-table-search-params';
 import { FormAlert } from '@shared/components/form/form-alert';
+import { PageHeader } from '@shared/components/page-header';
 import {
   registrationRequestKeys,
   useRegistrationRequests,
@@ -38,8 +39,8 @@ export function RequestsPage() {
   });
 
   return (
-    <section className="grid gap-4">
-      <h1 className="text-2xl font-semibold">{t('requests.title')}</h1>
+    <section className="grid gap-6">
+      <PageHeader title={t('requests.title')} />
       <RequestFilters
         filter={filter}
         onStatusChange={(status) => {

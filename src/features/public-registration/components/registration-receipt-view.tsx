@@ -16,7 +16,9 @@ export function RegistrationReceiptView({ receipt, onRestart }: RegistrationRece
     <Card className="border-t-4 border-t-gold">
       <CardContent className="flex flex-col items-center gap-4 py-6 text-center">
         <CircleCheckIcon className="size-12 text-turquoise" aria-hidden />
-        <h1 className="text-xl font-semibold">{t('publicRegistration.successTitle')}</h1>
+        <h1 className="font-display text-3xl leading-tight font-semibold">
+          {t('publicRegistration.successTitle')}
+        </h1>
         <div className="grid gap-1">
           <span className="text-sm text-muted-foreground">{t('publicRegistration.codeLabel')}</span>
           <output

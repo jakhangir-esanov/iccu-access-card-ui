@@ -6,6 +6,7 @@ import { toTashkentDateOnly } from '@core/i18n/date-format';
 import { useT } from '@core/i18n/use-i18n';
 import { AuthorizedImage } from '@shared/components/authorized-image';
 import { MessagePanel } from '@shared/components/message-panel';
+import { PageHeader } from '@shared/components/page-header';
 import { Button } from '@shared/ui/button';
 import { Card } from '@shared/ui/card';
 import { useReader } from '../api/readers.queries';
@@ -41,25 +42,31 @@ export function ReaderPage() {
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="icon" aria-label={t('readers.actions.back')}>
+      <PageHeader
+        title={reader.fullName}
+        leading={
+          <Button
+            asChild
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            aria-label={t('readers.actions.back')}
+          >
             <Link to={AppPath.readers}>
               <ArrowLeftIcon aria-hidden />
             </Link>
           </Button>
-          <h1 className="text-2xl font-semibold">{reader.fullName}</h1>
-        </div>
-        <ReaderActions reader={reader} />
-      </div>
+        }
+        actions={<ReaderActions reader={reader} />}
+      />
       <ExpiryAlert reader={reader} today={today} />
-      <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
-        <Card className="p-6">
-          <div className="grid gap-6 md:grid-cols-[11rem_1fr]">
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_24rem]">
+        <Card className="p-7">
+          <div className="grid gap-8 md:grid-cols-[11rem_1fr]">
             <AuthorizedImage
               fileId={reader.photoFileId}
               alt={reader.fullName}
-              className="aspect-[3/4] w-44 rounded-lg border"
+              className="aspect-[3/4] w-44 rounded-xl border shadow-sm"
             />
             <ReaderDetails reader={reader} />
           </div>

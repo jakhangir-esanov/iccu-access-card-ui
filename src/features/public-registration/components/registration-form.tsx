@@ -74,7 +74,7 @@ export function RegistrationForm({ onSubmitted }: RegistrationFormProps) {
         <PersonDetailsFields today={today} />
         <ConsentField />
         <FormAlert message={submit.error === null ? null : message(describeError(submit.error))} />
-        <Button type="submit" size="lg" className="h-11 w-full" disabled={submit.isPending}>
+        <Button type="submit" size="lg" className="w-full" disabled={submit.isPending}>
           {t('publicRegistration.submit')}
         </Button>
       </form>

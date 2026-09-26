@@ -5,6 +5,7 @@ import { useT } from '@core/i18n/use-i18n';
 import { DataTablePager } from '@shared/components/data-table/data-table-pager';
 import { useTableSearchParams } from '@shared/components/data-table/use-table-search-params';
 import { FormAlert } from '@shared/components/form/form-alert';
+import { PageHeader } from '@shared/components/page-header';
 import { Button } from '@shared/ui/button';
 import { useUsers } from '../api/users.queries';
 import { CreateUserDialog } from '../components/create-user-dialog';
@@ -40,18 +41,20 @@ export function UsersPage() {
   }, []);
 
   return (
-    <section className="grid gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">{t('users.title')}</h1>
-        <Button
-          onClick={() => {
-            setDialog({ kind: 'create' });
-          }}
-        >
-          <UserPlusIcon aria-hidden />
-          {t('users.create')}
-        </Button>
-      </div>
+    <section className="grid gap-6">
+      <PageHeader
+        title={t('users.title')}
+        actions={
+          <Button
+            onClick={() => {
+              setDialog({ kind: 'create' });
+            }}
+          >
+            <UserPlusIcon aria-hidden />
+            {t('users.create')}
+          </Button>
+        }
+      />
       <UserFilters filter={filter} onChange={table.setFilter} />
       <FormAlert message={users.isError ? t('table.loadFailed') : null} />
       <UsersTable

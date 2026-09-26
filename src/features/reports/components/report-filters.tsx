@@ -1,4 +1,5 @@
 import { useT } from '@core/i18n/use-i18n';
+import { FilterPanel } from '@shared/components/filter-panel';
 import {
   isReportGrouping,
   REPORT_GROUPING_LABELS,
@@ -19,7 +20,7 @@ interface ReportFiltersProps {
 export function ReportFilters({ query, today, onChange }: ReportFiltersProps) {
   const t = useT();
   return (
-    <div className="flex flex-wrap items-end gap-3">
+    <FilterPanel className="flex flex-wrap items-end gap-4">
       <div className="grid gap-1.5">
         <Label htmlFor="report-from">{t('reports.from')}</Label>
         <Input
@@ -46,7 +47,7 @@ export function ReportFilters({ query, today, onChange }: ReportFiltersProps) {
         />
       </div>
       <div className="grid gap-1.5">
-        <span className="text-sm font-medium">{t('reports.groupBy')}</span>
+        <span className="text-sm font-semibold">{t('reports.groupBy')}</span>
         <Tabs
           value={String(query.groupBy)}
           onValueChange={(value) => {
@@ -64,6 +65,6 @@ export function ReportFilters({ query, today, onChange }: ReportFiltersProps) {
           </TabsList>
         </Tabs>
       </div>
-    </div>
+    </FilterPanel>
   );
 }

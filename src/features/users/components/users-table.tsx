@@ -29,7 +29,7 @@ function createColumns(t: Translate, currentUserId: string | null, actions: User
     column.accessor('fullName', {
       header: () => t('users.columns.fullName'),
       cell: ({ row }) => (
-        <span className="font-medium">
+        <span className="font-semibold">
           {row.original.fullName}
           {row.original.id === currentUserId && (
             <span className="ml-2 text-xs text-muted-foreground">({t('users.you')})</span>

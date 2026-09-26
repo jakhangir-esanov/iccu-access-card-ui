@@ -5,9 +5,9 @@ import { ChangePasswordForm } from '../components/change-password-form';
 export function ChangePasswordPage() {
   const t = useT();
   return (
-    <Card className="max-w-md">
+    <Card className="max-w-lg">
       <CardHeader>
-        <CardTitle className="text-xl">{t('auth.password.title')}</CardTitle>
+        <CardTitle className="text-3xl">{t('auth.password.title')}</CardTitle>
         <CardDescription>{t('auth.password.hint')}</CardDescription>
       </CardHeader>
       <CardContent>

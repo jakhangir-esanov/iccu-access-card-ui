@@ -3,6 +3,7 @@ export const uz = {
     name: 'ICCU',
     fullName: "O'zbekiston Islom sivilizatsiyasi markazi kutubxonasi",
     center: "O'zbekistondagi Islom sivilizatsiyasi markazi",
+    library: 'Kutubxona',
   },
   locale: {
     uz: "O'zbekcha",
@@ -29,22 +30,31 @@ export const uz = {
     readers: 'Kitobxonlar',
     reports: 'Hisobotlar',
     users: 'Foydalanuvchilar',
+    groups: {
+      main: 'Asosiy',
+      management: 'Tahlil va boshqaruv',
+    },
   },
   layout: {
     language: 'Til',
     changePassword: "Parolni o'zgartirish",
     signOut: 'Chiqish',
+    account: 'Akkaunt',
   },
   theme: {
     title: 'Mavzu',
     light: 'Kungi rejim',
     dark: 'Tungi rejim',
     system: 'Tizim',
+    short: {
+      light: 'Kungi',
+      dark: 'Tungi',
+      system: 'Tizim',
+    },
   },
   auth: {
     login: {
       title: 'Tizimga kirish',
-      subtitle: "Kitobxonlarni ro'yxatga olish va kirish kartalari",
       username: 'Login',
       password: 'Parol',
       submit: 'Kirish',
@@ -341,6 +351,15 @@ export const uz = {
     oct: 'Okt',
     nov: 'Noy',
     dec: 'Dek',
+  },
+  weekdays: {
+    sun: 'Yakshanba',
+    mon: 'Dushanba',
+    tue: 'Seshanba',
+    wed: 'Chorshanba',
+    thu: 'Payshanba',
+    fri: 'Juma',
+    sat: 'Shanba',
   },
   users: {
     title: 'Foydalanuvchilar',

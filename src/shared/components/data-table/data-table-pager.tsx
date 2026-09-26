@@ -16,7 +16,7 @@ export function DataTablePager({ first, rows, total, onChange }: DataTablePagerP
   const from = total === 0 ? 0 : first + 1;
   const to = Math.min(first + rows, total);
   return (
-    <div className="flex flex-wrap items-center justify-end gap-3 text-sm text-muted-foreground">
+    <div className="flex flex-wrap items-center justify-end gap-4 px-1 text-sm font-medium text-muted-foreground">
       <label className="flex items-center gap-2">
         {t('table.rowsPerPage')}
         <NativeSelect
@@ -33,10 +33,12 @@ export function DataTablePager({ first, rows, total, onChange }: DataTablePagerP
           ))}
         </NativeSelect>
       </label>
-      <span aria-live="polite">{t('table.range', { from, to, total })}</span>
+      <span aria-live="polite" className="text-foreground tabular-nums">
+        {t('table.range', { from, to, total })}
+      </span>
       <Button
         variant="outline"
-        size="icon-sm"
+        size="icon"
         aria-label={t('table.previous')}
         disabled={first === 0}
         onClick={() => {
@@ -47,7 +49,7 @@ export function DataTablePager({ first, rows, total, onChange }: DataTablePagerP
       </Button>
       <Button
         variant="outline"
-        size="icon-sm"
+        size="icon"
         aria-label={t('table.next')}
         disabled={first + rows >= total}
         onClick={() => {

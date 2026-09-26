@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRightIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useSession } from '@core/auth/use-auth';
 import { describeError, describeErrorCode } from '@core/feedback/error-message';
@@ -49,14 +50,14 @@ export function LoginForm() {
   });
 
   return (
-    <form noValidate onSubmit={(event) => void submit(event)} className="grid gap-6">
+    <form noValidate onSubmit={(event) => void submit(event)} className="grid gap-5">
       <FormAlert message={alert} />
       <FormField id="username" label="auth.login.username" error={errors.username?.message}>
         <Input
           id="username"
           autoComplete="username"
           autoFocus
-          className="h-11 text-base"
+          className="h-13 text-base"
           aria-invalid={errors.username !== undefined}
           {...register('username')}
         />
@@ -66,16 +67,12 @@ export function LoginForm() {
         label="auth.login.password"
         autoComplete="current-password"
         error={errors.password?.message}
-        className="h-11 text-base"
+        className="h-13 text-base"
         registration={register('password')}
       />
-      <Button
-        type="submit"
-        size="lg"
-        className="mt-3 h-11 w-full text-base font-semibold"
-        disabled={login.isPending}
-      >
+      <Button type="submit" size="lg" className="mt-3 w-full" disabled={login.isPending}>
         {t('auth.login.submit')}
+        <ArrowRightIcon aria-hidden />
       </Button>
     </form>
   );

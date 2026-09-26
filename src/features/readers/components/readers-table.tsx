@@ -9,6 +9,7 @@ import { createDataTableColumnHelper } from '@shared/components/data-table/data-
 import { cardStatusOf } from '@shared/models/card-status';
 import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { formatPhone } from '@shared/person-details/person-format';
+import { Badge } from '@shared/ui/badge';
 import type { ReaderListItem } from '../models/reader';
 import { CardStatusBadge } from './card-status-badge';
 
@@ -23,24 +24,28 @@ function createColumns(t: Translate, today: string) {
         <AuthorizedImage
           fileId={row.original.photoFileId}
           alt={row.original.fullName}
-          className="aspect-[3/4] w-10 rounded"
+          className="aspect-[3/4] w-11 rounded-lg border"
         />
       ),
     }),
     column.accessor('cardNumber', {
       header: () => t('readers.columns.cardNumber'),
       cell: ({ getValue }) => (
-        <span className="font-mono font-semibold text-primary">{getValue()}</span>
+        <span className="font-bold tracking-[0.06em] text-primary tabular-nums">{getValue()}</span>
       ),
     }),
     column.accessor('fullName', {
       id: 'lastName',
       header: () => t('readers.columns.fullName'),
-      cell: ({ getValue }) => <span className="font-medium">{getValue()}</span>,
+      cell: ({ getValue }) => (
+        <span className="block min-w-40 font-semibold whitespace-normal">{getValue()}</span>
+      ),
     }),
     column.accessor('category', {
       header: () => t('readers.columns.category'),
-      cell: ({ getValue }) => t(READER_CATEGORY_LABELS[getValue()]),
+      cell: ({ getValue }) => (
+        <Badge variant="secondary">{t(READER_CATEGORY_LABELS[getValue()])}</Badge>
+      ),
     }),
     column.accessor('phone', {
       header: () => t('readers.columns.phone'),
@@ -50,12 +55,14 @@ function createColumns(t: Translate, today: string) {
     column.accessor('documentNumberMasked', {
       header: () => t('readers.columns.document'),
       enableSorting: false,
-      cell: ({ getValue }) => <span className="font-mono">{getValue()}</span>,
+      cell: ({ getValue }) => (
+        <span className="text-muted-foreground tabular-nums">{getValue()}</span>
+      ),
     }),
     column.accessor('expiresOn', {
       header: () => t('readers.columns.expiresOn'),
       cell: ({ getValue }) => (
-        <span className="flex flex-wrap items-center gap-2 whitespace-nowrap">
+        <span className="flex max-w-40 flex-wrap items-center gap-x-2 gap-y-1.5">
           {formatDateOnly(getValue())}
           <CardStatusBadge status={cardStatusOf(getValue(), today)} />
         </span>
@@ -64,7 +71,9 @@ function createColumns(t: Translate, today: string) {
     column.accessor('createdAt', {
       header: () => t('readers.columns.createdAt'),
       cell: ({ getValue }) => (
-        <span className="whitespace-nowrap">{formatDateTime(getValue())}</span>
+        <span className="whitespace-nowrap text-muted-foreground tabular-nums">
+          {formatDateTime(getValue())}
+        </span>
       ),
     }),
   ]);

@@ -34,7 +34,7 @@ Admin panelda: arizalar navbati (real vaqtda), kitobxonlar (qidirish, yaratish, 
 | Test | Vitest, Testing Library, jsdom | Ikki loyiha: `app` (jsdom), `scripts` (node) |
 | Sifat | ESLint (typescript-eslint strict, type-checked), Prettier, Sheriff | Sheriff — import chegaralari |
 
-Ataylab ishlatilmaydi (YAGNI): OpenAPI codegen, axios, global state kutubxonasi, mock backend, Clean Architecture qatlam papkalari, dark mode (kerak bo'lganda qo'shiladi).
+Ataylab ishlatilmaydi (YAGNI): OpenAPI codegen, axios, global state kutubxonasi, mock backend, Clean Architecture qatlam papkalari.
 
 ---
 
@@ -79,6 +79,16 @@ Sabab: feature'lar bir-biridan mustaqil qoladi, feature'ni o'chirish faqat uning
 15. **Grafiklar** (`shared/components/charts`, Recharts): ustun (bitta yoki stacked seriya), gorizontal bar, `ChartCard` (grafik/jadval almashtirgich — rangga suyanmaydigan ko'rinish), `StatTile`. Mark qoidalari: ustun qalinligi ≤ 24 px, uchi 4 px yumaloq, stacked segmentlar orasida 2 px fon rangli bo'shliq, gridline bitta rang, X o'qida ~10 belgi. Ikki seriyali ranglar (`--chart-1` lojuvard `#335aa6`, `--chart-2` feruza `#209993`) dataviz validatori bilan tekshirilgan (CVD ΔE 18,9, kontrast ≥ 3:1); shu sababli `--chart-1` oklch L 0,40 dan 0,48 ga ko'tarildi. Matn hech qachon seriya rangida emas. Oy nomlari Intl'dan emas, lug'atdan (`months.*`), chunki ba'zi brauzerlarda o'zbekcha ICU ma'lumoti yo'q.
 16. **Foydalanuvchilar** (faqat Admin, `RequireAdmin` guard'i + backend `Policies.Admin`): yaratish, tahrirlash (rol, faollik), parolni tiklash dialoglari faqat ochilganda mount qilinadi (har safar toza forma). Maydonga bog'lanmagan backend xatosi dialog ichida ko'rsatiladi, `User.UsernameTaken` login maydoniga tushadi. Admin o'zini tahrirlaganda rol va faollik maydonlari umuman chiqmaydi (RHF'da `disabled` input qiymati submit'da yo'qoladi). Parol qoidasi `shared/validation/password.ts` da, auth va users uchun umumiy.
 17. **Route'lar**: har feature o'z `*.routes.ts` faylida route obyektlarini beradi, sahifalar `lazy: { Component }` bilan alohida chunk bo'lib yuklanadi. Yo'llar `core/config/app-paths.ts` da.
+18. **Dizayn tizimi — "Temuriy kutubxona"**. Markaz binosining uslubidan olingan: lojuvard gumbaz, peshtoq arkasi, girih, oltin. Arab yozuvi va diniy matn ishlatilmaydi, faqat geometriya.
+    - **Ranglar** faqat `src/index.css` tokenlarida, kungi va tungi rejim uchun: lojuvard (`primary`, `deep`), tungi osmon (`sidebar`), feruza (`turquoise`), oltin (`gold`; matn uchun `gold-ink`, fon uchun `gold-soft`), marmar (`background`), qog'oz (`card`), terrakota (`destructive`). Holat belgilari `Badge` variantlarida: `success`, `warning`, `destructive`, `muted`.
+    - **Shriftlar**: sarlavhalar Cormorant Garamond (`font-display`), matn va raqamlar Manrope (`font-sans`). `@fontsource-variable` paketlari, `main.tsx` da ulanadi. Kutubxona tarmog'ida internet cheklangan bo'lishi mumkin, shuning uchun Google Fonts emas. Ikkalasida kirill ham bor.
+    - **Naqshlar**: `ornament-girih` (8 qirrali yulduzli girih, `::before` va CSS `mask`; rang tokendan, zichlik `--ornament-opacity` bilan), `ornament-strip` (hoshiya chizig'i), `KhatamStar` va `PortalArch` (`shared/components/ornaments`). SVG fayllar faqat shaklni beradi, rangni emas, shuning uchun tungi rejimda ham ishlaydi.
+    - **O'lchamlar**: tugma va input 44 px (`h-11`), login maydonlari 52 px, jadval sarlavhasi 48 px, karta radiusi 20 px (`rounded-2xl`), sidebar 288 px, header 80 px + hoshiya, kontent `max-w-[90rem]` markazda.
+    - **Admin shell**: sidebar menyusi guruhlarga bo'lingan (`menuSectionsFor`), aktiv band oltin yulduz bilan belgilanadi, jonli aloqa belgisi sidebar pastida. Header'da sana, til va akkaunt menyusi turadi. Akkaunt menyusida profil, parolni almashtirish, mavzu (kungi / tungi / tizim) va chiqish bor.
+    - **Sahifalar**: sarlavha `shared/components/page-header`, filtrlar `shared/components/filter-panel` ichida. Dashboard'da salomlashuv paneli (kutilayotgan arizalar va "Yangi kitobxon") va 3 × 2 statistika kartalari.
+    - Header'dagi hafta kuni ham oy nomlari kabi lug'atdan olinadi (`weekdays.*`), Intl'dan emas.
+    - Kartochka ma'lumotlari `DetailList` da: ikki ustun, yorliq ustida kichik bosh harflar. `PersonDetailsFields` container query bilan keng joyda (`@2xl`) ikki ustunga o'tadi: kitobxon formasi va ariza dialogida ikki ustun, mobil anketada bitta.
+    - shadcn `radix-nova` komponentlari `data-open`, `data-active`, `data-horizontal` kabi variantlarni ishlatadi, Radix esa `data-state` va `data-orientation` beradi. Shuning uchun ular `index.css` da `@custom-variant` bilan Radix atributlariga bog'langan (tablarning aktiv holati, dialog va menyu animatsiyalari shunga ishlaydi).
 
 ---
 

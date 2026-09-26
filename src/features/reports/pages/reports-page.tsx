@@ -5,6 +5,7 @@ import { useMessage } from '@core/feedback/use-message';
 import { toTashkentDateOnly } from '@core/i18n/date-format';
 import { useT } from '@core/i18n/use-i18n';
 import { FormAlert } from '@shared/components/form/form-alert';
+import { PageHeader } from '@shared/components/page-header';
 import { useRegistrationReport } from '../api/reports.queries';
 import { ReportByUser } from '../components/report-by-user';
 import { ReportCharts } from '../components/report-charts';
@@ -32,7 +33,7 @@ export function ReportsPage() {
 
   return (
     <section className="grid gap-6">
-      <h1 className="text-2xl font-semibold">{t('reports.title')}</h1>
+      <PageHeader title={t('reports.title')} />
       <ReportFilters
         query={query}
         today={today}

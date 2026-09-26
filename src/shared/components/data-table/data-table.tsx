@@ -43,7 +43,10 @@ export function DataTable<TRow extends RowData>(props: DataTableProps<TRow>) {
 
   return (
     <div
-      className={cn('rounded-lg border bg-card', isLoading && 'opacity-60')}
+      className={cn(
+        'overflow-hidden rounded-2xl border bg-card transition-opacity',
+        isLoading && 'opacity-60',
+      )}
       aria-busy={isLoading}
     >
       <Table>
@@ -61,7 +64,7 @@ export function DataTable<TRow extends RowData>(props: DataTableProps<TRow>) {
                     {header.column.getCanSort() ? (
                       <button
                         type="button"
-                        className="inline-flex items-center gap-1 hover:text-foreground"
+                        className="inline-flex items-center gap-1.5 uppercase hover:text-foreground"
                         onClick={header.column.getToggleSortingHandler()}
                       >
                         <table.FlexRender header={header} />
@@ -99,7 +102,7 @@ export function DataTable<TRow extends RowData>(props: DataTableProps<TRow>) {
             <TableRow>
               <TableCell
                 colSpan={columns.length}
-                className="h-24 text-center text-muted-foreground"
+                className="h-40 text-center text-muted-foreground"
               >
                 {t(isLoading ? 'common.loading' : 'table.empty')}
               </TableCell>

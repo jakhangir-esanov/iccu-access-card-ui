@@ -9,6 +9,7 @@ import { useT } from '@core/i18n/use-i18n';
 import { DataTablePager } from '@shared/components/data-table/data-table-pager';
 import { useTableSearchParams } from '@shared/components/data-table/use-table-search-params';
 import { FormAlert } from '@shared/components/form/form-alert';
+import { PageHeader } from '@shared/components/page-header';
 import { Button } from '@shared/ui/button';
 import { saveFile } from '@shared/utils/save-file';
 import { useExportReaders, useReaders } from '../api/readers.queries';
@@ -44,24 +45,26 @@ export function ReadersPage() {
   };
 
   return (
-    <section className="grid gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold">{t('readers.title')}</h1>
-        <div className="flex flex-wrap gap-2">
-          {isAdmin && (
-            <Button variant="outline" disabled={exporter.isPending} onClick={exportList}>
-              <FileSpreadsheetIcon aria-hidden />
-              {t('readers.export')}
+    <section className="grid gap-6">
+      <PageHeader
+        title={t('readers.title')}
+        actions={
+          <>
+            {isAdmin && (
+              <Button variant="outline" disabled={exporter.isPending} onClick={exportList}>
+                <FileSpreadsheetIcon aria-hidden />
+                {t('readers.export')}
+              </Button>
+            )}
+            <Button asChild>
+              <Link to={newReaderPath}>
+                <PlusIcon aria-hidden />
+                {t('readers.create')}
+              </Link>
             </Button>
-          )}
-          <Button asChild>
-            <Link to={newReaderPath}>
-              <PlusIcon aria-hidden />
-              {t('readers.create')}
-            </Link>
-          </Button>
-        </div>
-      </div>
+          </>
+        }
+      />
       <ReaderFilters
         filter={filter}
         onChange={table.setFilter}

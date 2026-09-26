@@ -16,7 +16,7 @@ export function PasswordInput({ className, disabled, ...props }: PasswordInputPr
       <Input
         type={visible ? 'text' : 'password'}
         disabled={disabled}
-        className={cn('pr-11', className)}
+        className={cn('pr-12', className)}
         {...props}
       />
       <Button
@@ -29,7 +29,7 @@ export function PasswordInput({ className, disabled, ...props }: PasswordInputPr
         onClick={() => {
           setVisible((prev) => !prev);
         }}
-        className="absolute right-1 text-muted-foreground hover:text-foreground"
+        className="absolute right-1.5 text-muted-foreground hover:text-foreground"
       >
         {visible ? <EyeOffIcon aria-hidden /> : <EyeIcon aria-hidden />}
       </Button>

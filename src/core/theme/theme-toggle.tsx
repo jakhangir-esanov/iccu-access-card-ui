@@ -1,4 +1,4 @@
-import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
+import { MoonIcon, SunIcon } from 'lucide-react';
 import { useT } from '@core/i18n/use-i18n';
 import { Button } from '@shared/ui/button';
 import {
@@ -9,18 +9,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
-import { THEMES, isTheme, type Theme } from './theme';
+import { THEMES, isTheme } from './theme';
+import { ThemeIcon } from './theme-icon';
 import { useTheme } from './use-theme';
-
-function ThemeIcon({ theme }: Readonly<{ theme: Theme }>) {
-  if (theme === 'dark') {
-    return <MoonIcon aria-hidden />;
-  }
-  if (theme === 'light') {
-    return <SunIcon aria-hidden />;
-  }
-  return <MonitorIcon aria-hidden />;
-}
 
 export function ThemeToggle() {
   const t = useT();
@@ -29,12 +20,17 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" aria-label={t('theme.title')}>
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full"
+          aria-label={t('theme.title')}
+        >
           {resolvedTheme === 'dark' ? <MoonIcon aria-hidden /> : <SunIcon aria-hidden />}
           <span className="sr-only">{t('theme.title')}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-auto min-w-48">
         <DropdownMenuLabel>{t('theme.title')}</DropdownMenuLabel>
         <DropdownMenuRadioGroup
           value={theme}

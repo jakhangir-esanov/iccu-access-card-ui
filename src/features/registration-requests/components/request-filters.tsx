@@ -2,6 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import { useState } from 'react';
 import type { TranslationKey } from '@core/i18n/translations/dictionary';
 import { useT } from '@core/i18n/use-i18n';
+import { FilterPanel } from '@shared/components/filter-panel';
 import {
   REGISTRATION_REQUEST_STATUS_LABELS,
   REGISTRATION_REQUEST_STATUSES,
@@ -38,7 +39,7 @@ export function RequestFilters({ filter, onStatusChange, onSearchChange }: Reque
   const applySearch = useDebouncedCallback(onSearchChange, SEARCH_DELAY_MS);
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3">
+    <FilterPanel className="flex flex-wrap items-center justify-between gap-4">
       <Tabs
         value={String(filter.status)}
         onValueChange={(value) => {
@@ -53,9 +54,9 @@ export function RequestFilters({ filter, onStatusChange, onSearchChange }: Reque
           ))}
         </TabsList>
       </Tabs>
-      <div className="relative w-full max-w-xs">
+      <div className="relative w-full max-w-sm">
         <SearchIcon
-          className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute top-1/2 left-3.5 size-4.5 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />
         <Input
@@ -63,13 +64,13 @@ export function RequestFilters({ filter, onStatusChange, onSearchChange }: Reque
           value={search}
           aria-label={t('common.search')}
           placeholder={t('requests.search')}
-          className="pl-8"
+          className="pl-10"
           onChange={(event) => {
             setSearch(event.target.value);
             applySearch(event.target.value);
           }}
         />
       </div>
-    </div>
+    </FilterPanel>
   );
 }

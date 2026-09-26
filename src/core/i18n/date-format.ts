@@ -63,6 +63,24 @@ export function formatMonth(dateOnly: string, t: Translate): string {
   return key === undefined ? dateOnly : `${t(key)} ${year}`;
 }
 
+const WEEKDAY_KEYS: readonly TranslationKey[] = [
+  'weekdays.sun',
+  'weekdays.mon',
+  'weekdays.tue',
+  'weekdays.wed',
+  'weekdays.thu',
+  'weekdays.fri',
+  'weekdays.sat',
+];
+
+export function formatLongDate(moment: Date, t: Translate): string {
+  const { year, month, day } = partsInTashkent(moment);
+  const weekday = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day))).getUTCDay();
+  const key = WEEKDAY_KEYS[weekday];
+  const date = `${day}.${month}.${year}`;
+  return key === undefined ? date : `${t(key)}, ${date}`;
+}
+
 export function formatDayMonth(dateOnly: string): string {
   const [, month, day] = dateOnly.split('-');
   return `${day ?? ''}.${month ?? ''}`;

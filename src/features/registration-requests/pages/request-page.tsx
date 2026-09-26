@@ -6,6 +6,7 @@ import { useConfirm } from '@core/feedback/use-confirm';
 import { useNotify } from '@core/feedback/use-notify';
 import { useT } from '@core/i18n/use-i18n';
 import { AuthorizedImage } from '@shared/components/authorized-image';
+import { PageHeader } from '@shared/components/page-header';
 import type { PersonDetails } from '@shared/person-details/person-details.schema';
 import { Alert, AlertDescription, AlertTitle } from '@shared/ui/alert';
 import { Button } from '@shared/ui/button';
@@ -95,22 +96,21 @@ export function RequestPage() {
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2">
+      <PageHeader
+        title={t('requests.detail.title', { code: request.code })}
+        leading={
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
+            className="rounded-full"
             onClick={() => void navigate(AppPath.registrationRequests)}
           >
-            <ArrowLeftIcon className="size-4" />
+            <ArrowLeftIcon aria-hidden />
             <span className="sr-only">{t('requests.back')}</span>
           </Button>
-          <h1 className="text-2xl font-semibold">
-            {t('requests.detail.title', { code: request.code })}
-          </h1>
-        </div>
-        <RequestStatusBadge status={request.status} />
-      </div>
+        }
+        actions={<RequestStatusBadge status={request.status} />}
+      />
 
       {request.registeredReader !== null && (
         <Alert variant="destructive">

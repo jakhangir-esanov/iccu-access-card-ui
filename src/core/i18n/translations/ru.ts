@@ -5,6 +5,7 @@ export const ru: Dictionary = {
     name: 'ICCU',
     fullName: 'Библиотека Центра исламской цивилизации в Узбекистане',
     center: 'Центр исламской цивилизации в Узбекистане',
+    library: 'Библиотека',
   },
   locale: {
     uz: "O'zbekcha",
@@ -31,22 +32,31 @@ export const ru: Dictionary = {
     readers: 'Читатели',
     reports: 'Отчёты',
     users: 'Пользователи',
+    groups: {
+      main: 'Основное',
+      management: 'Аналитика и управление',
+    },
   },
   layout: {
     language: 'Язык',
     changePassword: 'Сменить пароль',
     signOut: 'Выйти',
+    account: 'Аккаунт',
   },
   theme: {
     title: 'Тема',
     light: 'Дневной режим',
     dark: 'Ночной режим',
     system: 'Системная',
+    short: {
+      light: 'Дневная',
+      dark: 'Ночная',
+      system: 'Система',
+    },
   },
   auth: {
     login: {
       title: 'Вход в систему',
-      subtitle: 'Регистрация читателей и читательские билеты',
       username: 'Логин',
       password: 'Пароль',
       submit: 'Войти',
@@ -344,6 +354,15 @@ export const ru: Dictionary = {
     oct: 'окт',
     nov: 'ноя',
     dec: 'дек',
+  },
+  weekdays: {
+    sun: 'Воскресенье',
+    mon: 'Понедельник',
+    tue: 'Вторник',
+    wed: 'Среда',
+    thu: 'Четверг',
+    fri: 'Пятница',
+    sat: 'Суббота',
   },
   users: {
     title: 'Пользователи',

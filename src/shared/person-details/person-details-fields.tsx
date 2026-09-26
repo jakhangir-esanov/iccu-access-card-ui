@@ -23,74 +23,82 @@ export function PersonDetailsFields({ today }: PersonDetailsFieldsProps) {
   const isPassport = documentType === String(DocumentType.Passport);
 
   return (
-    <div className="grid gap-4">
-      <FormField id="category" label="person.category" error={errors.category?.message}>
-        <NativeSelect
-          id="category"
-          className="w-full"
-          aria-invalid={errors.category !== undefined}
-          {...register('category')}
-        >
-          <NativeSelectOption value="" disabled>
-            {t('person.choose')}
-          </NativeSelectOption>
-          {READER_CATEGORIES.map((category) => (
-            <NativeSelectOption key={category} value={category}>
-              {t(READER_CATEGORY_LABELS[category])}
+    <div className="@container">
+      <div className="grid gap-4 @2xl:grid-cols-2 @2xl:gap-x-6 @2xl:gap-y-5">
+        <FormField id="category" label="person.category" error={errors.category?.message}>
+          <NativeSelect
+            id="category"
+            className="w-full"
+            aria-invalid={errors.category !== undefined}
+            {...register('category')}
+          >
+            <NativeSelectOption value="" disabled>
+              {t('person.choose')}
             </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </FormField>
-      <PersonNameFields />
-      <FormField id="birthDate" label="person.birthDate" error={errors.birthDate?.message}>
-        <Input
-          id="birthDate"
-          type="date"
-          min={EARLIEST_BIRTH_DATE}
-          max={today}
-          aria-invalid={errors.birthDate !== undefined}
-          {...register('birthDate')}
-        />
-      </FormField>
-      <FormField id="phone" label="person.phone" error={errors.phone?.message}>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">{PHONE_PREFIX}</span>
+            {READER_CATEGORIES.map((category) => (
+              <NativeSelectOption key={category} value={category}>
+                {t(READER_CATEGORY_LABELS[category])}
+              </NativeSelectOption>
+            ))}
+          </NativeSelect>
+        </FormField>
+        <PersonNameFields />
+        <FormField id="birthDate" label="person.birthDate" error={errors.birthDate?.message}>
           <Input
-            id="phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel-national"
-            placeholder={t('person.phonePlaceholder')}
-            aria-invalid={errors.phone !== undefined}
-            {...register('phone')}
+            id="birthDate"
+            type="date"
+            min={EARLIEST_BIRTH_DATE}
+            max={today}
+            aria-invalid={errors.birthDate !== undefined}
+            {...register('birthDate')}
           />
-        </div>
-      </FormField>
-      <FormField id="documentType" label="person.documentType" error={errors.documentType?.message}>
-        <NativeSelect id="documentType" className="w-full" {...register('documentType')}>
-          {DOCUMENT_TYPES.map((type) => (
-            <NativeSelectOption key={type} value={type}>
-              {t(DOCUMENT_TYPE_LABELS[type])}
-            </NativeSelectOption>
-          ))}
-        </NativeSelect>
-      </FormField>
-      <FormField
-        id="documentNumber"
-        label="person.documentNumber"
-        error={errors.documentNumber?.message}
-      >
-        <Input
+        </FormField>
+        <FormField id="phone" label="person.phone" error={errors.phone?.message}>
+          <div className="flex items-center gap-2">
+            <span className="flex h-11 shrink-0 items-center rounded-xl border bg-muted px-3.5 text-[0.9375rem] font-semibold text-muted-foreground tabular-nums">
+              {PHONE_PREFIX}
+            </span>
+            <Input
+              id="phone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel-national"
+              placeholder={t('person.phonePlaceholder')}
+              aria-invalid={errors.phone !== undefined}
+              {...register('phone')}
+            />
+          </div>
+        </FormField>
+        <FormField
+          id="documentType"
+          label="person.documentType"
+          error={errors.documentType?.message}
+        >
+          <NativeSelect id="documentType" className="w-full" {...register('documentType')}>
+            {DOCUMENT_TYPES.map((type) => (
+              <NativeSelectOption key={type} value={type}>
+                {t(DOCUMENT_TYPE_LABELS[type])}
+              </NativeSelectOption>
+            ))}
+          </NativeSelect>
+        </FormField>
+        <FormField
           id="documentNumber"
-          autoCapitalize="characters"
-          autoComplete="off"
-          placeholder={t(
-            isPassport ? 'person.passportPlaceholder' : 'person.birthCertificatePlaceholder',
-          )}
-          aria-invalid={errors.documentNumber !== undefined}
-          {...register('documentNumber')}
-        />
-      </FormField>
+          label="person.documentNumber"
+          error={errors.documentNumber?.message}
+        >
+          <Input
+            id="documentNumber"
+            autoCapitalize="characters"
+            autoComplete="off"
+            placeholder={t(
+              isPassport ? 'person.passportPlaceholder' : 'person.birthCertificatePlaceholder',
+            )}
+            aria-invalid={errors.documentNumber !== undefined}
+            {...register('documentNumber')}
+          />
+        </FormField>
+      </div>
     </div>
   );
 }

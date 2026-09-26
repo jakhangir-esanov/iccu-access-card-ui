@@ -1,6 +1,7 @@
 import { SearchIcon, XIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useT } from '@core/i18n/use-i18n';
+import { FilterPanel } from '@shared/components/filter-panel';
 import { CARD_STATUS_LABELS, CARD_STATUSES } from '@shared/models/card-status';
 import { READER_CATEGORIES, READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import {
@@ -38,10 +39,10 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
   };
 
   return (
-    <div className="grid gap-3">
-      <div className="relative max-w-md">
+    <FilterPanel>
+      <div className="relative max-w-xl">
         <SearchIcon
-          className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute top-1/2 left-3.5 size-4.5 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />
         <Input
@@ -49,7 +50,7 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
           value={search}
           aria-label={t('common.search')}
           placeholder={t('readers.search')}
-          className="pl-8"
+          className="pl-10"
           onChange={(event) => {
             setSearch(event.target.value);
             applySearch(event.target.value);
@@ -118,6 +119,6 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
           </Button>
         )}
       </div>
-    </div>
+    </FilterPanel>
   );
 }

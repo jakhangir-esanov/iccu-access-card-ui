@@ -23,21 +23,23 @@ function createColumns(t: Translate) {
         <AuthorizedImage
           fileId={row.original.photoFileId}
           alt={row.original.fullName}
-          className="aspect-[3/4] w-10 rounded"
+          className="aspect-[3/4] w-11 rounded-lg border"
         />
       ),
     }),
     column.accessor('code', {
       header: () => t('requests.columns.code'),
       cell: ({ getValue }) => (
-        <span className="font-mono text-base font-semibold text-primary">{getValue()}</span>
+        <span className="text-base font-bold tracking-[0.06em] text-primary tabular-nums">
+          {getValue()}
+        </span>
       ),
     }),
     column.accessor('fullName', {
       id: 'lastName',
       header: () => t('requests.columns.fullName'),
       cell: ({ row }) => (
-        <span className="flex items-center gap-2 font-medium">
+        <span className="flex items-center gap-2 font-semibold">
           {row.original.fullName}
           {row.original.hasRegisteredDocument && (
             <TriangleAlertIcon

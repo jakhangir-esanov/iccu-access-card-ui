@@ -1,6 +1,7 @@
 import { SearchIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useT } from '@core/i18n/use-i18n';
+import { FilterPanel } from '@shared/components/filter-panel';
 import { USER_ROLE_LABELS, USER_ROLES } from '@shared/models/user-role';
 import { Input } from '@shared/ui/input';
 import { Label } from '@shared/ui/label';
@@ -23,10 +24,10 @@ export function UserFilters({ filter, onChange }: UserFiltersProps) {
   }, SEARCH_DELAY_MS);
 
   return (
-    <div className="flex flex-wrap items-end gap-3">
-      <div className="relative w-full max-w-xs">
+    <FilterPanel className="flex flex-wrap items-end gap-4">
+      <div className="relative w-full max-w-sm">
         <SearchIcon
-          className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+          className="pointer-events-none absolute top-1/2 left-3.5 size-4.5 -translate-y-1/2 text-muted-foreground"
           aria-hidden
         />
         <Input
@@ -34,7 +35,7 @@ export function UserFilters({ filter, onChange }: UserFiltersProps) {
           value={search}
           aria-label={t('common.search')}
           placeholder={t('users.search')}
-          className="pl-8"
+          className="pl-10"
           onChange={(event) => {
             setSearch(event.target.value);
             applySearch(event.target.value);
@@ -76,6 +77,6 @@ export function UserFilters({ filter, onChange }: UserFiltersProps) {
           </NativeSelectOption>
         </NativeSelect>
       </div>
-    </div>
+    </FilterPanel>
   );
 }

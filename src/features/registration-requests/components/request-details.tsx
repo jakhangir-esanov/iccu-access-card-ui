@@ -19,7 +19,7 @@ export function RequestDetails({ request }: { readonly request: RegistrationRequ
     { label: 'person.documentType', value: t(DOCUMENT_TYPE_LABELS[request.documentType]) },
     {
       label: 'person.documentNumber',
-      value: <span className="font-mono">{request.documentNumber}</span>,
+      value: <span className="tracking-[0.04em] tabular-nums">{request.documentNumber}</span>,
     },
   ];
   const review: readonly DetailRow[] = [
@@ -41,7 +41,7 @@ export function RequestDetails({ request }: { readonly request: RegistrationRequ
   return (
     <div className="grid gap-6">
       <DetailList rows={person} />
-      <div className="border-t pt-4">
+      <div className="border-t pt-6">
         <DetailList rows={review} />
       </div>
     </div>

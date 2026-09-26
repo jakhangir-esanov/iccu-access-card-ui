@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, PrinterIcon } from 'lucide-react';
+import { ArrowLeftIcon, InfoIcon, PrinterIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { readerPath } from '@core/config/app-paths';
@@ -6,6 +6,8 @@ import { useConfirm } from '@core/feedback/use-confirm';
 import { useNotify } from '@core/feedback/use-notify';
 import { toTashkentDateOnly } from '@core/i18n/date-format';
 import { useT } from '@core/i18n/use-i18n';
+import { PageHeader } from '@shared/components/page-header';
+import { Alert, AlertDescription } from '@shared/ui/alert';
 import { Button } from '@shared/ui/button';
 import { useReader, useRecordCardPrint } from '../api/readers.queries';
 import { IdCardBack } from '../components/card/id-card-back';
@@ -57,27 +59,41 @@ export function ReaderCardPage() {
 
   return (
     <div className="grid gap-6 print:block">
-      <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="icon" aria-label={t('readers.actions.back')}>
-            <Link to={readerPath(id)}>
-              <ArrowLeftIcon aria-hidden />
-            </Link>
-          </Button>
-          <h1 className="text-2xl font-semibold">{t('readers.card.title')}</h1>
-        </div>
-        <Button disabled={!isPhotoReady || recordPrint.isPending} onClick={print}>
-          <PrinterIcon aria-hidden />
-          {isPhotoReady ? t('readers.card.print') : t('readers.card.photoLoading')}
-        </Button>
+      <div className="print:hidden">
+        <PageHeader
+          title={t('readers.card.title')}
+          description={reader.data.fullName}
+          leading={
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="rounded-full"
+              aria-label={t('readers.actions.back')}
+            >
+              <Link to={readerPath(id)}>
+                <ArrowLeftIcon aria-hidden />
+              </Link>
+            </Button>
+          }
+          actions={
+            <Button disabled={!isPhotoReady || recordPrint.isPending} onClick={print}>
+              <PrinterIcon aria-hidden />
+              {isPhotoReady ? t('readers.card.print') : t('readers.card.photoLoading')}
+            </Button>
+          }
+        />
       </div>
       <div className="print:hidden">
         <ExpiryAlert reader={reader.data} today={today} />
       </div>
-      <p className="text-sm text-muted-foreground print:hidden">{t('readers.card.hint')}</p>
+      <Alert className="print:hidden">
+        <InfoIcon aria-hidden />
+        <AlertDescription>{t('readers.card.hint')}</AlertDescription>
+      </Alert>
       <div className="flex flex-wrap gap-10 print:block">
         <figure className="grid gap-2 print:block">
-          <figcaption className="text-sm font-medium print:hidden">
+          <figcaption className="text-xs font-bold tracking-[0.08em] text-muted-foreground uppercase print:hidden">
             {t('readers.card.front')}
           </figcaption>
           <IdCardFront
@@ -88,7 +104,7 @@ export function ReaderCardPage() {
           />
         </figure>
         <figure className="grid gap-2 print:block">
-          <figcaption className="text-sm font-medium print:hidden">
+          <figcaption className="text-xs font-bold tracking-[0.08em] text-muted-foreground uppercase print:hidden">
             {t('readers.card.back')}
           </figcaption>
           <IdCardBack />
