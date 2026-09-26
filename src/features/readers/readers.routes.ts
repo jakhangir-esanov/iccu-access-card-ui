@@ -19,6 +19,10 @@ export const readersRoutes: RouteObject = {
       lazy: { Component: async () => (await import('./pages/reader-page')).ReaderPage },
     },
     {
+      path: `:id/${AppSegment.card}`,
+      lazy: { Component: async () => (await import('./pages/reader-card-page')).ReaderCardPage },
+    },
+    {
       path: `:id/${AppSegment.edit}`,
       lazy: { Component: async () => (await loadForms()).EditReaderPage },
     },

@@ -1,7 +1,7 @@
-import { PencilIcon, RefreshCwIcon, Trash2Icon } from 'lucide-react';
+import { PencilIcon, PrinterIcon, RefreshCwIcon, Trash2Icon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '@core/auth/use-auth';
-import { AppPath, readerEditPath } from '@core/config/app-paths';
+import { AppPath, readerCardPath, readerEditPath } from '@core/config/app-paths';
 import { useConfirm } from '@core/feedback/use-confirm';
 import { useNotify } from '@core/feedback/use-notify';
 import { formatDateOnly } from '@core/i18n/date-format';
@@ -66,6 +66,12 @@ export function ReaderActions({ reader }: { readonly reader: Reader }) {
       <Button variant="outline" disabled={renew.isPending} onClick={() => void renewCard()}>
         <RefreshCwIcon aria-hidden />
         {t('readers.actions.renew')}
+      </Button>
+      <Button asChild variant="outline">
+        <Link to={readerCardPath(reader.id)}>
+          <PrinterIcon aria-hidden />
+          {t('readers.actions.print')}
+        </Link>
       </Button>
       <Button asChild>
         <Link to={readerEditPath(reader.id)}>

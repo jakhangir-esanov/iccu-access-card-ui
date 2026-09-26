@@ -59,7 +59,14 @@ Sabab: feature'lar bir-biridan mustaqil qoladi, feature'ni o'chirish faqat uning
 6. **Sana va vaqt**: backend UTC beradi, UI `Asia/Tashkent` da ko'rsatadi. `DateOnly` satr bo'lib qoladi.
 7. **Enum'lar** `shared/models` da `const` obyekt, union tur va i18n yorliq kalitlari bilan.
 8. **SignalR** faqat admin zonasida, login'dan keyin ulanadi.
-9. **Karta chop etish**: 85 × 55 mm, CSS `@page`, alohida print sahifasi. Dizayn Figma'dagi `A4-13` (old tomoni) va `A4-11` (orqa tomoni) freymlarida.
+9. **Karta chop etish** (`/admin/readers/:id/card`):
+    - O'lcham **85,6 × 54 mm** (standart ID-1/CR80 plastik karta). Figma freymlari shu nisbatda; loyiha hujjatidagi 85 × 55 taxminiy edi.
+    - Dizayn Figma'dan (nusxa fayl `vIGJqyDGxD56mrkKoeECDy`, old `1019:119`, orqa `1019:30`) Figma MCP orqali aniq qiymatlarda ko'chirilgan: 856 × 540 px freym = 85,6 × 54 mm, 10 px = 1 mm. Ranglar `#00703c` (yashil), `#eeeeee` (fon), `#045533` (toifa). Shrift Instrument Sans (`@fontsource-variable/instrument-sans`, faqat karta sahifasida yuklanadi). Render qilingan geometriya Figma'dan 0,06 mm ichida tekshirilgan. Karta matni doim inglizcha, toifa `en` lug'atidan katta harflarda. Raqam prefikssiz, 7 xonali. 30 va undan uzun F.I.Sh. 2,5 mm shriftda chiqadi.
+    - Chop etish: nomlangan `@page id-card` (85,6 × 54 mm, hoshiyasiz), har tomon alohida sahifa (`break-after: page`), `print-color-adjust: exact`. Admin layout va sahifa boshqaruvlari `print:hidden`. Ekranda karta `zoom: 2.2` bilan ko'rsatiladi.
+    - Shtrix-kod: `jsbarcode`, Code 128, karta raqamini kodlaydi (SVG, `viewBox` bilan mm o'lchamga moslanadi).
+    - Emblema: `src/shared/assets/iccu-emblem.png` — Figma'dagi asset (1024 × 1024, shaffof fon), old tomonda 11,5 × 11,8 mm, orqa tomonda 40,1 × 40,5 mm.
+    - Figma'dagi 1 px qora ramka chizilmaydi: u kanvasda ko'rinish uchun, PVC kartada chetda chiziq bo'lib qoladi.
+    - Chop etish tugmasi rasm yuklangandan keyin yoqiladi. `afterprint` dan keyin xodim "chop etildi" deb tasdiqlasa `POST /readers/{id}/prints` chaqiriladi.
 10. **Tillar**: uz / ru / en, typed kalitlar. Yetishmagan tarjima build'ni buzadi.
 11. **Izohsiz kod**: ESLint qoidasi (`iccu/no-comments`) va `scripts/check-no-comments.mjs` (JSON, CSS, Dockerfile va boshqalar).
 12. **Sessiya** (`core/auth`): bitta `SessionStore` (oddiy TS klass, React'dan tashqarida), `useSyncExternalStore` bilan o'qiladi. Sabablari:

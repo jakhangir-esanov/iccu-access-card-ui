@@ -15,6 +15,7 @@ import {
   exportReaders,
   fetchReader,
   fetchReaders,
+  recordCardPrint,
   renewReader,
   updateReader,
   uploadReaderPhoto,
@@ -73,6 +74,11 @@ export function useRenewReader(id: string) {
     mutationFn: async () => toCardValidity(await renewReader(id)),
     onSuccess: invalidate,
   });
+}
+
+export function useRecordCardPrint(id: string) {
+  const invalidate = useInvalidateReaders();
+  return useMutation({ mutationFn: () => recordCardPrint(id), onSuccess: invalidate });
 }
 
 export function useDeleteReader(id: string) {

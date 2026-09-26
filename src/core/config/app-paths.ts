@@ -10,6 +10,7 @@ export const AppSegment = {
   users: 'users',
   create: 'new',
   edit: 'edit',
+  card: 'card',
 } as const;
 
 const admin = `/${AppSegment.admin}`;
@@ -32,5 +33,7 @@ export const ANY_PATH = '*';
 export const readerPath = (id: string): string => `${AppPath.readers}/${id}`;
 
 export const readerEditPath = (id: string): string => `${readerPath(id)}/${AppSegment.edit}`;
+
+export const readerCardPath = (id: string): string => `${readerPath(id)}/${AppSegment.card}`;
 
 export const newReaderPath = `${AppPath.readers}/${AppSegment.create}`;

@@ -43,6 +43,10 @@ export function deleteReader(id: string): Promise<void> {
   return apiClient.delete(`${BASE_PATH}/${id}`);
 }
 
+export function recordCardPrint(id: string): Promise<void> {
+  return apiClient.post(`${BASE_PATH}/${id}/prints`);
+}
+
 export function exportReaders(filter: ReaderFilter): Promise<DownloadedFile> {
   return apiClient.getFile(`${BASE_PATH}/export`, { query: toReaderQuery(filter) });
 }

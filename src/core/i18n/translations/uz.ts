@@ -196,6 +196,19 @@ export const uz = {
     notFound: 'Ariza topilmadi.',
   },
   readers: {
+    card: {
+      title: 'Kartani chop etish',
+      front: 'Old tomoni',
+      back: 'Orqa tomoni',
+      print: 'Chop etish',
+      hint: "Printer sozlamalari: qog'oz 85,6 × 54 mm (CR80), hoshiyalar yo'q, masshtab 100%, ikki tomonlama chop etish.",
+      printedTitle: 'Karta chop etildimi?',
+      printedConfirm:
+        "Karta printerdan to'g'ri chiqqan bo'lsa tasdiqlang, shunda chop etishlar soni oshadi.",
+      printedYes: 'Ha, chop etildi',
+      recorded: 'Chop etish qayd qilindi.',
+      photoLoading: 'Rasm yuklanmoqda...',
+    },
     title: 'Kitobxonlar',
     create: 'Yangi kitobxon',
     export: 'Excelga eksport',
@@ -240,6 +253,7 @@ export const uz = {
       renew: 'Uzaytirish',
       delete: "O'chirish",
       back: 'Kitobxonlarga qaytish',
+      print: 'Kartani chop etish',
     },
     renewConfirm: "{name} kartasi bugundan boshlab 2 yilga uzaytiriladi. Karta raqami o'zgarmaydi.",
     renewed: 'Karta {date} gacha uzaytirildi.',

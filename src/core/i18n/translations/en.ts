@@ -197,6 +197,19 @@ export const en: Dictionary = {
     notFound: 'Request not found.',
   },
   readers: {
+    card: {
+      title: 'Print the card',
+      front: 'Front',
+      back: 'Back',
+      print: 'Print',
+      hint: 'Printer settings: paper 85.6 × 54 mm (CR80), no margins, scale 100%, double-sided.',
+      printedTitle: 'Was the card printed?',
+      printedConfirm:
+        'Confirm if the card came out of the printer correctly, then the print count goes up.',
+      printedYes: 'Yes, printed',
+      recorded: 'Print recorded.',
+      photoLoading: 'Loading the photo...',
+    },
     title: 'Readers',
     create: 'New reader',
     export: 'Export to Excel',
@@ -241,6 +254,7 @@ export const en: Dictionary = {
       renew: 'Renew',
       delete: 'Delete',
       back: 'Back to readers',
+      print: 'Print card',
     },
     renewConfirm:
       "{name}'s card will be renewed for 2 years from today. The card number stays the same.",

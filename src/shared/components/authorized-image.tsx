@@ -11,9 +11,10 @@ interface AuthorizedImageProps {
   readonly fileId: string;
   readonly alt: string;
   readonly className?: string;
+  readonly onLoad?: () => void;
 }
 
-export function AuthorizedImage({ fileId, alt, className }: AuthorizedImageProps) {
+export function AuthorizedImage({ fileId, alt, className, onLoad }: AuthorizedImageProps) {
   const imageRef = useRef<HTMLImageElement>(null);
   const file = useQuery({
     queryKey: [FILE_QUERY_ROOT, fileId],
@@ -48,6 +49,7 @@ export function AuthorizedImage({ fileId, alt, className }: AuthorizedImageProps
       <img
         ref={imageRef}
         alt={alt}
+        onLoad={onLoad}
         className={cn('size-full object-cover', file.data === undefined && 'invisible')}
       />
     </div>

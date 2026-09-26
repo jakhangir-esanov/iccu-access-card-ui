@@ -11,14 +11,16 @@ export function AdminLayout() {
     <RealtimeProvider>
       <RegistrationAlerts />
       <div className="flex min-h-svh">
-        <AdminSidebar />
+        <div className="contents print:hidden">
+          <AdminSidebar />
+        </div>
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex h-14 items-center justify-end gap-1 border-b bg-card px-6">
+          <header className="flex h-14 items-center justify-end gap-1 border-b bg-card px-6 print:hidden">
             <RealtimeIndicator />
             <LocaleSwitcher />
             <UserMenu />
           </header>
-          <main className="flex-1 p-6">
+          <main className="flex-1 p-6 print:p-0">
             <Outlet />
           </main>
         </div>
