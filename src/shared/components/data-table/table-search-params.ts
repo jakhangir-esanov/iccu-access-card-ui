@@ -63,3 +63,12 @@ export function writeFilter(params: URLSearchParams, name: string, value: string
   }
   return next;
 }
+
+export function clearFilters(params: URLSearchParams, names: readonly string[]): URLSearchParams {
+  const next = new URLSearchParams(params);
+  next.delete(TableParam.first);
+  names.forEach((name) => {
+    next.delete(name);
+  });
+  return next;
+}

@@ -7,6 +7,7 @@ import { PublicLayout } from '@core/layout/public-layout';
 import { changePasswordRoute, forbiddenRoute, loginRoute } from '@features/auth/auth.routes';
 import { dashboardRoute } from '@features/dashboard/dashboard.routes';
 import { notFoundRoute } from '@features/not-found/not-found.routes';
+import { readersRoutes } from '@features/readers/readers.routes';
 import { publicRegistrationRoute } from '@features/public-registration/public-registration.routes';
 import { registrationRequestsRoutes } from '@features/registration-requests/registration-requests.routes';
 
@@ -22,6 +23,7 @@ const adminRoutes: RouteObject = {
           children: [
             dashboardRoute,
             registrationRequestsRoutes,
+            readersRoutes,
             changePasswordRoute,
             forbiddenRoute,
             notFoundRoute,

@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { SortOrder } from '@core/http/paging';
-import { readPageRequest, writeFilter, writePage, writeSort } from './table-search-params';
+import {
+  clearFilters,
+  readPageRequest,
+  writeFilter,
+  writePage,
+  writeSort,
+} from './table-search-params';
 
 const DEFAULT_SORT = { field: 'cardNumber', order: SortOrder.Descending };
 
@@ -54,5 +60,14 @@ describe('writers', () => {
     expect(writePage(new URLSearchParams('search=ali'), 20, 10).toString()).toBe(
       'search=ali&first=20&rows=10',
     );
+  });
+
+  it('should remove only the named filters when filters are cleared', () => {
+    const next = clearFilters(new URLSearchParams('search=ali&category=1&sort=x:asc&first=10'), [
+      'search',
+      'category',
+    ]);
+
+    expect(next.toString()).toBe('sort=x%3Aasc');
   });
 });

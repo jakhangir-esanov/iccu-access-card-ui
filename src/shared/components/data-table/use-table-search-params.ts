@@ -1,7 +1,13 @@
 import { useCallback } from 'react';
 import { useSearchParams } from 'react-router';
 import type { PageRequest, Sorting } from '@core/http/paging';
-import { readPageRequest, writeFilter, writePage, writeSort } from './table-search-params';
+import {
+  clearFilters,
+  readPageRequest,
+  writeFilter,
+  writePage,
+  writeSort,
+} from './table-search-params';
 
 export interface TableSearchParams {
   readonly page: PageRequest;
@@ -9,6 +15,7 @@ export interface TableSearchParams {
   readonly setPage: (first: number, rows: number) => void;
   readonly setSort: (sort: Sorting | null) => void;
   readonly setFilter: (name: string, value: string) => void;
+  readonly clearFilters: (names: readonly string[]) => void;
 }
 
 const REPLACE = { replace: true } as const;
@@ -32,6 +39,9 @@ export function useTableSearchParams(defaultSort: Sorting | null): TableSearchPa
     },
     setFilter: (name, value) => {
       update((current) => writeFilter(current, name, value));
+    },
+    clearFilters: (names) => {
+      update((current) => clearFilters(current, names));
     },
   };
 }
