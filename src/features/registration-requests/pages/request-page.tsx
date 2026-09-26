@@ -77,7 +77,12 @@ export function RequestPage() {
   };
 
   const handleReject = async (reason: string) => {
-    await rejectMutation.mutateAsync(reason);
+    try {
+      await rejectMutation.mutateAsync(reason);
+    } catch (error) {
+      notify.failure(error);
+      return;
+    }
     notify.success('requests.reject.done');
     setIsRejecting(false);
   };

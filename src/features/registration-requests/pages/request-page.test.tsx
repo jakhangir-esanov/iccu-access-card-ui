@@ -148,4 +148,25 @@ describe('RequestPage', () => {
       });
     });
   });
+
+  it('should keep the dialog open and show the backend message when rejection fails', async () => {
+    vi.mocked(fetchRegistrationRequest).mockResolvedValue(SAMPLE_REQUEST);
+    vi.mocked(rejectRegistrationRequest).mockRejectedValue(
+      new ApiError({
+        status: 409,
+        code: 'RegistrationRequest.NotPending',
+        messages: { en: 'Reviewed.', uz: "Ariza allaqachon ko'rib chiqilgan.", ru: 'Рассмотрена.' },
+      }),
+    );
+
+    renderRequestPage();
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Rad etish' }));
+    await userEvent.type(await screen.findByLabelText('Sabab'), 'Takroriy ariza');
+    await userEvent.click(screen.getByRole('button', { name: 'Rad etish' }));
+
+    expect(await screen.findByText("Ariza allaqachon ko'rib chiqilgan.")).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByLabelText('Sabab')).toHaveValue('Takroriy ariza');
+  });
 });
