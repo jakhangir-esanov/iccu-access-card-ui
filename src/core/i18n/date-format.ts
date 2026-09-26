@@ -1,3 +1,6 @@
+import type { Translate } from './translate';
+import type { TranslationKey } from './translations/dictionary';
+
 export const APP_TIME_ZONE = 'Asia/Tashkent';
 
 type DatePart = 'year' | 'month' | 'day' | 'hour' | 'minute';
@@ -37,4 +40,30 @@ export function formatDateOnly(dateOnly: string): string {
 export function toTashkentDateOnly(moment: Date): string {
   const { year, month, day } = partsInTashkent(moment);
   return `${year}-${month}-${day}`;
+}
+
+const MONTH_KEYS: readonly TranslationKey[] = [
+  'months.jan',
+  'months.feb',
+  'months.mar',
+  'months.apr',
+  'months.may',
+  'months.jun',
+  'months.jul',
+  'months.aug',
+  'months.sep',
+  'months.oct',
+  'months.nov',
+  'months.dec',
+];
+
+export function formatMonth(dateOnly: string, t: Translate): string {
+  const [year = '', month = ''] = dateOnly.split('-');
+  const key = MONTH_KEYS[Number(month) - 1];
+  return key === undefined ? dateOnly : `${t(key)} ${year}`;
+}
+
+export function formatDayMonth(dateOnly: string): string {
+  const [, month, day] = dateOnly.split('-');
+  return `${day ?? ''}.${month ?? ''}`;
 }

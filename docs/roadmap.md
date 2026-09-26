@@ -11,7 +11,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 4 | **Arizalar navbati** | ro'yxat (status, qidiruv), SignalR (toast, ovoz, yangilash), kartochka va rasm, tahrirlash, tasdiqlash → kitobxonga o'tish, rad etish, "hujjat allaqachon bor" ogohlantirishi | Tayyor |
 | 5 | **Kitobxonlar** | jadval (server paging/sort, filtrlar, qidiruv), kartochka, yaratish/tahrirlash rasm bilan, uzaytirish, o'chirish va eksport (Admin) | Tayyor |
 | 6 | **Karta chop etish** | 85,6 × 54 mm (CR80) print sahifasi (Figma `A4-13` old, `A4-11` orqa), Code 128 shtrix-kod, chop etishni tasdiqlab qayd qilish | Tayyor |
-| 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | |
+| 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | Tayyor |
 | 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | |
 | 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | |
 
@@ -35,6 +35,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 - **Lokal test kitobxoni**: 5-bosqich tekshiruvida `0000002` (Toshmatov Botir) yaratilib, o'chirildi. Karta raqamlari qayta berilmagani uchun lokal bazada keyingi kitobxon `0000003` oladi.
 - **Karta holati**: ro'yxat va kartochkada `cardStatusOf(expiresOn, bugun)` bilan hisoblanadi (backend qoidasi: `expires_on < bugun` — muddati o'tgan, 30 kun ichida — tez orada tugaydi).
 - **Printer kalibrovkasi**: Canon modeli ma'lum bo'lgach haqiqiy kartada tekshiriladi (hoshiya, chetsiz chop etish, ikki tomonlama tartib).
+- **Hisobot davrlari**: backend `byPeriod` da faqat ma'lumot bor kun/oylarni qaytaradi, frontend bo'sh davrlarni nol bilan to'ldiradi (`fillPeriods`). Dashboard'dagi `lastDays` esa har doim 30 kunni to'liq beradi.
 - **Lokal seed**: lokal bazada faqat `admin` bor edi. `resepshn` / `Resep12345` (Receptionist) 2026-09-26 da `POST /users` orqali qo'shildi.
 
 ## Ochiq savollar

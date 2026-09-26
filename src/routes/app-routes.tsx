@@ -8,6 +8,7 @@ import { changePasswordRoute, forbiddenRoute, loginRoute } from '@features/auth/
 import { dashboardRoute } from '@features/dashboard/dashboard.routes';
 import { notFoundRoute } from '@features/not-found/not-found.routes';
 import { readersRoutes } from '@features/readers/readers.routes';
+import { reportsRoute } from '@features/reports/reports.routes';
 import { publicRegistrationRoute } from '@features/public-registration/public-registration.routes';
 import { registrationRequestsRoutes } from '@features/registration-requests/registration-requests.routes';
 
@@ -24,6 +25,7 @@ const adminRoutes: RouteObject = {
             dashboardRoute,
             registrationRequestsRoutes,
             readersRoutes,
+            reportsRoute,
             changePasswordRoute,
             forbiddenRoute,
             notFoundRoute,
