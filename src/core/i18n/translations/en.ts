@@ -21,6 +21,7 @@ export const en: Dictionary = {
     delete: 'Delete',
     retry: 'Try again',
     loading: 'Loading...',
+    pickDate: 'Pick a date',
   },
   roles: {
     receptionist: 'Receptionist',

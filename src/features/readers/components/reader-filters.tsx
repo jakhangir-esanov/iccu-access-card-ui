@@ -2,6 +2,7 @@ import { SearchIcon, XIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useT } from '@core/i18n/use-i18n';
 import { FilterPanel } from '@shared/components/filter-panel';
+import { DatePicker } from '@shared/components/form/date-picker';
 import { CARD_STATUS_LABELS, CARD_STATUSES } from '@shared/models/card-status';
 import { READER_CATEGORIES, READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import {
@@ -84,26 +85,20 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
         />
         <div className="grid gap-1.5">
           <Label htmlFor="filter-from">{t('readers.filters.registeredFrom')}</Label>
-          <Input
+          <DatePicker
             id="filter-from"
-            type="date"
             value={filter.registeredFrom}
             max={filter.registeredTo || undefined}
-            onChange={(event) => {
-              onChange(ReaderFilterParam.registeredFrom, event.target.value);
-            }}
+            onChange={change(ReaderFilterParam.registeredFrom)}
           />
         </div>
         <div className="grid gap-1.5">
           <Label htmlFor="filter-to">{t('readers.filters.registeredTo')}</Label>
-          <Input
+          <DatePicker
             id="filter-to"
-            type="date"
             value={filter.registeredTo}
             min={filter.registeredFrom || undefined}
-            onChange={(event) => {
-              onChange(ReaderFilterParam.registeredTo, event.target.value);
-            }}
+            onChange={change(ReaderFilterParam.registeredTo)}
           />
         </div>
         {hasActiveFilter(filter) && (

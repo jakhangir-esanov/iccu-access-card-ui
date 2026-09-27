@@ -5,7 +5,7 @@ import { DOCUMENT_TYPES, DOCUMENT_TYPE_LABELS, DocumentType } from '@shared/mode
 import { READER_CATEGORIES, READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { Input } from '@shared/ui/input';
 import { NativeSelect, NativeSelectOption } from '@shared/ui/native-select';
-import { EARLIEST_BIRTH_DATE } from './person-details-rules';
+import { BirthDateField } from './birth-date-field';
 import type { PersonDetailsFormInput } from './person-details.schema';
 import { PersonNameFields } from './person-name-fields';
 
@@ -43,16 +43,7 @@ export function PersonDetailsFields({ today }: PersonDetailsFieldsProps) {
           </NativeSelect>
         </FormField>
         <PersonNameFields />
-        <FormField id="birthDate" label="person.birthDate" error={errors.birthDate?.message}>
-          <Input
-            id="birthDate"
-            type="date"
-            min={EARLIEST_BIRTH_DATE}
-            max={today}
-            aria-invalid={errors.birthDate !== undefined}
-            {...register('birthDate')}
-          />
-        </FormField>
+        <BirthDateField today={today} />
         <FormField id="phone" label="person.phone" error={errors.phone?.message}>
           <div className="flex items-center gap-2">
             <span className="flex h-11 shrink-0 items-center rounded-xl border bg-muted px-3.5 text-[0.9375rem] font-semibold text-muted-foreground tabular-nums">

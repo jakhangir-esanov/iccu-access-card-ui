@@ -33,6 +33,26 @@ vi.mock('@shared/components/photo/photo-field', () => ({
   ),
 }));
 
+vi.mock('@shared/components/form/date-picker', () => ({
+  DatePicker: ({
+    id,
+    value,
+    onChange,
+  }: {
+    readonly id: string;
+    readonly value: string;
+    readonly onChange: (value: string) => void;
+  }) => (
+    <input
+      id={id}
+      value={value}
+      onChange={(event) => {
+        onChange(event.target.value);
+      }}
+    />
+  ),
+}));
+
 async function fillValidForm() {
   await userEvent.click(screen.getByRole('button', { name: 'photo' }));
   await userEvent.selectOptions(screen.getByLabelText('Toifa'), '1');

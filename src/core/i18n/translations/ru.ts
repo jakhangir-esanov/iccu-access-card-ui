@@ -21,6 +21,7 @@ export const ru: Dictionary = {
     delete: 'Удалить',
     retry: 'Повторить',
     loading: 'Загрузка...',
+    pickDate: 'Выберите дату',
   },
   roles: {
     receptionist: 'Ресепшн',

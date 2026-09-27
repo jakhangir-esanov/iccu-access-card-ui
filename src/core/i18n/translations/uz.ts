@@ -19,6 +19,7 @@ export const uz = {
     delete: "O'chirish",
     retry: 'Qayta urinish',
     loading: 'Yuklanmoqda...',
+    pickDate: 'Sanani tanlang',
   },
   roles: {
     receptionist: 'Resepshn',

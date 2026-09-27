@@ -1,12 +1,12 @@
 import { useT } from '@core/i18n/use-i18n';
 import { FilterPanel } from '@shared/components/filter-panel';
+import { DatePicker } from '@shared/components/form/date-picker';
 import {
   isReportGrouping,
   REPORT_GROUPING_LABELS,
   REPORT_GROUPINGS,
   type ReportGrouping,
 } from '@shared/models/report-grouping';
-import { Input } from '@shared/ui/input';
 import { Label } from '@shared/ui/label';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 import { ReportParam, type ReportQuery } from '../models/report-query';
@@ -21,28 +21,26 @@ export function ReportFilters({ query, today, onChange }: ReportFiltersProps) {
   const t = useT();
   return (
     <FilterPanel className="flex flex-wrap items-end gap-4">
-      <div className="grid gap-1.5">
+      <div className="grid w-48 gap-1.5">
         <Label htmlFor="report-from">{t('reports.from')}</Label>
-        <Input
+        <DatePicker
           id="report-from"
-          type="date"
           value={query.from}
           max={query.to}
-          onChange={(event) => {
-            onChange(ReportParam.from, event.target.value);
+          onChange={(value) => {
+            onChange(ReportParam.from, value);
           }}
         />
       </div>
-      <div className="grid gap-1.5">
+      <div className="grid w-48 gap-1.5">
         <Label htmlFor="report-to">{t('reports.to')}</Label>
-        <Input
+        <DatePicker
           id="report-to"
-          type="date"
           value={query.to}
           min={query.from}
           max={today}
-          onChange={(event) => {
-            onChange(ReportParam.to, event.target.value);
+          onChange={(value) => {
+            onChange(ReportParam.to, value);
           }}
         />
       </div>

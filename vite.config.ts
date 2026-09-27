@@ -40,6 +40,13 @@ export default defineConfig({
           if (id.includes('node_modules/@microsoft/signalr')) {
             return 'vendor-signalr';
           }
+          if (
+            id.includes('node_modules/react-day-picker') ||
+            id.includes('node_modules/date-fns') ||
+            id.includes('node_modules/@date-fns')
+          ) {
+            return 'vendor-calendar';
+          }
           if (id.includes('node_modules/@tanstack')) {
             return 'vendor-tanstack';
           }
