@@ -14,6 +14,7 @@ import { IdCardBack } from '../components/card/id-card-back';
 import { IdCardFront } from '../components/card/id-card-front';
 import { ExpiryAlert } from '../components/expiry-alert';
 import { toCardFace } from '../models/card-face';
+import '@fontsource-variable/instrument-sans';
 import '../components/card/id-card.css';
 
 const AFTER_PRINT_EVENT = 'afterprint';

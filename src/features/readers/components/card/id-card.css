@@ -4,36 +4,21 @@
 }
 
 .id-card {
-  --id-card-night: #0e1a3a;
-  --id-card-gold: #c9a24a;
-  --id-card-gold-light: #e2c57a;
-  --id-card-ivory: #f7f1e3;
-  --id-card-photo: #cdbe9e;
+  --id-card-green: #00703c;
+  --id-card-paper: #eeeeee;
+  --id-card-category: #045533;
+  --id-card-ink: #000000;
+  --id-card-white: #ffffff;
 
   position: relative;
-  isolation: isolate;
   box-sizing: border-box;
   width: 85.6mm;
   height: 54mm;
   overflow: hidden;
-  background: var(--id-card-night);
-  color: var(--id-card-ivory);
-  font-family: 'Manrope Variable', Arial, sans-serif;
+  background: var(--id-card-paper);
+  color: var(--id-card-ink);
+  font-family: 'Instrument Sans Variable', Arial, sans-serif;
   line-height: normal;
-  print-color-adjust: exact;
-  -webkit-print-color-adjust: exact;
-}
-
-.id-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-color: var(--id-card-gold);
-  opacity: 0.22;
-  mask-image: url('@shared/assets/ornaments/girih-tile.svg');
-  mask-size: 6.4mm 6.4mm;
-  mask-repeat: repeat;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
 }
@@ -42,285 +27,145 @@
   margin: 0;
 }
 
-.id-card__label {
-  color: var(--id-card-gold-light);
-  font-size: 1.2mm;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.id-card--back {
+  background: var(--id-card-green);
 }
 
-.id-card__strip {
+.id-card__back-emblem {
   position: absolute;
-  height: 1mm;
-  background-color: var(--id-card-gold);
-  mask-image: url('@shared/assets/ornaments/border-strip.svg');
-  mask-size: 2.4mm 1mm;
-  mask-repeat: repeat-x;
-  mask-position: center;
+  top: 50%;
+  left: 50%;
+  width: 40.1mm;
+  height: 40.5mm;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+}
+
+.id-card__header {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 15.8mm;
+  background: var(--id-card-green);
 }
 
 .id-card__logo {
   position: absolute;
-  top: 2.4mm;
-  left: 3.2mm;
-  width: 9.6mm;
-  height: 9.6mm;
-  object-fit: contain;
-}
-
-.id-card__heading {
-  position: absolute;
-  top: 3.3mm;
-  left: 14.6mm;
-  width: 44mm;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8mm;
-}
-
-.id-card__center {
-  font-size: 1.3mm;
-  line-height: 1.5;
+  top: 2.2mm;
+  left: 2.8mm;
+  width: 11.5mm;
+  height: 11.8mm;
+  object-fit: cover;
 }
 
 .id-card__title {
-  font-family: 'Cormorant Garamond Variable', Georgia, serif;
-  font-size: 4.4mm;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.id-card__number {
   position: absolute;
   top: 4.2mm;
-  right: 3.6mm;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.2mm;
-}
-
-.id-card__number-value {
+  left: 46.75mm;
+  width: 57.5mm;
+  color: var(--id-card-white);
   font-size: 3.2mm;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateX(-50%);
 }
 
-.id-card__strip--header {
-  top: 14mm;
-  left: 3.2mm;
-  width: 79.2mm;
+.id-card__title-line {
+  display: block;
+  white-space: nowrap;
 }
 
-.id-card__arch {
-  position: absolute;
-  top: 17.2mm;
-  left: 3mm;
-  width: 22.2mm;
-  height: 29.6mm;
-}
-
-.id-card__arch-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-}
-
-.id-card__arch-outer,
-.id-card__arch-frame {
-  position: absolute;
-  fill: none;
-  stroke: var(--id-card-gold);
-}
-
-.id-card__arch-outer {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  stroke-opacity: 0.5;
-  stroke-width: 1.5;
-}
-
-.id-card__arch-photo,
-.id-card__arch-frame {
-  top: 1mm;
-  left: 1mm;
-  width: 20.2mm;
-  height: 27mm;
-}
-
-.id-card__arch-photo {
-  position: absolute;
-  clip-path: url('#id-card-arch');
-  background: var(--id-card-photo);
-}
-
-.id-card__arch-frame {
-  stroke-width: 3;
-}
-
-.id-card__photo {
-  width: 100%;
-  height: 100%;
-  background: var(--id-card-photo);
-}
-
-.id-card__holder {
+.id-card__details {
   position: absolute;
   top: 18.6mm;
-  left: 28.2mm;
-  width: 54mm;
+  left: 2.6mm;
+  width: 57mm;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1.4mm;
 }
 
 .id-card__name {
-  display: -webkit-box;
-  overflow: hidden;
   font-size: 3mm;
-  font-weight: 800;
-  line-height: 1.12;
+  font-weight: 700;
   text-transform: uppercase;
   overflow-wrap: anywhere;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 }
 
 .id-card__name--long {
-  font-size: 2.6mm;
+  font-size: 2.5mm;
 }
 
 .id-card__category {
-  padding: 0.5mm 1.4mm;
-  border-radius: 99mm;
-  background: var(--id-card-gold);
-  color: var(--id-card-night);
-  font-size: 1.5mm;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.id-card__dates {
-  position: absolute;
-  top: 33mm;
-  left: 28.2mm;
-  display: flex;
-  gap: 4.4mm;
-}
-
-.id-card__date {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4mm;
-}
-
-.id-card__date-value {
-  font-size: 2.1mm;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.id-card__barcode-panel {
-  position: absolute;
-  top: 40.4mm;
-  left: 28.2mm;
-  box-sizing: border-box;
-  width: 30mm;
-  height: 9.6mm;
-  padding: 1.2mm 1.8mm;
-  border-radius: 1.4mm;
-  background: var(--id-card-ivory);
+  margin: 2.34mm 0 0 4.9mm;
+  color: var(--id-card-category);
+  font-size: 2.8mm;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .id-card__barcode {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 19mm;
+  height: 8mm;
+  margin: 1.78mm 0 0 4.9mm;
 }
 
-.id-card__strip--start,
-.id-card__strip--end {
-  top: 3.4mm;
-  width: 18mm;
+.id-card__dates {
+  margin: 1.8mm 0 0 5.1mm;
+  font-size: 2mm;
+  font-weight: 600;
 }
 
-.id-card__strip--start {
-  left: 4mm;
-}
-
-.id-card__strip--end {
-  right: 4mm;
-}
-
-.id-card__back-arch {
+.id-card__photo {
   position: absolute;
-  bottom: 0;
-  left: 25.6mm;
-  width: 34.4mm;
-  height: 47.2mm;
-  color: var(--id-card-gold);
+  top: 13.2mm;
+  left: 60.8mm;
+  width: 22.7mm;
+  height: 30.2mm;
+  border-radius: 2mm;
+  background: var(--id-card-white);
 }
 
-.id-card__back-content {
+.id-card__number {
   position: absolute;
-  top: 15.4mm;
-  left: 29.8mm;
-  width: 26mm;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.6mm;
+  top: 43.5mm;
+  left: 60.8mm;
+  width: 22.7mm;
+  font-size: 3mm;
+  font-weight: 600;
   text-align: center;
 }
 
-.id-card__back-emblem {
-  width: 17.6mm;
-  height: 17.6mm;
-  object-fit: contain;
-}
-
-.id-card__back-center {
-  line-height: 1.6;
-}
-
-.id-card__back-title {
-  font-family: 'Cormorant Garamond Variable', Georgia, serif;
-  font-size: 4mm;
-  font-weight: 600;
-  line-height: 1;
-}
-
-.id-card__contact {
+.id-card__footer {
   position: absolute;
-  bottom: 3.4mm;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4mm;
+  inset: auto 0 0;
+  height: 5.9mm;
+  background: var(--id-card-green);
 }
 
-.id-card__contact--start {
-  left: 4mm;
+.id-card__website,
+.id-card__phone {
+  position: absolute;
+  top: 1.8mm;
+  color: var(--id-card-white);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.id-card__contact--end {
-  right: 4mm;
-  align-items: flex-end;
+.id-card__website {
+  left: 7mm;
+  font-size: 2.2mm;
 }
 
-.id-card__contact-value {
+.id-card__phone {
+  left: 60.9mm;
   font-size: 2mm;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
 @media screen {
   .id-card-sheet {
     zoom: 2.2;
-    border-radius: 3.2mm;
+    border-radius: 2mm;
     box-shadow: 0 0.3mm 1.2mm rgb(0 0 0 / 0.25);
   }
 }

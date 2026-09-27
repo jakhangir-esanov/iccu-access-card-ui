@@ -5,16 +5,11 @@ import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import type { Reader } from './reader';
 
 export const CARD_TEXT = {
-  center: 'Islamic Civilization Center in Uzbekistan',
-  title: 'Library Card',
-  library: 'Library',
-  cardNumber: 'Card No.',
+  titleLines: ['Library of Islamic Civilization', 'Center in Uzbekistan'],
   issuedOn: 'Date of issue',
-  expiresOn: 'Date of expiry',
-  websiteLabel: 'Website',
+  expiresOn: 'Date of Expiry',
   website: 'elibrary.cisc.uz',
-  phoneLabel: 'Phone',
-  phone: '+998 (71) 227 15 48',
+  phone: 'Tel: +998(71) 227 15 48',
 } as const;
 
 const CARD_LOCALE = 'en';
