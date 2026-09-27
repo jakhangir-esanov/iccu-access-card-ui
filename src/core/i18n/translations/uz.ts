@@ -191,7 +191,6 @@ export const uz = {
       expired: "Muddati o'tgan",
     },
     columns: {
-      photo: 'Rasm',
       code: 'Kod',
       fullName: 'F.I.Sh.',
       category: 'Toifa',

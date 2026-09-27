@@ -4,11 +4,11 @@ import type { Sorting } from '@core/http/paging';
 import { formatDateTime } from '@core/i18n/date-format';
 import type { Translate } from '@core/i18n/translate';
 import { useT } from '@core/i18n/use-i18n';
-import { AuthorizedImage } from '@shared/components/authorized-image';
 import { DataTable } from '@shared/components/data-table/data-table';
 import { createDataTableColumnHelper } from '@shared/components/data-table/data-table-columns';
 import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { formatPhone } from '@shared/person-details/person-format';
+import { Badge } from '@shared/ui/badge';
 import type { RegistrationRequestListItem } from '../models/registration-request';
 import { RequestStatusBadge } from './request-status-badge';
 
@@ -16,17 +16,6 @@ const column = createDataTableColumnHelper<RegistrationRequestListItem>();
 
 function createColumns(t: Translate) {
   return column.columns([
-    column.display({
-      id: 'photo',
-      header: () => <span className="sr-only">{t('requests.columns.photo')}</span>,
-      cell: ({ row }) => (
-        <AuthorizedImage
-          fileId={row.original.photoFileId}
-          alt={row.original.fullName}
-          className="aspect-[3/4] w-11 rounded-lg border"
-        />
-      ),
-    }),
     column.accessor('code', {
       header: () => t('requests.columns.code'),
       cell: ({ getValue }) => (
@@ -52,7 +41,9 @@ function createColumns(t: Translate) {
     }),
     column.accessor('category', {
       header: () => t('requests.columns.category'),
-      cell: ({ getValue }) => t(READER_CATEGORY_LABELS[getValue()]),
+      cell: ({ getValue }) => (
+        <Badge variant="secondary">{t(READER_CATEGORY_LABELS[getValue()])}</Badge>
+      ),
     }),
     column.accessor('phone', {
       header: () => t('requests.columns.phone'),

@@ -19,7 +19,7 @@ export function PortalArch({ className }: Readonly<{ className?: string }>) {
       className={cn('text-gold', className)}
       preserveAspectRatio="xMidYMax meet"
     >
-      <path d={`${MAIN_ARCH} Z`} className="fill-deep/60 stroke-none" />
+      <path d={`${MAIN_ARCH} Z`} fill="currentColor" fillOpacity={0.07} />
       <g fill="none" stroke="currentColor">
         <path d={OUTER_ARCH} strokeOpacity={0.5} strokeWidth={1.5} />
         <path d={MAIN_ARCH} strokeOpacity={0.9} strokeWidth={2} />

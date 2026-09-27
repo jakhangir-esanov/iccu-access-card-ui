@@ -192,7 +192,6 @@ export const en: Dictionary = {
       expired: 'Expired',
     },
     columns: {
-      photo: 'Photo',
       code: 'Code',
       fullName: 'Full name',
       category: 'Category',

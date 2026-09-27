@@ -193,7 +193,6 @@ export const ru: Dictionary = {
       expired: 'Просрочена',
     },
     columns: {
-      photo: 'Фото',
       code: 'Код',
       fullName: 'Ф.И.О.',
       category: 'Категория',
