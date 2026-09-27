@@ -240,7 +240,7 @@ Username saqlashda kichik harfga o'tkaziladi. Faolsizlantirilgan foydalanuvchini
 | Metod va yo'l | Ruxsat | Body | Javob `data` |
 |---|---|---|---|
 | `POST /api/files` | User | `multipart/form-data`, maydon nomi **`file`** | fayl `id` (Guid) |
-| `POST /api/public/files` | Anonim, 10 daqiqada 5 ta (IP) | xuddi shunday | fayl `id` |
+| `POST /api/public/files` | Anonim, 10 daqiqada 120 ta (IP) | xuddi shunday | fayl `id` |
 | `GET /api/files/{id}/content` | User | — | rasm baytlari (`image/jpeg` / `png` / `webp`) |
 | `DELETE /api/files/{id}` | Admin | — | — (409 `StoredFile.InUse`) |
 
@@ -264,7 +264,7 @@ SubmitRegistrationRequest {
 }
 ```
 
-- Rate limit: 10 daqiqada 5 ta (IP).
+- Rate limit: 10 daqiqada 60 ta (IP). Kutubxona Wi-Fi'sidagi hamma tashrif buyuruvchi bitta IP bilan chiqishi mumkin, shuning uchun limit 20 kishilik navbatga yetadigan qilib olingan.
 - `consentGiven` `true` bo'lishi shart (`RegistrationRequest.ConsentRequired`).
 - `photoFileId` topilmasa `404 StoredFile.NotFound`.
 - Javobdagi `code` tashrif buyuruvchiga katta qilib ko'rsatiladi. U resepshnga shu kodni aytadi. Ariza 24 soat amal qiladi.
