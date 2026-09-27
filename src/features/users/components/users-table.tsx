@@ -6,7 +6,8 @@ import type { Translate } from '@core/i18n/translate';
 import { useT } from '@core/i18n/use-i18n';
 import { DataTable } from '@shared/components/data-table/data-table';
 import { createDataTableColumnHelper } from '@shared/components/data-table/data-table-columns';
-import { USER_ROLE_LABELS } from '@shared/models/user-role';
+import { USER_ROLE_LABELS, UserRole } from '@shared/models/user-role';
+import { Badge, type BadgeVariant } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
 import {
   DropdownMenu,
@@ -18,6 +19,13 @@ import { statusOf, type User } from '../models/user';
 import { UserStatusBadge } from './user-status-badge';
 
 const column = createDataTableColumnHelper<User>();
+
+const ROLE_VARIANTS: Readonly<Record<UserRole, BadgeVariant>> = {
+  [UserRole.Receptionist]: 'secondary',
+  [UserRole.Admin]: 'warning',
+};
+
+const MUTED_CELL = 'text-muted-foreground tabular-nums';
 
 interface UserActions {
   readonly onEdit: (user: User) => void;
@@ -32,18 +40,22 @@ function createColumns(t: Translate, currentUserId: string | null, actions: User
         <span className="font-semibold">
           {row.original.fullName}
           {row.original.id === currentUserId && (
-            <span className="ml-2 text-xs text-muted-foreground">({t('users.you')})</span>
+            <Badge variant="muted" className="ml-2.5 h-6 px-2.5 text-xs">
+              {t('users.you')}
+            </Badge>
           )}
         </span>
       ),
     }),
     column.accessor('username', {
       header: () => t('users.columns.username'),
-      cell: ({ getValue }) => <span className="font-mono">{getValue()}</span>,
+      cell: ({ getValue }) => <span className="text-muted-foreground">{getValue()}</span>,
     }),
     column.accessor('role', {
       header: () => t('users.columns.role'),
-      cell: ({ getValue }) => t(USER_ROLE_LABELS[getValue()]),
+      cell: ({ getValue }) => (
+        <Badge variant={ROLE_VARIANTS[getValue()]}>{t(USER_ROLE_LABELS[getValue()])}</Badge>
+      ),
     }),
     column.display({
       id: 'status',
@@ -54,12 +66,16 @@ function createColumns(t: Translate, currentUserId: string | null, actions: User
       header: () => t('users.columns.lastLoginAt'),
       cell: ({ getValue }) => {
         const value = getValue();
-        return value === null ? t('users.never') : formatDateTime(value);
+        return (
+          <span className={MUTED_CELL}>
+            {value === null ? t('users.never') : formatDateTime(value)}
+          </span>
+        );
       },
     }),
     column.accessor('createdAt', {
       header: () => t('users.columns.createdAt'),
-      cell: ({ getValue }) => formatDateTime(getValue()),
+      cell: ({ getValue }) => <span className={MUTED_CELL}>{formatDateTime(getValue())}</span>,
     }),
     column.display({
       id: 'actions',
@@ -75,14 +91,15 @@ function UserRowActions({ user, actions }: { readonly user: User; readonly actio
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant="outline"
           size="icon-sm"
+          className="rounded-full"
           aria-label={`${t('users.columns.actions')}: ${user.fullName}`}
         >
           <EllipsisIcon aria-hidden />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-auto min-w-56">
         <DropdownMenuItem
           onSelect={() => {
             actions.onEdit(user);

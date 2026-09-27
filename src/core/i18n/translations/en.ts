@@ -262,7 +262,6 @@ export const en: Dictionary = {
       clear: 'Clear filters',
     },
     columns: {
-      photo: 'Photo',
       cardNumber: 'Card',
       fullName: 'Full name',
       category: 'Category',

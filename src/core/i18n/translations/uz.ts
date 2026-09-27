@@ -261,7 +261,6 @@ export const uz = {
       clear: 'Filtrlarni tozalash',
     },
     columns: {
-      photo: 'Rasm',
       cardNumber: 'Karta',
       fullName: 'F.I.Sh.',
       category: 'Toifa',

@@ -3,7 +3,6 @@ import type { Sorting } from '@core/http/paging';
 import { formatDateOnly, formatDateTime } from '@core/i18n/date-format';
 import type { Translate } from '@core/i18n/translate';
 import { useT } from '@core/i18n/use-i18n';
-import { AuthorizedImage } from '@shared/components/authorized-image';
 import { DataTable } from '@shared/components/data-table/data-table';
 import { createDataTableColumnHelper } from '@shared/components/data-table/data-table-columns';
 import { cardStatusOf } from '@shared/models/card-status';
@@ -17,17 +16,6 @@ const column = createDataTableColumnHelper<ReaderListItem>();
 
 function createColumns(t: Translate, today: string) {
   return column.columns([
-    column.display({
-      id: 'photo',
-      header: () => <span className="sr-only">{t('readers.columns.photo')}</span>,
-      cell: ({ row }) => (
-        <AuthorizedImage
-          fileId={row.original.photoFileId}
-          alt={row.original.fullName}
-          className="aspect-[3/4] w-11 rounded-lg border"
-        />
-      ),
-    }),
     column.accessor('cardNumber', {
       header: () => t('readers.columns.cardNumber'),
       cell: ({ getValue }) => (

@@ -263,7 +263,6 @@ export const ru: Dictionary = {
       clear: 'Сбросить фильтры',
     },
     columns: {
-      photo: 'Фото',
       cardNumber: 'Билет',
       fullName: 'Ф.И.О.',
       category: 'Категория',

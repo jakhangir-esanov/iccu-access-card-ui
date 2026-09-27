@@ -57,7 +57,7 @@ describe('UsersPage', () => {
   it('should mark the current user and a locked account when the list loads', async () => {
     await renderPage();
 
-    expect(screen.getByText('(siz)')).toBeInTheDocument();
+    expect(screen.getByText('siz')).toBeInTheDocument();
     expect(screen.getByText('Bloklangan')).toBeInTheDocument();
     expect(screen.getByText('Hali kirmagan')).toBeInTheDocument();
   });
