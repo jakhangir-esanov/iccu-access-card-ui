@@ -171,8 +171,11 @@
 }
 
 @media print {
-  .id-card-sheet {
+  body:has(.id-card-sheet) {
     page: id-card;
-    break-after: page;
+  }
+
+  .id-card--back {
+    break-before: page;
   }
 }
