@@ -15,11 +15,7 @@ export function ReportSummary({ report }: { readonly report: RegistrationReport 
         value={reception}
         icon={UserRoundCheckIcon}
       />
-      <StatTile
-        label={t('enums.registrationSource.selfService')}
-        value={selfService}
-        icon={QrCodeIcon}
-      />
+      <StatTile label={t('reports.online')} value={selfService} icon={QrCodeIcon} />
     </div>
   );
 }

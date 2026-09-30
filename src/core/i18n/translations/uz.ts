@@ -1,8 +1,9 @@
 export const uz = {
   app: {
     name: 'ICCU',
-    fullName: "O'zbekiston Islom sivilizatsiyasi markazi kutubxonasi",
+    fullName: 'Vazirlar Mahkamasi huzuridagi Islom sivilizatsiyasi markazi',
     center: "O'zbekistondagi Islom sivilizatsiyasi markazi",
+    libraryName: "O'zbekistondagi Islom sivilizatsiyasi markazi kutubxonasi",
     library: 'Kutubxona',
   },
   locale: {
@@ -124,7 +125,7 @@ export const uz = {
     },
     notSpecified: "Ko'rsatilmagan",
     registrationSource: {
-      reception: 'Resepshn',
+      reception: 'Qabulxona',
       selfService: 'QR anketa',
     },
     cardStatus: {
@@ -334,9 +335,10 @@ export const uz = {
     day: 'Kunlik',
     month: 'Oylik',
     total: "Jami ro'yxatdan o'tganlar",
+    online: "Onlayn ro'yxatdan o'tganlar",
     byPeriod: {
       title: "Davr bo'yicha",
-      subtitle: 'Resepshn va QR anketa',
+      subtitle: 'Qabulxona va QR anketa',
     },
     byCategory: {
       title: "Toifalar bo'yicha",

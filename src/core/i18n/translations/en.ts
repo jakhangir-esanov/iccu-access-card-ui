@@ -3,8 +3,9 @@ import type { Dictionary } from './dictionary';
 export const en: Dictionary = {
   app: {
     name: 'ICCU',
-    fullName: 'Library of the Center for Islamic Civilization in Uzbekistan',
+    fullName: 'Center for Islamic Civilization under the Cabinet of Ministers',
     center: 'Center for Islamic Civilization in Uzbekistan',
+    libraryName: 'Library of the Center for Islamic Civilization in Uzbekistan',
     library: 'Library',
   },
   locale: {
@@ -336,6 +337,7 @@ export const en: Dictionary = {
     day: 'Daily',
     month: 'Monthly',
     total: 'Total registrations',
+    online: 'Registered online',
     byPeriod: {
       title: 'By period',
       subtitle: 'Reception and QR form',

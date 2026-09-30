@@ -17,7 +17,7 @@ export function DashboardHero({ name, pendingRequests }: DashboardHeroProps) {
     <section className="ornament-girih flex flex-wrap items-center justify-between gap-6 rounded-2xl bg-deep px-9 py-8 text-deep-foreground [--ornament-opacity:0.18]">
       <div className="grid gap-2.5">
         <p className="text-xs font-bold tracking-[0.18em] text-gold uppercase">
-          {t('app.fullName')}
+          {t('app.libraryName')}
         </p>
         <h1 className="font-display text-4xl leading-tight font-semibold">
           {t('dashboard.welcome', { name })}

@@ -24,6 +24,9 @@ describe('ReportsPage', () => {
 
     expect(await screen.findByText("Jami ro'yxatdan o'tganlar")).toBeInTheDocument();
     expect(screen.getByText("Jami ro'yxatdan o'tganlar").parentElement).toHaveTextContent('5');
+    const [receptionTile] = screen.getAllByText('Qabulxona');
+    expect(receptionTile?.parentElement).toHaveTextContent('2');
+    expect(screen.getByText("Onlayn ro'yxatdan o'tganlar").parentElement).toHaveTextContent('3');
     expect(screen.getByText('Resepshn Xodimi')).toBeInTheDocument();
     expect(fetchRegistrationReport).toHaveBeenCalledWith({
       from: '2026-09-01',
