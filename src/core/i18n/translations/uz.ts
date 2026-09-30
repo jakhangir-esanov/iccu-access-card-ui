@@ -126,7 +126,7 @@ export const uz = {
     notSpecified: "Ko'rsatilmagan",
     registrationSource: {
       reception: 'Qabulxona',
-      selfService: 'QR anketa',
+      selfService: 'Onlayn',
     },
     cardStatus: {
       active: 'Faol',
@@ -338,7 +338,7 @@ export const uz = {
     online: "Onlayn ro'yxatdan o'tganlar",
     byPeriod: {
       title: "Davr bo'yicha",
-      subtitle: 'Qabulxona va QR anketa',
+      subtitle: 'Qabulxona va onlayn',
     },
     byCategory: {
       title: "Toifalar bo'yicha",
