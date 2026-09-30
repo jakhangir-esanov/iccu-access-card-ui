@@ -24,7 +24,7 @@ describe('toCategoryRows', () => {
       t,
     );
 
-    expect(rows).toHaveLength(7);
+    expect(rows).toHaveLength(8);
     expect(rows.slice(0, 3).map((row) => [row.label, row.values.count])).toEqual([
       ['PhD', 5],
       ['Talaba', 3],

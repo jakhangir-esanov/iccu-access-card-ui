@@ -18,6 +18,13 @@ describe('toCardFace', () => {
     });
   });
 
+  it.each([
+    [6, 'EMPLOYEE'],
+    [7, 'USER'],
+  ])('should print category %i as %s when the card is built', (category, expected) => {
+    expect(toCardFace(toReader({ ...READER_DTO, category })).category).toBe(expected);
+  });
+
   it('should keep Uzbek apostrophes when the name has them', () => {
     const face = toCardFace(
       toReader({ ...READER_DTO, lastName: 'Bo‘ritosheva', middleName: null }),

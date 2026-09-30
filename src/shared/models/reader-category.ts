@@ -8,6 +8,7 @@ export const ReaderCategory = {
   DSc: 4,
   Professor: 5,
   Employee: 6,
+  User: 7,
 } as const;
 
 export type ReaderCategory = (typeof ReaderCategory)[keyof typeof ReaderCategory];
@@ -22,6 +23,7 @@ export const READER_CATEGORY_LABELS: Readonly<Record<ReaderCategory, Translation
   [ReaderCategory.DSc]: 'enums.readerCategory.dsc',
   [ReaderCategory.Professor]: 'enums.readerCategory.professor',
   [ReaderCategory.Employee]: 'enums.readerCategory.employee',
+  [ReaderCategory.User]: 'enums.readerCategory.user',
 };
 
 export function isReaderCategory(value: unknown): value is ReaderCategory {

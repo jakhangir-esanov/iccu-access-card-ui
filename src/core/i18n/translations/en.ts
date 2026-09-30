@@ -114,6 +114,7 @@ export const en: Dictionary = {
       dsc: 'DSc',
       professor: 'Professor',
       employee: 'Employee',
+      user: 'User',
     },
     gender: {
       male: 'Male',

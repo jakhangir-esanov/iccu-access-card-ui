@@ -37,6 +37,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 - **Hisobot davrlari**: backend `byPeriod` da faqat ma'lumot bor kun/oylarni qaytaradi, frontend bo'sh davrlarni nol bilan to'ldiradi (`fillPeriods`). Dashboard'dagi `lastDays` esa har doim 30 kunni to'liq beradi.
 - **Lokal test foydalanuvchisi**: 8-bosqich tekshiruvida `kutubxonachi1` (Resepshn) yaratildi, keyin o'chirildi (faolsizlantirildi) va paroli tiklandi.
 - **Lokal test chet el fuqarosi**: 11-bosqich tekshiruvida `0008` ariza (Smith John, Erkak, Chet el fuqarosi, `+79012345678`) yuborildi va tasdiqlandi, kitobxon `0000011` bo'ldi. Undan oldingi lokal kitobxonlarda jins va fuqarolik bo'sh.
+- **Lokal test Foydalanuvchi toifasi**: 2026-10-01 da "Xizmatchi" "Xodim" deb o'zgartirildi va 7-toifa "Foydalanuvchi" (kartada `USER`) qo'shildi; tekshiruvda `0009` ariza (Rahimov Sardor, Foydalanuvchi) yuborildi, ko'rib chiqilmagan.
 - **Lokal seed**: lokal bazada faqat `admin` bor edi. `resepshn` / `Resep12345` (Receptionist) 2026-09-26 da `POST /users` orqali qo'shildi.
 
 ## Ochiq savollar

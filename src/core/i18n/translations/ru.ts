@@ -114,6 +114,7 @@ export const ru: Dictionary = {
       dsc: 'DSc',
       professor: 'Профессор',
       employee: 'Сотрудник',
+      user: 'Пользователь',
     },
     gender: {
       male: 'Мужской',

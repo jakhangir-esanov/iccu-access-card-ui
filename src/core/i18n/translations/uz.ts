@@ -111,7 +111,8 @@ export const uz = {
       phd: 'PhD',
       dsc: 'DSc',
       professor: 'Professor',
-      employee: 'Xizmatchi',
+      employee: 'Xodim',
+      user: 'Foydalanuvchi',
     },
     gender: {
       male: 'Erkak',
