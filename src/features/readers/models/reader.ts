@@ -1,4 +1,5 @@
-import type { DocumentType } from '@shared/models/document-type';
+import type { Citizenship } from '@shared/models/citizenship';
+import type { Gender } from '@shared/models/gender';
 import type { ReaderCategory } from '@shared/models/reader-category';
 import type { RegistrationSource } from '@shared/models/registration-source';
 
@@ -9,8 +10,9 @@ interface ReaderPerson {
   readonly middleName: string | null;
   readonly fullName: string;
   readonly birthDate: string;
+  readonly gender: Gender | null;
+  readonly citizenship: Citizenship | null;
   readonly phone: string;
-  readonly documentType: DocumentType;
 }
 
 interface ReaderCard {
@@ -24,12 +26,9 @@ interface ReaderCard {
   readonly createdAt: string;
 }
 
-export interface ReaderListItem extends ReaderPerson, ReaderCard {
-  readonly documentNumberMasked: string;
-}
+export type ReaderListItem = ReaderPerson & ReaderCard;
 
 export interface Reader extends ReaderPerson, ReaderCard {
-  readonly documentNumber: string;
   readonly lastPrintedAt: string | null;
   readonly createdByName: string | null;
   readonly updatedAt: string | null;

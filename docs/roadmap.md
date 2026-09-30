@@ -8,13 +8,14 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 | 1 | **core** | `http` (api-client, ApiError, paging), `i18n` (uz/ru/en typed), `feedback` (toast, confirm) va ularning testlari | Tayyor |
 | 2 | **Auth va shell** | login, sessiyani tiklash, 401 → refresh, rol guard'i, chiqish, parolni almashtirish, admin layout va rolga qarab menyu, 403/404 sahifalari | Tayyor |
 | 3 | **QR anketa `/royxat`** | mobil forma, galereya/kamera, 3:4 kesish, anonim yuklash, rozilik, kod ekrani, rate limit va validatsiya xabarlari | Tayyor |
-| 4 | **Arizalar navbati** | ro'yxat (status, qidiruv), SignalR (toast, ovoz, yangilash), kartochka va rasm, tahrirlash, tasdiqlash → kitobxonga o'tish, rad etish, "hujjat allaqachon bor" ogohlantirishi | Tayyor |
+| 4 | **Arizalar navbati** | ro'yxat (status, qidiruv), SignalR (toast, ovoz, yangilash), kartochka va rasm, tahrirlash, tasdiqlash → kitobxonga o'tish, rad etish, "telefon allaqachon bor" ogohlantirishi | Tayyor |
 | 5 | **Kitobxonlar** | jadval (server paging/sort, filtrlar, qidiruv), kartochka, yaratish/tahrirlash rasm bilan, uzaytirish, o'chirish va eksport (Admin) | Tayyor |
 | 6 | **Karta chop etish** | 85,6 × 54 mm (CR80) print sahifasi (Figma `A4-13` old, `A4-11` orqa), Code 128 shtrix-kod, chop etishni tasdiqlab qayd qilish | Tayyor |
 | 7 | **Dashboard va hisobot** | kartochkalar, 30 kunlik grafik, toifalar; davr, kun/oy, manba va xodim kesimi | Tayyor |
 | 8 | **Foydalanuvchilar** | ro'yxat, yaratish, tahrirlash (rol, faollik), parolni tiklash | Tayyor |
 | 9 | **Deploy** | `iccu-web` nginx image, backend `deploy/` dagi edge nginx va stack o'zgarishlari, to'liq ssenariy | Tayyor |
 | 10 | **Dizayn** | "Temuriy kutubxona" dizayn tizimi: tokenlar, shriftlar, girih naqshlari, login, admin shell, akkaunt menyusi, sahifa sarlavhalari, filtr panellari, kattaroq komponentlar, kartochka va forma sahifalari, dialoglar | Tayyor |
+| 11 | **Hujjat o'rniga jins va fuqarolik** | ma'muriyat topshirig'i (2026-09-30): hujjat turi va raqami hamma joydan olib tashlandi; jins va fuqarolik select'lari, chet el fuqarosi uchun xalqaro telefon, takror telefon bo'yicha; ro'yxat ustunlari, filtrlar, dashboard va hisobotda jins/fuqarolik kesimi. Backend bilan birga (`ReplaceDocumentWithGenderAndCitizenship` migratsiyasi) | Tayyor |
 
 ---
 
@@ -35,6 +36,7 @@ Har bosqich: kod, testlar, `npm run lint` + `npm test` + `npm run build` o'tadi,
 - **Printer kalibrovkasi**: Canon modeli ma'lum bo'lgach haqiqiy kartada tekshiriladi (hoshiya, chetsiz chop etish, ikki tomonlama tartib).
 - **Hisobot davrlari**: backend `byPeriod` da faqat ma'lumot bor kun/oylarni qaytaradi, frontend bo'sh davrlarni nol bilan to'ldiradi (`fillPeriods`). Dashboard'dagi `lastDays` esa har doim 30 kunni to'liq beradi.
 - **Lokal test foydalanuvchisi**: 8-bosqich tekshiruvida `kutubxonachi1` (Resepshn) yaratildi, keyin o'chirildi (faolsizlantirildi) va paroli tiklandi.
+- **Lokal test chet el fuqarosi**: 11-bosqich tekshiruvida `0008` ariza (Smith John, Erkak, Chet el fuqarosi, `+79012345678`) yuborildi va tasdiqlandi, kitobxon `0000011` bo'ldi. Undan oldingi lokal kitobxonlarda jins va fuqarolik bo'sh.
 - **Lokal seed**: lokal bazada faqat `admin` bor edi. `resepshn` / `Resep12345` (Receptionist) 2026-09-26 da `POST /users` orqali qo'shildi.
 
 ## Ochiq savollar

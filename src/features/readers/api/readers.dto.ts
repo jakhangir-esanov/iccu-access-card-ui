@@ -4,8 +4,9 @@ interface ReaderPersonDto {
   readonly firstName: string;
   readonly middleName: string | null;
   readonly birthDate: string;
+  readonly gender: number | null;
+  readonly citizenship: number | null;
   readonly phone: string;
-  readonly documentType: number;
 }
 
 interface ReaderCardDto {
@@ -20,12 +21,9 @@ interface ReaderCardDto {
   readonly createdAt: string;
 }
 
-export interface ReaderListItemDto extends ReaderPersonDto, ReaderCardDto {
-  readonly documentNumberMasked: string;
-}
+export type ReaderListItemDto = ReaderPersonDto & ReaderCardDto;
 
 export interface ReaderDto extends ReaderPersonDto, ReaderCardDto {
-  readonly documentNumber: string;
   readonly lastPrintedAt: string | null;
   readonly createdByName: string | null;
   readonly updatedAt: string | null;
@@ -37,9 +35,9 @@ export interface SaveReaderRequestDto {
   readonly firstName: string;
   readonly middleName: string | null;
   readonly birthDate: string;
+  readonly gender: number;
+  readonly citizenship: number;
   readonly phone: string;
-  readonly documentType: number;
-  readonly documentNumber: string;
   readonly photoFileId: string;
 }
 

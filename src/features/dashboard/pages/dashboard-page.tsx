@@ -7,6 +7,7 @@ import { ChartCard } from '@shared/components/charts/chart-card';
 import { ChartTable } from '@shared/components/charts/chart-table';
 import { CHART_PALETTE, type ChartSeries } from '@shared/components/charts/chart-types';
 import { ColumnChart } from '@shared/components/charts/column-chart';
+import { DemographicCharts } from '@shared/components/charts/demographic-charts';
 import { HorizontalBarChart } from '@shared/components/charts/horizontal-bar-chart';
 import { FormAlert } from '@shared/components/form/form-alert';
 import { dashboardKeys, useDashboard } from '../api/dashboard.queries';
@@ -61,6 +62,11 @@ export function DashboardPage() {
               }
             />
           </div>
+          <DemographicCharts
+            byGender={data.byGender}
+            byCitizenship={data.byCitizenship}
+            series={series}
+          />
         </>
       )}
     </section>

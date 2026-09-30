@@ -90,6 +90,8 @@ describe('toRegistrationReport', () => {
       total: 3,
       byPeriod: [],
       byCategory: [],
+      byGender: [],
+      byCitizenship: [],
       byUser: [
         { userId: 'a', fullName: 'Ali', count: 1 },
         { userId: 'b', fullName: 'Vali', count: 2 },

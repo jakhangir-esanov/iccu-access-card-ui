@@ -1,4 +1,5 @@
-import { DocumentType, isDocumentType } from '@shared/models/document-type';
+import { toCitizenshipOrNull } from '@shared/models/citizenship';
+import { toGenderOrNull } from '@shared/models/gender';
 import { isReaderCategory, ReaderCategory } from '@shared/models/reader-category';
 import { isRegistrationSource, RegistrationSource } from '@shared/models/registration-source';
 import { formatFullName } from '@shared/person-details/person-format';
@@ -25,8 +26,9 @@ function toSharedFields(dto: SharedDto) {
     middleName: dto.middleName,
     fullName: formatFullName(dto),
     birthDate: dto.birthDate,
+    gender: toGenderOrNull(dto.gender),
+    citizenship: toCitizenshipOrNull(dto.citizenship),
     phone: dto.phone,
-    documentType: isDocumentType(dto.documentType) ? dto.documentType : DocumentType.Passport,
     source: isRegistrationSource(dto.source) ? dto.source : RegistrationSource.Reception,
     issuedOn: dto.issuedOn,
     expiresOn: dto.expiresOn,
@@ -36,13 +38,12 @@ function toSharedFields(dto: SharedDto) {
 }
 
 export function toReaderListItem(dto: ReaderListItemDto): ReaderListItem {
-  return { ...toSharedFields(dto), documentNumberMasked: dto.documentNumberMasked };
+  return toSharedFields(dto);
 }
 
 export function toReader(dto: ReaderDto): Reader {
   return {
     ...toSharedFields(dto),
-    documentNumber: dto.documentNumber,
     lastPrintedAt: dto.lastPrintedAt,
     createdByName: dto.createdByName,
     updatedAt: dto.updatedAt,
@@ -56,9 +57,9 @@ export function toSaveReaderRequest(values: ReaderFormValues): SaveReaderRequest
     firstName: values.firstName,
     middleName: values.middleName,
     birthDate: values.birthDate,
+    gender: values.gender,
+    citizenship: values.citizenship,
     phone: values.phone,
-    documentType: values.documentType,
-    documentNumber: values.documentNumber,
     photoFileId: values.photoFileId,
   };
 }

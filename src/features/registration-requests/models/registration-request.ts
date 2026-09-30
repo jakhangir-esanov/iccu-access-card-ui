@@ -1,4 +1,5 @@
-import type { DocumentType } from '@shared/models/document-type';
+import type { Citizenship } from '@shared/models/citizenship';
+import type { Gender } from '@shared/models/gender';
 import type { ReaderCategory } from '@shared/models/reader-category';
 import {
   RegistrationRequestStatus,
@@ -15,7 +16,7 @@ export interface RegistrationRequestListItem {
   readonly phone: string;
   readonly submittedAt: string;
   readonly expiresAt: string;
-  readonly hasRegisteredDocument: boolean;
+  readonly hasRegisteredPhone: boolean;
 }
 
 export interface RegisteredReader {
@@ -34,9 +35,9 @@ export interface RegistrationRequest {
   readonly middleName: string | null;
   readonly fullName: string;
   readonly birthDate: string;
+  readonly gender: Gender | null;
+  readonly citizenship: Citizenship | null;
   readonly phone: string;
-  readonly documentType: DocumentType;
-  readonly documentNumber: string;
   readonly submittedAt: string;
   readonly expiresAt: string;
   readonly reviewedAt: string | null;

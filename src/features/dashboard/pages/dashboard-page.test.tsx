@@ -27,6 +27,15 @@ const DASHBOARD: DashboardDto = {
     { category: 1, count: 700 },
     { category: 42, count: 5 },
   ],
+  byGender: [
+    { gender: 0, count: 500 },
+    { gender: 1, count: 700 },
+    { gender: null, count: 84 },
+  ],
+  byCitizenship: [
+    { citizenship: 0, count: 1270 },
+    { citizenship: 1, count: 14 },
+  ],
   lastDays: [
     { day: '2026-09-26', count: 3 },
     { day: '2026-09-27', count: 4 },
@@ -36,6 +45,14 @@ const DASHBOARD: DashboardDto = {
 describe('toDashboard', () => {
   it('should drop categories the UI does not know when the backend sends them', () => {
     expect(toDashboard(DASHBOARD).byCategory).toEqual([{ category: 1, count: 700 }]);
+  });
+
+  it('should keep readers without a gender as a separate row when the backend groups them', () => {
+    expect(toDashboard(DASHBOARD).byGender).toEqual([
+      { gender: 0, count: 500 },
+      { gender: 1, count: 700 },
+      { gender: null, count: 84 },
+    ]);
   });
 });
 
@@ -62,6 +79,8 @@ describe('DashboardPage', () => {
       'href',
       '/admin/requests',
     );
+    expect(screen.getByText("Jinsi bo'yicha")).toBeInTheDocument();
+    expect(screen.getByText("Fuqarolik bo'yicha")).toBeInTheDocument();
   });
 
   it('should explain the failure when the dashboard cannot be loaded', async () => {

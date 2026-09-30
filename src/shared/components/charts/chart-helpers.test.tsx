@@ -3,10 +3,13 @@ import { describe, expect, it } from 'vitest';
 import { I18nProvider } from '@core/i18n/i18n-provider';
 import { createTranslator } from '@core/i18n/translate';
 import { DICTIONARIES } from '@core/i18n/translations/dictionaries';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { toCategoryRows } from './category-rows';
 import { ChartTooltip } from './chart-tooltip';
 import { CHART_PALETTE, tickInterval, toChartData } from './chart-types';
+import { toCitizenshipRows, toGenderRows } from './demographic-rows';
 
 const t = createTranslator(DICTIONARIES.uz);
 
@@ -26,6 +29,41 @@ describe('toCategoryRows', () => {
       ['PhD', 5],
       ['Talaba', 3],
       ["O'quvchi", 0],
+    ]);
+  });
+});
+
+describe('toGenderRows', () => {
+  it('should list both genders in order and hide the empty not-specified row', () => {
+    const rows = toGenderRows([{ gender: Gender.Female, count: 4 }], 'count', t);
+
+    expect(rows.map((row) => [row.label, row.values.count])).toEqual([
+      ['Erkak', 0],
+      ['Ayol', 4],
+    ]);
+  });
+
+  it('should add a not-specified row when old readers have no gender', () => {
+    const rows = toGenderRows(
+      [
+        { gender: Gender.Male, count: 2 },
+        { gender: null, count: 3 },
+      ],
+      'count',
+      t,
+    );
+
+    expect(rows.at(-1)).toEqual({ key: 'none', label: "Ko'rsatilmagan", values: { count: 3 } });
+  });
+});
+
+describe('toCitizenshipRows', () => {
+  it('should label both citizenships when the counts are mapped', () => {
+    const rows = toCitizenshipRows([{ citizenship: Citizenship.Foreign, count: 1 }], 'count', t);
+
+    expect(rows.map((row) => [row.label, row.values.count])).toEqual([
+      ["O'zbekiston fuqarosi", 0],
+      ['Chet el fuqarosi', 1],
     ]);
   });
 });

@@ -12,7 +12,7 @@ export interface RegistrationRequestListItemDto {
   readonly expiresAt: string;
   readonly reviewedAt: string | null;
   readonly reviewedByName: string | null;
-  readonly hasRegisteredDocument: boolean;
+  readonly hasRegisteredPhone: boolean;
 }
 
 export interface RegistrationRequestDto {
@@ -25,9 +25,9 @@ export interface RegistrationRequestDto {
   readonly firstName: string;
   readonly middleName: string | null;
   readonly birthDate: string;
+  readonly gender: number | null;
+  readonly citizenship: number | null;
   readonly phone: string;
-  readonly documentType: number;
-  readonly documentNumber: string;
   readonly submittedAt: string;
   readonly expiresAt: string;
   readonly reviewedAt: string | null;
@@ -44,9 +44,9 @@ export interface UpdateRegistrationRequestDto {
   readonly firstName: string;
   readonly middleName: string | null;
   readonly birthDate: string;
+  readonly gender: number;
+  readonly citizenship: number;
   readonly phone: string;
-  readonly documentType: number;
-  readonly documentNumber: string;
 }
 
 export interface ApproveRegistrationResponseDto {

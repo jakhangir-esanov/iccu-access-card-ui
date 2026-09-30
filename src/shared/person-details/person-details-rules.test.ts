@@ -1,52 +1,43 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
-import {
-  NAME_PATTERN,
-  isValidBirthDate,
-  isValidDocumentNumber,
-  normalizeDocumentNumber,
-  normalizePhone,
-} from './person-details-rules';
+import { Citizenship } from '@shared/models/citizenship';
+import { NAME_PATTERN, isValidBirthDate, normalizePhone } from './person-details-rules';
 
 describe('normalizePhone', () => {
   it.each([
     ['90 123 45 67', '+998901234567'],
     ['+998 (90) 123-45-67', '+998901234567'],
     ['998901234567', '+998901234567'],
-  ])('should turn %s into %s', (phone, expected) => {
-    expect(normalizePhone(phone)).toBe(expected);
+  ])('should turn %s into %s when the reader is a citizen of Uzbekistan', (phone, expected) => {
+    expect(normalizePhone(phone, Citizenship.Uzbekistan)).toBe(expected);
   });
 
   it.each(['12345', '7 901 234 56 78', '99890123456', ''])(
-    'should reject %s when it is not an Uzbek number',
+    'should reject %s when a citizen of Uzbekistan has no Uzbek number',
     (phone) => {
-      expect(normalizePhone(phone)).toBeNull();
+      expect(normalizePhone(phone, Citizenship.Uzbekistan)).toBeNull();
     },
   );
-});
 
-describe('normalizeDocumentNumber', () => {
-  it.each([
-    ['ad 765-4321', 'AD7654321'],
-    ['I-TN 1234567', 'ITN1234567'],
-    ['№ 12.34#56', '123456'],
-  ])('should turn %s into %s', (number, expected) => {
-    expect(normalizeDocumentNumber(number)).toBe(expected);
+  it('should accept only Uzbek numbers when the citizenship is not chosen', () => {
+    expect(normalizePhone('90 123 45 67', null)).toBe('+998901234567');
+    expect(normalizePhone('+7 901 234 56 78', null)).toBeNull();
   });
-});
 
-describe('isValidDocumentNumber', () => {
   it.each([
-    [DocumentType.Passport, 'AA1234567', true],
-    [DocumentType.Passport, 'aa 123 45 67', true],
-    [DocumentType.Passport, 'A1234567', false],
-    [DocumentType.Passport, 'AA123456', false],
-    [DocumentType.BirthCertificate, 'I-TN 1234567', true],
-    [DocumentType.BirthCertificate, 'ABCDEFG', false],
-    [DocumentType.BirthCertificate, '12345', false],
-  ])('should check type %i number %s as %s', (type, number, expected) => {
-    expect(isValidDocumentNumber(type, number)).toBe(expected);
+    ['+7 901 234 56 78', '+79012345678'],
+    ['+49 (151) 1234-5678', '+4915112345678'],
+    ['12345678', '+12345678'],
+    ['90 123 45 67', '+998901234567'],
+  ])('should turn %s into %s when the reader is a foreign citizen', (phone, expected) => {
+    expect(normalizePhone(phone, Citizenship.Foreign)).toBe(expected);
   });
+
+  it.each(['1234567', '+1234567890123456', '0049 151 1234 5678', ''])(
+    'should reject %s when a foreign number is outside 8-15 digits or starts with zero',
+    (phone) => {
+      expect(normalizePhone(phone, Citizenship.Foreign)).toBeNull();
+    },
+  );
 });
 
 describe('NAME_PATTERN', () => {

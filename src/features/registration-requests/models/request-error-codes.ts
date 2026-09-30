@@ -1,7 +1,7 @@
 export const RequestErrorCode = {
   NotPending: 'RegistrationRequest.NotPending',
   Expired: 'RegistrationRequest.Expired',
-  DocumentAlreadyRegistered: 'Reader.DocumentAlreadyRegistered',
+  PhoneAlreadyRegistered: 'Reader.PhoneAlreadyRegistered',
 } as const;
 
 const STALE_REQUEST_CODES: ReadonlySet<string> = new Set(Object.values(RequestErrorCode));

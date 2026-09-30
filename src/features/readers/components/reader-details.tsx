@@ -1,7 +1,9 @@
 import { formatDateOnly, formatDateTime } from '@core/i18n/date-format';
 import { useT } from '@core/i18n/use-i18n';
 import { DetailList, type DetailRow } from '@shared/components/detail-list';
-import { DOCUMENT_TYPE_LABELS } from '@shared/models/document-type';
+import { OptionalLabel } from '@shared/components/optional-label';
+import { CITIZENSHIP_LABELS } from '@shared/models/citizenship';
+import { GENDER_LABELS } from '@shared/models/gender';
 import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { REGISTRATION_SOURCE_LABELS } from '@shared/models/registration-source';
 import { formatPhone } from '@shared/person-details/person-format';
@@ -16,13 +18,16 @@ export function ReaderDetails({ reader }: { readonly reader: Reader }) {
     { label: 'person.lastName', value: reader.lastName },
     { label: 'person.firstName', value: reader.firstName },
     { label: 'person.middleName', value: reader.middleName ?? EMPTY_VALUE },
-    { label: 'person.birthDate', value: formatDateOnly(reader.birthDate) },
-    { label: 'person.phone', value: formatPhone(reader.phone) },
-    { label: 'person.documentType', value: t(DOCUMENT_TYPE_LABELS[reader.documentType]) },
     {
-      label: 'person.documentNumber',
-      value: <span className="tracking-[0.04em] tabular-nums">{reader.documentNumber}</span>,
+      label: 'person.gender',
+      value: <OptionalLabel value={reader.gender} labels={GENDER_LABELS} />,
     },
+    { label: 'person.birthDate', value: formatDateOnly(reader.birthDate) },
+    {
+      label: 'person.citizenship',
+      value: <OptionalLabel value={reader.citizenship} labels={CITIZENSHIP_LABELS} />,
+    },
+    { label: 'person.phone', value: formatPhone(reader.phone) },
   ];
   const record: readonly DetailRow[] = [
     { label: 'readers.detail.source', value: t(REGISTRATION_SOURCE_LABELS[reader.source]) },

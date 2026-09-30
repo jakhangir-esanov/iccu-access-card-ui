@@ -1,12 +1,16 @@
 import type { QueryParams } from '@core/http/api-types';
 import { SortOrder, type Sorting } from '@core/http/paging';
 import { isCardStatus, type CardStatus } from '@shared/models/card-status';
+import { isCitizenship, type Citizenship } from '@shared/models/citizenship';
+import { isGender, type Gender } from '@shared/models/gender';
 import { isReaderCategory, type ReaderCategory } from '@shared/models/reader-category';
 import { isRegistrationSource, type RegistrationSource } from '@shared/models/registration-source';
 
 export const ReaderFilterParam = {
   search: 'search',
   category: 'category',
+  gender: 'gender',
+  citizenship: 'citizenship',
   source: 'source',
   status: 'status',
   registeredFrom: 'registeredFrom',
@@ -20,6 +24,8 @@ export const READER_FILTER_NAMES: readonly ReaderFilterName[] = Object.values(Re
 export interface ReaderFilter {
   readonly search: string;
   readonly category: ReaderCategory | null;
+  readonly gender: Gender | null;
+  readonly citizenship: Citizenship | null;
   readonly source: RegistrationSource | null;
   readonly status: CardStatus | null;
   readonly registeredFrom: string;
@@ -40,6 +46,8 @@ export function parseReaderFilter(read: (name: ReaderFilterName) => string): Rea
   return {
     search: read(ReaderFilterParam.search),
     category: parseEnum(read(ReaderFilterParam.category), isReaderCategory),
+    gender: parseEnum(read(ReaderFilterParam.gender), isGender),
+    citizenship: parseEnum(read(ReaderFilterParam.citizenship), isCitizenship),
     source: parseEnum(read(ReaderFilterParam.source), isRegistrationSource),
     status: parseEnum(read(ReaderFilterParam.status), isCardStatus),
     registeredFrom: read(ReaderFilterParam.registeredFrom),

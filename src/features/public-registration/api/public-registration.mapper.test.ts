@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { toRegistrationReceipt, toSubmitRegistrationRequest } from './public-registration.mapper';
 
@@ -11,9 +12,9 @@ describe('toSubmitRegistrationRequest', () => {
       firstName: 'Anvar',
       middleName: null,
       birthDate: '1990-01-02',
+      gender: Gender.Male,
+      citizenship: Citizenship.Uzbekistan,
       phone: '+998901234567',
-      documentType: DocumentType.Passport,
-      documentNumber: 'AA1234567',
       photoFileId: 'file-1',
       consentGiven: true,
     };

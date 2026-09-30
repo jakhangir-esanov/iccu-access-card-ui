@@ -30,7 +30,7 @@ function createColumns(t: Translate) {
       cell: ({ row }) => (
         <span className="flex items-center gap-2 font-semibold">
           {row.original.fullName}
-          {row.original.hasRegisteredDocument && (
+          {row.original.hasRegisteredPhone && (
             <TriangleAlertIcon
               className="size-4 text-gold"
               aria-label={t('requests.duplicateShort')}

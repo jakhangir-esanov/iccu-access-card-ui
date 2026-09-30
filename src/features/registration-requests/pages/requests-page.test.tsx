@@ -33,7 +33,7 @@ const SAMPLE_ROW: RegistrationRequestListItemDto = {
   expiresAt: '2026-09-27T17:06:55.082Z',
   reviewedAt: null,
   reviewedByName: null,
-  hasRegisteredDocument: false,
+  hasRegisteredPhone: false,
 };
 
 describe('RequestsPage', () => {

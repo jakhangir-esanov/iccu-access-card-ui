@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { toPersonDetailsFormInput } from './person-details-form';
 import { formatFullName, formatPhone } from './person-format';
@@ -29,27 +30,43 @@ describe('formatPhone', () => {
 });
 
 describe('toPersonDetailsFormInput', () => {
+  const stored = {
+    category: ReaderCategory.Employee,
+    lastName: 'Toshmatov',
+    firstName: 'Botir',
+    middleName: null,
+    birthDate: '1985-03-12',
+    gender: Gender.Male,
+    citizenship: Citizenship.Uzbekistan,
+    phone: '+998931112233',
+  };
+
   it('should turn stored details into form strings when a record is edited', () => {
-    expect(
-      toPersonDetailsFormInput({
-        category: ReaderCategory.Employee,
-        lastName: 'Toshmatov',
-        firstName: 'Botir',
-        middleName: null,
-        birthDate: '1985-03-12',
-        phone: '+998931112233',
-        documentType: DocumentType.BirthCertificate,
-        documentNumber: 'ITN1234567',
-      }),
-    ).toEqual({
+    expect(toPersonDetailsFormInput(stored)).toEqual({
       category: '6',
       lastName: 'Toshmatov',
       firstName: 'Botir',
       middleName: '',
       birthDate: '1985-03-12',
+      gender: '0',
+      citizenship: '0',
       phone: '931112233',
-      documentType: '1',
-      documentNumber: 'ITN1234567',
     });
+  });
+
+  it('should keep the whole number when the reader is a foreign citizen', () => {
+    const input = toPersonDetailsFormInput({
+      ...stored,
+      citizenship: Citizenship.Foreign,
+      phone: '+79012345678',
+    });
+
+    expect([input.citizenship, input.phone]).toEqual(['1', '+79012345678']);
+  });
+
+  it('should leave gender and citizenship empty when an old record has none', () => {
+    const input = toPersonDetailsFormInput({ ...stored, gender: null, citizenship: null });
+
+    expect([input.gender, input.citizenship, input.phone]).toEqual(['', '', '931112233']);
   });
 });

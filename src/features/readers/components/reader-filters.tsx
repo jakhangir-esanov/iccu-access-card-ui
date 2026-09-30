@@ -4,6 +4,8 @@ import { useT } from '@core/i18n/use-i18n';
 import { FilterPanel } from '@shared/components/filter-panel';
 import { DatePicker } from '@shared/components/form/date-picker';
 import { CARD_STATUS_LABELS, CARD_STATUSES } from '@shared/models/card-status';
+import { CITIZENSHIP_LABELS, CITIZENSHIPS } from '@shared/models/citizenship';
+import { GENDER_LABELS, GENDERS } from '@shared/models/gender';
 import { READER_CATEGORIES, READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import {
   REGISTRATION_SOURCE_LABELS,
@@ -58,7 +60,7 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
           }}
         />
       </div>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-[repeat(5,minmax(0,1fr))_auto] xl:items-end">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:items-end">
         <ReaderFilterSelect
           id="filter-category"
           label="readers.filters.category"
@@ -66,6 +68,22 @@ export function ReaderFilters({ filter, onChange, onClear }: ReaderFiltersProps)
           options={READER_CATEGORIES}
           labels={READER_CATEGORY_LABELS}
           onChange={change(ReaderFilterParam.category)}
+        />
+        <ReaderFilterSelect
+          id="filter-gender"
+          label="readers.filters.gender"
+          value={filter.gender}
+          options={GENDERS}
+          labels={GENDER_LABELS}
+          onChange={change(ReaderFilterParam.gender)}
+        />
+        <ReaderFilterSelect
+          id="filter-citizenship"
+          label="readers.filters.citizenship"
+          value={filter.citizenship}
+          options={CITIZENSHIPS}
+          labels={CITIZENSHIP_LABELS}
+          onChange={change(ReaderFilterParam.citizenship)}
         />
         <ReaderFilterSelect
           id="filter-source"

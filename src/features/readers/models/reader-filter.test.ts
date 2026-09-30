@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CardStatus } from '@shared/models/card-status';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import {
   hasActiveFilter,
@@ -22,6 +24,8 @@ describe('parseReaderFilter', () => {
     expect(filter).toEqual({
       search: 'ali',
       category: ReaderCategory.Professor,
+      gender: null,
+      citizenship: null,
       source: null,
       status: CardStatus.Expired,
       registeredFrom: '2026-01-01',
@@ -30,9 +34,23 @@ describe('parseReaderFilter', () => {
   });
 
   it('should ignore enums when the URL value is unknown', () => {
-    const filter = parseReaderFilter(reading({ category: '99', source: 'x', status: '' }));
+    const filter = parseReaderFilter(
+      reading({ category: '99', gender: '7', citizenship: 'x', source: 'x', status: '' }),
+    );
 
-    expect([filter.category, filter.source, filter.status]).toEqual([null, null, null]);
+    expect([
+      filter.category,
+      filter.gender,
+      filter.citizenship,
+      filter.source,
+      filter.status,
+    ]).toEqual([null, null, null, null, null]);
+  });
+
+  it('should read gender and citizenship when the URL has them', () => {
+    const filter = parseReaderFilter(reading({ gender: '1', citizenship: '1' }));
+
+    expect([filter.gender, filter.citizenship]).toEqual([Gender.Female, Citizenship.Foreign]);
   });
 });
 

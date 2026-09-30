@@ -1,4 +1,5 @@
-import { isDocumentType, DocumentType } from '@shared/models/document-type';
+import { toCitizenshipOrNull } from '@shared/models/citizenship';
+import { toGenderOrNull } from '@shared/models/gender';
 import { isReaderCategory, ReaderCategory } from '@shared/models/reader-category';
 import {
   isRegistrationRequestStatus,
@@ -26,7 +27,6 @@ import type {
 const toStatus = (value: number) =>
   isRegistrationRequestStatus(value) ? value : RegistrationRequestStatus.Pending;
 const toCategory = (value: number) => (isReaderCategory(value) ? value : ReaderCategory.Pupil);
-const toDocumentType = (value: number) => (isDocumentType(value) ? value : DocumentType.Passport);
 
 export function toRegistrationRequestListItem(
   dto: RegistrationRequestListItemDto,
@@ -41,7 +41,7 @@ export function toRegistrationRequestListItem(
     phone: dto.phone,
     submittedAt: dto.submittedAt,
     expiresAt: dto.expiresAt,
-    hasRegisteredDocument: dto.hasRegisteredDocument,
+    hasRegisteredPhone: dto.hasRegisteredPhone,
   };
 }
 
@@ -64,9 +64,9 @@ export function toRegistrationRequest(dto: RegistrationRequestDto): Registration
     middleName: dto.middleName,
     fullName: formatFullName(dto),
     birthDate: dto.birthDate,
+    gender: toGenderOrNull(dto.gender),
+    citizenship: toCitizenshipOrNull(dto.citizenship),
     phone: dto.phone,
-    documentType: toDocumentType(dto.documentType),
-    documentNumber: dto.documentNumber,
     submittedAt: dto.submittedAt,
     expiresAt: dto.expiresAt,
     reviewedAt: dto.reviewedAt,
@@ -84,9 +84,9 @@ export function toUpdateRegistrationRequest(details: PersonDetails): UpdateRegis
     firstName: details.firstName,
     middleName: details.middleName,
     birthDate: details.birthDate,
+    gender: details.gender,
+    citizenship: details.citizenship,
     phone: details.phone,
-    documentType: details.documentType,
-    documentNumber: details.documentNumber,
   };
 }
 

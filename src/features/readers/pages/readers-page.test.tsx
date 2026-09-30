@@ -29,7 +29,8 @@ describe('ReadersPage', () => {
 
     expect(await screen.findByText('0000001')).toBeInTheDocument();
     expect(screen.getByText('Karimova Gulnoza Anvar qizi')).toBeInTheDocument();
-    expect(screen.getByText('AD***4321')).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: 'Ayol' })).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: "O'zbekiston fuqarosi" })).toBeInTheDocument();
     expect(screen.getByText('1-1 / 1')).toBeInTheDocument();
   });
 

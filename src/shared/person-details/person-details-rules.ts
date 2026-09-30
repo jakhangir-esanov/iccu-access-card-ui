@@ -1,4 +1,4 @@
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
 
 export const NAME_MAX_LENGTH = 100;
 export const NAME_PATTERN = /^\s*\p{L}[\p{L}\p{M}'ʻʼ‘’` -]*$/u;
@@ -7,30 +7,32 @@ export const EARLIEST_BIRTH_DATE = '1900-01-01';
 const PHONE_COUNTRY_CODE = '998';
 const PHONE_NATIONAL_LENGTH = 9;
 const PHONE_FULL_LENGTH = 12;
+const INTERNATIONAL_MIN_LENGTH = 8;
+const INTERNATIONAL_MAX_LENGTH = 15;
+const LEADING_ZERO = '0';
 const NON_DIGIT = /\D/g;
 
-const DOCUMENT_SEPARATORS = /[\s\-№#.]/g;
-const PASSPORT_PATTERN = /^[A-Z]{2}\d{7}$/;
-const BIRTH_CERTIFICATE_PATTERN = /^(?=.*\d)[\p{Lu}\d]{6,20}$/u;
-
-const DOCUMENT_PATTERNS: Readonly<Record<DocumentType, RegExp>> = {
-  [DocumentType.Passport]: PASSPORT_PATTERN,
-  [DocumentType.BirthCertificate]: BIRTH_CERTIFICATE_PATTERN,
-};
-
-export function normalizePhone(phone: string): string | null {
-  const digits = phone.replace(NON_DIGIT, '');
+function normalizeUzbekPhone(digits: string): string | null {
   const full = digits.length === PHONE_NATIONAL_LENGTH ? `${PHONE_COUNTRY_CODE}${digits}` : digits;
   const isValid = full.length === PHONE_FULL_LENGTH && full.startsWith(PHONE_COUNTRY_CODE);
   return isValid ? `+${full}` : null;
 }
 
-export function normalizeDocumentNumber(documentNumber: string): string {
-  return documentNumber.toUpperCase().replace(DOCUMENT_SEPARATORS, '');
+function normalizeInternationalPhone(digits: string): string | null {
+  const isValid =
+    digits.length >= INTERNATIONAL_MIN_LENGTH &&
+    digits.length <= INTERNATIONAL_MAX_LENGTH &&
+    !digits.startsWith(LEADING_ZERO);
+  return isValid ? `+${digits}` : null;
 }
 
-export function isValidDocumentNumber(type: DocumentType, documentNumber: string): boolean {
-  return DOCUMENT_PATTERNS[type].test(normalizeDocumentNumber(documentNumber));
+export function normalizePhone(phone: string, citizenship: Citizenship | null): string | null {
+  const digits = phone.replace(NON_DIGIT, '');
+  const uzbekPhone = normalizeUzbekPhone(digits);
+  if (uzbekPhone !== null || citizenship !== Citizenship.Foreign) {
+    return uzbekPhone;
+  }
+  return normalizeInternationalPhone(digits);
 }
 
 export function isValidBirthDate(birthDate: string, today: string): boolean {

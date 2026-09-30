@@ -1,3 +1,5 @@
+import type { Citizenship } from '@shared/models/citizenship';
+import type { Gender } from '@shared/models/gender';
 import type { ReaderCategory } from '@shared/models/reader-category';
 import type { ReportGrouping } from '@shared/models/report-grouping';
 
@@ -10,6 +12,16 @@ export interface PeriodTotals {
 
 export interface CategoryTotal {
   readonly category: ReaderCategory;
+  readonly count: number;
+}
+
+export interface GenderTotal {
+  readonly gender: Gender | null;
+  readonly count: number;
+}
+
+export interface CitizenshipTotal {
+  readonly citizenship: Citizenship | null;
   readonly count: number;
 }
 
@@ -26,5 +38,7 @@ export interface RegistrationReport {
   readonly total: number;
   readonly byPeriod: readonly PeriodTotals[];
   readonly byCategory: readonly CategoryTotal[];
+  readonly byGender: readonly GenderTotal[];
+  readonly byCitizenship: readonly CitizenshipTotal[];
   readonly byUser: readonly EmployeeTotal[];
 }

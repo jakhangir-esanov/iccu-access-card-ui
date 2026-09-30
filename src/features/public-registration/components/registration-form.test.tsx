@@ -53,14 +53,15 @@ vi.mock('@shared/components/form/date-picker', () => ({
   ),
 }));
 
-async function fillValidForm() {
+async function fillValidForm(citizenship = '0', phone = '90 555 12 34') {
   await userEvent.click(screen.getByRole('button', { name: 'photo' }));
   await userEvent.selectOptions(screen.getByLabelText('Toifa'), '1');
   await userEvent.type(screen.getByLabelText('Familiya'), 'Karimova');
   await userEvent.type(screen.getByLabelText('Ism'), 'Gulnoza');
+  await userEvent.selectOptions(screen.getByLabelText('Jinsi'), '1');
   await userEvent.type(screen.getByLabelText("Tug'ilgan sana"), '2004-05-17');
-  await userEvent.type(screen.getByLabelText('Telefon'), '90 555 12 34');
-  await userEvent.type(screen.getByLabelText('Hujjat raqami'), 'ad 765-4321');
+  await userEvent.selectOptions(screen.getByLabelText('Fuqaroligi'), citizenship);
+  await userEvent.type(screen.getByLabelText('Telefon'), phone);
   await userEvent.click(screen.getByRole('checkbox'));
   await userEvent.click(screen.getByRole('button', { name: 'Yuborish' }));
 }
@@ -82,13 +83,27 @@ describe('RegistrationForm', () => {
       firstName: 'Gulnoza',
       middleName: null,
       birthDate: '2004-05-17',
+      gender: 1,
+      citizenship: 0,
       phone: '+998905551234',
-      documentType: 0,
-      documentNumber: 'AD7654321',
       photoFileId: 'photo-1',
       consentGiven: true,
     });
     expect(onSubmitted).toHaveBeenCalledWith({ code: '0427', expiresAt: '2026-09-27T09:00:00Z' });
+  });
+
+  it('should send the international number when a foreign citizen registers', async () => {
+    vi.mocked(submitRegistration).mockResolvedValue({
+      code: '0428',
+      expiresAt: '2026-09-27T09:00:00Z',
+    });
+    renderWithProviders(<RegistrationForm onSubmitted={vi.fn()} />);
+
+    await fillValidForm('1', '+7 901 234 56 78');
+
+    expect(submitRegistration).toHaveBeenCalledWith(
+      expect.objectContaining({ citizenship: 1, phone: '+79012345678' }),
+    );
   });
 
   it('should show a backend field error under its field when validation fails on the server', async () => {

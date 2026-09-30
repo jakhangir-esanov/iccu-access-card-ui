@@ -15,6 +15,8 @@ describe('ReportsPage', () => {
       total: 5,
       byPeriod: [{ period: '2026-09-26', total: 5, reception: 2, selfService: 3 }],
       byCategory: [{ category: 1, count: 5 }],
+      byGender: [{ gender: 1, count: 5 }],
+      byCitizenship: [{ citizenship: 0, count: 5 }],
       byUser: [{ userId: 'u1', fullName: 'Resepshn Xodimi', count: 2 }],
     });
 

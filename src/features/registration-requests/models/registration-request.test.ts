@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { RegistrationRequestStatus } from '@shared/models/registration-request-status';
 import { canApprove, isOpenForReview, type RegistrationRequest } from './registration-request';
@@ -15,9 +16,9 @@ const BASE_REQUEST: RegistrationRequest = {
   middleName: null,
   fullName: 'Karimova Gulnoza',
   birthDate: '2004-05-17',
+  gender: Gender.Female,
+  citizenship: Citizenship.Uzbekistan,
   phone: '+998905551234',
-  documentType: DocumentType.Passport,
-  documentNumber: 'AD7654321',
   submittedAt: '2026-09-26T17:00:00Z',
   expiresAt: '2026-09-27T17:00:00Z',
   reviewedAt: null,

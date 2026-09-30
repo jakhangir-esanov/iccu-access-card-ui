@@ -4,8 +4,10 @@ import { toPersonDetailsFormInput } from '@shared/person-details/person-details-
 import {
   EMPTY_PERSON_DETAILS,
   PERSON_DETAILS_FIELDS,
-  documentNumberRule,
+  PHONE_RULE_OPTIONS,
   personDetailsShape,
+  phoneRule,
+  withNormalizedPhone,
 } from '@shared/person-details/person-details.schema';
 import type { Reader } from './reader';
 
@@ -15,7 +17,8 @@ export function createReaderFormSchema(today: string) {
       ...personDetailsShape(today),
       photoFileId: z.string().min(1, { error: i18nKey('validation.photoRequired') }),
     })
-    .superRefine(documentNumberRule);
+    .superRefine(phoneRule, PHONE_RULE_OPTIONS)
+    .transform(withNormalizedPhone);
 }
 
 type ReaderFormSchema = ReturnType<typeof createReaderFormSchema>;

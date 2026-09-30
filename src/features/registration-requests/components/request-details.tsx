@@ -2,7 +2,9 @@ import { formatDateOnly, formatDateTime } from '@core/i18n/date-format';
 import { i18nKey } from '@core/i18n/translation-key';
 import { useT } from '@core/i18n/use-i18n';
 import { DetailList, type DetailRow } from '@shared/components/detail-list';
-import { DOCUMENT_TYPE_LABELS } from '@shared/models/document-type';
+import { OptionalLabel } from '@shared/components/optional-label';
+import { CITIZENSHIP_LABELS } from '@shared/models/citizenship';
+import { GENDER_LABELS } from '@shared/models/gender';
 import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { formatPhone } from '@shared/person-details/person-format';
 import type { RegistrationRequest } from '../models/registration-request';
@@ -14,13 +16,16 @@ export function RequestDetails({ request }: { readonly request: RegistrationRequ
     { label: 'person.lastName', value: request.lastName },
     { label: 'person.firstName', value: request.firstName },
     { label: 'person.middleName', value: request.middleName ?? '—' },
-    { label: 'person.birthDate', value: formatDateOnly(request.birthDate) },
-    { label: 'person.phone', value: formatPhone(request.phone) },
-    { label: 'person.documentType', value: t(DOCUMENT_TYPE_LABELS[request.documentType]) },
     {
-      label: 'person.documentNumber',
-      value: <span className="tracking-[0.04em] tabular-nums">{request.documentNumber}</span>,
+      label: 'person.gender',
+      value: <OptionalLabel value={request.gender} labels={GENDER_LABELS} />,
     },
+    { label: 'person.birthDate', value: formatDateOnly(request.birthDate) },
+    {
+      label: 'person.citizenship',
+      value: <OptionalLabel value={request.citizenship} labels={CITIZENSHIP_LABELS} />,
+    },
+    { label: 'person.phone', value: formatPhone(request.phone) },
   ];
   const review: readonly DetailRow[] = [
     { label: 'requests.detail.submittedAt', value: formatDateTime(request.submittedAt) },

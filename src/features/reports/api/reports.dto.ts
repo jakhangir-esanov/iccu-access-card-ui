@@ -10,6 +10,16 @@ export interface CategoryTotalDto {
   readonly count: number;
 }
 
+export interface GenderTotalDto {
+  readonly gender: number | null;
+  readonly count: number;
+}
+
+export interface CitizenshipTotalDto {
+  readonly citizenship: number | null;
+  readonly count: number;
+}
+
 export interface EmployeeTotalDto {
   readonly userId: string;
   readonly fullName: string;
@@ -23,5 +33,7 @@ export interface RegistrationReportDto {
   readonly total: number;
   readonly byPeriod: readonly PeriodTotalsDto[];
   readonly byCategory: readonly CategoryTotalDto[];
+  readonly byGender: readonly GenderTotalDto[];
+  readonly byCitizenship: readonly CitizenshipTotalDto[];
   readonly byUser: readonly EmployeeTotalDto[];
 }

@@ -3,8 +3,10 @@ import { i18nKey } from '@core/i18n/translation-key';
 import {
   EMPTY_PERSON_DETAILS,
   PERSON_DETAILS_FIELDS,
-  documentNumberRule,
+  PHONE_RULE_OPTIONS,
   personDetailsShape,
+  phoneRule,
+  withNormalizedPhone,
 } from '@shared/person-details/person-details.schema';
 
 export function createRegistrationFormSchema(today: string) {
@@ -16,7 +18,8 @@ export function createRegistrationFormSchema(today: string) {
         error: i18nKey('validation.consentRequired'),
       }),
     })
-    .superRefine(documentNumberRule);
+    .superRefine(phoneRule, PHONE_RULE_OPTIONS)
+    .transform(withNormalizedPhone);
 }
 
 type RegistrationFormSchema = ReturnType<typeof createRegistrationFormSchema>;

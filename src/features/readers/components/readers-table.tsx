@@ -5,7 +5,10 @@ import type { Translate } from '@core/i18n/translate';
 import { useT } from '@core/i18n/use-i18n';
 import { DataTable } from '@shared/components/data-table/data-table';
 import { createDataTableColumnHelper } from '@shared/components/data-table/data-table-columns';
+import { OptionalLabel } from '@shared/components/optional-label';
 import { cardStatusOf } from '@shared/models/card-status';
+import { CITIZENSHIP_LABELS } from '@shared/models/citizenship';
+import { GENDER_LABELS } from '@shared/models/gender';
 import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import { formatPhone } from '@shared/person-details/person-format';
 import { Badge } from '@shared/ui/badge';
@@ -40,12 +43,13 @@ function createColumns(t: Translate, today: string) {
       enableSorting: false,
       cell: ({ getValue }) => <span className="whitespace-nowrap">{formatPhone(getValue())}</span>,
     }),
-    column.accessor('documentNumberMasked', {
-      header: () => t('readers.columns.document'),
-      enableSorting: false,
-      cell: ({ getValue }) => (
-        <span className="text-muted-foreground tabular-nums">{getValue()}</span>
-      ),
+    column.accessor('gender', {
+      header: () => t('readers.columns.gender'),
+      cell: ({ getValue }) => <OptionalLabel value={getValue()} labels={GENDER_LABELS} />,
+    }),
+    column.accessor('citizenship', {
+      header: () => t('readers.columns.citizenship'),
+      cell: ({ getValue }) => <OptionalLabel value={getValue()} labels={CITIZENSHIP_LABELS} />,
     }),
     column.accessor('expiresOn', {
       header: () => t('readers.columns.expiresOn'),

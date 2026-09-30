@@ -14,9 +14,9 @@ export function toSubmitRegistrationRequest(
     firstName: values.firstName,
     middleName: values.middleName,
     birthDate: values.birthDate,
+    gender: values.gender,
+    citizenship: values.citizenship,
     phone: values.phone,
-    documentType: values.documentType,
-    documentNumber: values.documentNumber,
     photoFileId: values.photoFileId,
     consentGiven: values.consentGiven,
   };

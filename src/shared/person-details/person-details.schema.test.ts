@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import {
   EMPTY_PERSON_DETAILS,
@@ -15,9 +16,9 @@ const VALID: PersonDetailsFormInput = {
   firstName: 'Gulnoza',
   middleName: '',
   birthDate: '2004-05-17',
+  gender: '1',
+  citizenship: '0',
   phone: '90 555 12 34',
-  documentType: '0',
-  documentNumber: 'ad 765-4321',
 };
 
 const issuesOf = (input: PersonDetailsFormInput) => {
@@ -35,31 +36,51 @@ describe('createPersonDetailsSchema', () => {
       firstName: 'Gulnoza',
       middleName: null,
       birthDate: '2004-05-17',
+      gender: Gender.Female,
+      citizenship: Citizenship.Uzbekistan,
       phone: '+998905551234',
-      documentType: DocumentType.Passport,
-      documentNumber: 'AD7654321',
     });
   });
 
+  it('should default the citizenship to Uzbekistan when the form is new', () => {
+    expect(EMPTY_PERSON_DETAILS.citizenship).toBe(String(Citizenship.Uzbekistan));
+  });
+
   it('should report every required field when the form is empty', () => {
-    expect(issuesOf(EMPTY_PERSON_DETAILS)).toMatchObject({
+    expect(issuesOf({ ...EMPTY_PERSON_DETAILS, citizenship: '' })).toEqual({
       category: 'validation.required',
       lastName: 'validation.required',
       firstName: 'validation.required',
       birthDate: 'validation.required',
+      gender: 'validation.required',
+      citizenship: 'validation.required',
+      phone: 'validation.required',
+    });
+  });
+
+  it('should use the Uzbek phone message when a citizen of Uzbekistan has a foreign number', () => {
+    expect(issuesOf({ ...VALID, phone: '+7 901 234 56 78' })).toEqual({
       phone: 'validation.phone',
-      documentNumber: 'validation.required',
     });
   });
 
-  it('should use the passport message when a passport number is wrong', () => {
-    expect(issuesOf({ ...VALID, documentNumber: 'I-TN 1234567' })).toEqual({
-      documentNumber: 'validation.passport',
+  it('should keep the international number when the reader is a foreign citizen', () => {
+    const result = schema.parse({ ...VALID, citizenship: '1', phone: '+7 (901) 234-56-78' });
+
+    expect([result.citizenship, result.phone]).toEqual([Citizenship.Foreign, '+79012345678']);
+  });
+
+  it('should use the international message when a foreign number is too short', () => {
+    expect(issuesOf({ ...VALID, citizenship: '1', phone: '12345' })).toEqual({
+      phone: 'validation.internationalPhone',
     });
   });
 
-  it('should accept a birth certificate number when the type is birth certificate', () => {
-    expect(issuesOf({ ...VALID, documentType: '1', documentNumber: 'I-TN 1234567' })).toEqual({});
+  it('should check the phone format when another field breaks a format rule', () => {
+    expect(issuesOf({ ...VALID, firstName: 'Ali2', phone: '123' })).toEqual({
+      firstName: 'validation.name',
+      phone: 'validation.phone',
+    });
   });
 
   it('should reject names and dates when they break the rules', () => {

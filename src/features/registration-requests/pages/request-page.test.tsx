@@ -1,9 +1,10 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Route, Routes } from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ApiError } from '@core/http/api-error';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { RegistrationRequestStatus } from '@shared/models/registration-request-status';
 import { renderWithProviders } from '@test/render-with-providers';
@@ -37,9 +38,9 @@ const SAMPLE_REQUEST: RegistrationRequestDto = {
   firstName: 'Gulnoza',
   middleName: 'Anvar qizi',
   birthDate: '2004-05-17',
+  gender: Gender.Female,
+  citizenship: Citizenship.Foreign,
   phone: '+998905551234',
-  documentType: DocumentType.Passport,
-  documentNumber: 'AD7654321',
   submittedAt: '2026-09-26T17:06:55.082Z',
   expiresAt: '2026-09-27T17:06:55.082Z',
   reviewedAt: null,
@@ -49,6 +50,17 @@ const SAMPLE_REQUEST: RegistrationRequestDto = {
   registeredReaderId: null,
   registeredReaderCardNumber: null,
 };
+
+const NOW = new Date('2026-09-26T18:00:00Z');
+
+beforeEach(() => {
+  vi.useFakeTimers({ toFake: ['Date'] });
+  vi.setSystemTime(NOW);
+});
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 function renderRequestPage() {
   return renderWithProviders(
@@ -68,11 +80,12 @@ describe('RequestPage', () => {
     expect(await screen.findByText('Ariza 0001')).toBeInTheDocument();
     expect(screen.getByText('Karimova')).toBeInTheDocument();
     expect(screen.getByText('Gulnoza')).toBeInTheDocument();
-    expect(screen.getByText('AD7654321')).toBeInTheDocument();
+    expect(screen.getByText('Ayol')).toBeInTheDocument();
+    expect(screen.getByText('Chet el fuqarosi')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Tasdiqlash' })).toBeEnabled();
   });
 
-  it('should display duplicate document warning and disable approve when reader already registered', async () => {
+  it('should display duplicate phone warning and disable approve when reader already registered', async () => {
     vi.mocked(fetchRegistrationRequest).mockResolvedValue({
       ...SAMPLE_REQUEST,
       registeredReaderId: 'reader-42',
@@ -82,7 +95,7 @@ describe('RequestPage', () => {
     renderRequestPage();
 
     expect(
-      await screen.findByText('Bu hujjat bilan kitobxon allaqachon bor (karta 0000042).'),
+      await screen.findByText('Bu telefon raqami bilan kitobxon allaqachon bor (karta 0000042).'),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Tasdiqlash' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Kitobxonni ochish' })).toBeInTheDocument();

@@ -12,8 +12,8 @@ const NAME_FIELDS: readonly {
   readonly label: TranslationKey;
   readonly autoComplete: string;
 }[] = [
-  { name: 'lastName', label: 'person.lastName', autoComplete: 'family-name' },
   { name: 'firstName', label: 'person.firstName', autoComplete: 'given-name' },
+  { name: 'lastName', label: 'person.lastName', autoComplete: 'family-name' },
   { name: 'middleName', label: 'person.middleName', autoComplete: 'additional-name' },
 ];
 

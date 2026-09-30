@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { DocumentType } from '@shared/models/document-type';
+import { Citizenship } from '@shared/models/citizenship';
+import { Gender } from '@shared/models/gender';
 import { ReaderCategory } from '@shared/models/reader-category';
 import { RegistrationRequestStatus } from '@shared/models/registration-request-status';
 import type { RegistrationRequest } from '../models/registration-request';
@@ -30,14 +31,14 @@ const SAMPLE_LIST_ITEM_DTO: RegistrationRequestListItemDto = {
   expiresAt: '2026-09-27T17:06:55.082Z',
   reviewedAt: null,
   reviewedByName: null,
-  hasRegisteredDocument: false,
+  hasRegisteredPhone: false,
 };
 
 const SAMPLE_DETAIL_DTO: RegistrationRequestDto = {
   ...SAMPLE_LIST_ITEM_DTO,
   birthDate: '2004-05-17',
-  documentType: DocumentType.Passport,
-  documentNumber: 'AD7654321',
+  gender: Gender.Female,
+  citizenship: Citizenship.Uzbekistan,
   rejectionReason: null,
   readerId: null,
   registeredReaderId: null,
@@ -53,6 +54,13 @@ describe('registration-requests.mapper', () => {
     expect(item.fullName).toBe('Karimova Gulnoza Anvar qizi');
     expect(item.status).toBe(RegistrationRequestStatus.Pending);
     expect(item.category).toBe(ReaderCategory.Student);
+    expect(item.hasRegisteredPhone).toBe(false);
+  });
+
+  it('should map gender and citizenship when the detail is loaded', () => {
+    const request = toRegistrationRequest(SAMPLE_DETAIL_DTO);
+
+    expect([request.gender, request.citizenship]).toEqual([Gender.Female, Citizenship.Uzbekistan]);
   });
 
   it('should map detail dto to model when registered reader is present', () => {
@@ -87,9 +95,9 @@ describe('registration-requests.mapper', () => {
       firstName: 'Bekzod',
       middleName: null,
       birthDate: '1985-01-01',
+      gender: Gender.Male,
+      citizenship: Citizenship.Uzbekistan,
       phone: '+998901112233',
-      documentType: DocumentType.Passport,
-      documentNumber: 'AA1234567',
     });
 
     expect(dto).toEqual({
@@ -98,9 +106,9 @@ describe('registration-requests.mapper', () => {
       firstName: 'Bekzod',
       middleName: null,
       birthDate: '1985-01-01',
+      gender: Gender.Male,
+      citizenship: Citizenship.Uzbekistan,
       phone: '+998901112233',
-      documentType: DocumentType.Passport,
-      documentNumber: 'AA1234567',
     });
   });
 
@@ -130,9 +138,9 @@ describe('registration-requests.mapper', () => {
       firstName: 'Gulnoza',
       middleName: 'Anvar qizi',
       birthDate: '2004-05-17',
+      gender: String(Gender.Female),
+      citizenship: String(Citizenship.Uzbekistan),
       phone: '905551234',
-      documentType: String(DocumentType.Passport),
-      documentNumber: 'AD7654321',
     });
   });
 });

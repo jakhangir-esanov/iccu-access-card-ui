@@ -4,6 +4,7 @@ import { ChartCard } from '@shared/components/charts/chart-card';
 import { ChartTable } from '@shared/components/charts/chart-table';
 import { CHART_PALETTE, type ChartSeries } from '@shared/components/charts/chart-types';
 import { ColumnChart } from '@shared/components/charts/column-chart';
+import { DemographicCharts } from '@shared/components/charts/demographic-charts';
 import { HorizontalBarChart } from '@shared/components/charts/horizontal-bar-chart';
 import type { RegistrationReport } from '../models/registration-report';
 import {
@@ -35,25 +36,32 @@ export function ReportCharts({ report }: ReportChartsProps) {
   const categoryRows = toCategoryRows(report.byCategory, COUNT_SERIES_ID, t);
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[3fr_2fr]">
-      <ChartCard
-        title={t('reports.byPeriod.title')}
-        subtitle={t('reports.byPeriod.subtitle')}
-        chart={<ColumnChart rows={periodRows} series={sourceSeries} />}
-        table={
-          <ChartTable labelHeader={t('charts.period')} rows={periodRows} series={sourceSeries} />
-        }
-      />
-      <ChartCard
-        title={t('reports.byCategory.title')}
-        chart={<HorizontalBarChart rows={categoryRows} series={countSeries} />}
-        table={
-          <ChartTable
-            labelHeader={t('charts.category')}
-            rows={categoryRows}
-            series={[countSeries]}
-          />
-        }
+    <div className="grid gap-6">
+      <div className="grid gap-6 xl:grid-cols-[3fr_2fr]">
+        <ChartCard
+          title={t('reports.byPeriod.title')}
+          subtitle={t('reports.byPeriod.subtitle')}
+          chart={<ColumnChart rows={periodRows} series={sourceSeries} />}
+          table={
+            <ChartTable labelHeader={t('charts.period')} rows={periodRows} series={sourceSeries} />
+          }
+        />
+        <ChartCard
+          title={t('reports.byCategory.title')}
+          chart={<HorizontalBarChart rows={categoryRows} series={countSeries} />}
+          table={
+            <ChartTable
+              labelHeader={t('charts.category')}
+              rows={categoryRows}
+              series={[countSeries]}
+            />
+          }
+        />
+      </div>
+      <DemographicCharts
+        byGender={report.byGender}
+        byCitizenship={report.byCitizenship}
+        series={countSeries}
       />
     </div>
   );

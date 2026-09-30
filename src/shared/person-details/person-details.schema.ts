@@ -1,24 +1,25 @@
 import { z } from 'zod';
 import { i18nKey } from '@core/i18n/translation-key';
 import type { TranslationKey } from '@core/i18n/translations/dictionary';
-import { DocumentType, isDocumentType } from '@shared/models/document-type';
+import { Citizenship, isCitizenship } from '@shared/models/citizenship';
+import { isGender } from '@shared/models/gender';
 import { isReaderCategory } from '@shared/models/reader-category';
 import {
   NAME_MAX_LENGTH,
   NAME_PATTERN,
   isValidBirthDate,
-  isValidDocumentNumber,
-  normalizeDocumentNumber,
   normalizePhone,
 } from './person-details-rules';
 
 const issue = (key: TranslationKey) => ({ error: key });
 const required = { error: i18nKey('validation.required'), abort: true };
 
-const DOCUMENT_NUMBER_ERRORS: Readonly<Record<DocumentType, TranslationKey>> = {
-  [DocumentType.Passport]: 'validation.passport',
-  [DocumentType.BirthCertificate]: 'validation.birthCertificate',
+const PHONE_ERRORS: Readonly<Record<Citizenship, TranslationKey>> = {
+  [Citizenship.Uzbekistan]: 'validation.phone',
+  [Citizenship.Foreign]: 'validation.internationalPhone',
 };
+
+const PHONE_RULE_FIELDS: readonly PropertyKey[] = ['phone', 'citizenship'];
 
 const nameSchema = z
   .string()
@@ -34,21 +35,17 @@ const optionalNameSchema = z
   .refine((name) => name === '' || NAME_PATTERN.test(name), issue('validation.name'))
   .transform((name) => (name === '' ? null : name));
 
-const categorySchema = z
-  .string()
-  .refine((value) => value !== '' && isReaderCategory(Number(value)), required)
-  .transform(Number)
-  .refine(isReaderCategory);
-
-const documentTypeSchema = z
-  .string()
-  .refine((value) => value !== '' && isDocumentType(Number(value)), required)
-  .transform(Number)
-  .refine(isDocumentType);
+function enumSelectSchema<T extends number>(isValue: (value: unknown) => value is T) {
+  return z
+    .string()
+    .refine((value) => value !== '' && isValue(Number(value)), required)
+    .transform(Number)
+    .refine(isValue);
+}
 
 export function personDetailsShape(today: string) {
   return {
-    category: categorySchema,
+    category: enumSelectSchema(isReaderCategory),
     lastName: nameSchema,
     firstName: nameSchema,
     middleName: optionalNameSchema,
@@ -56,34 +53,42 @@ export function personDetailsShape(today: string) {
       .string()
       .min(1, required)
       .refine((date) => isValidBirthDate(date, today), issue('validation.birthDate')),
-    phone: z
-      .string()
-      .refine((phone) => normalizePhone(phone) !== null, issue('validation.phone'))
-      .transform((phone) => normalizePhone(phone) ?? phone),
-    documentType: documentTypeSchema,
-    documentNumber: z.string().trim().min(1, required).transform(normalizeDocumentNumber),
+    gender: enumSelectSchema(isGender),
+    citizenship: enumSelectSchema(isCitizenship),
+    phone: z.string().trim().min(1, required),
   };
 }
 
-interface DocumentFields {
-  readonly documentType: DocumentType;
-  readonly documentNumber: string;
+interface PhoneFields {
+  readonly citizenship: Citizenship;
+  readonly phone: string;
 }
 
-export function documentNumberRule(values: DocumentFields, context: z.RefinementCtx): void {
-  const { documentType, documentNumber } = values;
-  if (documentNumber === '' || isValidDocumentNumber(documentType, documentNumber)) {
+export function phoneRule(values: PhoneFields, context: z.RefinementCtx): void {
+  if (normalizePhone(values.phone, values.citizenship) !== null) {
     return;
   }
-  context.addIssue({
-    code: 'custom',
-    path: ['documentNumber'],
-    message: DOCUMENT_NUMBER_ERRORS[documentType],
-  });
+  context.addIssue({ code: 'custom', path: ['phone'], message: PHONE_ERRORS[values.citizenship] });
+}
+
+function isPhoneRuleIssue(fieldIssue: z.core.$ZodRawIssue): boolean {
+  const field = fieldIssue.path?.[0];
+  return field !== undefined && PHONE_RULE_FIELDS.includes(field);
+}
+
+export const PHONE_RULE_OPTIONS = {
+  when: (payload: z.core.ParsePayload) => !payload.issues.some(isPhoneRuleIssue),
+};
+
+export function withNormalizedPhone<T extends PhoneFields>(values: T): T {
+  return { ...values, phone: normalizePhone(values.phone, values.citizenship) ?? values.phone };
 }
 
 export function createPersonDetailsSchema(today: string) {
-  return z.object(personDetailsShape(today)).superRefine(documentNumberRule);
+  return z
+    .object(personDetailsShape(today))
+    .superRefine(phoneRule, PHONE_RULE_OPTIONS)
+    .transform(withNormalizedPhone);
 }
 
 export type PersonDetailsFormInput = z.input<ReturnType<typeof createPersonDetailsSchema>>;
@@ -96,9 +101,9 @@ export const EMPTY_PERSON_DETAILS: PersonDetailsFormInput = {
   firstName: '',
   middleName: '',
   birthDate: '',
+  gender: '',
+  citizenship: String(Citizenship.Uzbekistan),
   phone: '',
-  documentType: String(DocumentType.Passport),
-  documentNumber: '',
 };
 
 export const PERSON_DETAILS_FIELDS = [
@@ -107,7 +112,7 @@ export const PERSON_DETAILS_FIELDS = [
   'firstName',
   'middleName',
   'birthDate',
+  'gender',
+  'citizenship',
   'phone',
-  'documentType',
-  'documentNumber',
 ] as const satisfies readonly (keyof PersonDetailsFormInput)[];

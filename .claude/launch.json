@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
+    },
+    {
+      "name": "iccu-api",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "D:/Projects/iccu-access-card/src/Iccu.Api"],
+      "port": 5080
     }
   ]
 }
