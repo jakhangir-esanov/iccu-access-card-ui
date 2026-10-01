@@ -23,7 +23,7 @@ export const uz = {
     pickDate: 'Sanani tanlang',
   },
   roles: {
-    receptionist: 'Resepshn',
+    receptionist: 'Qabulxona',
     admin: 'Administrator',
   },
   nav: {
@@ -163,13 +163,13 @@ export const uz = {
   },
   publicRegistration: {
     title: "Kutubxonaga ro'yxatdan o'tish",
-    subtitle: "Anketani to'ldiring, so'ng resepshnga ariza kodini ayting.",
+    subtitle: "Anketani to'ldiring, so'ng qabulxona xodimiga ariza kodini ayting.",
     consent:
       "Shaxsiy ma'lumotlarim kutubxona kartasini rasmiylashtirish uchun qayta ishlanishiga roziman.",
     submit: 'Yuborish',
     successTitle: 'Arizangiz qabul qilindi',
     codeLabel: 'Ariza kodi',
-    codeHint: 'Resepshnga shu kodni ayting.',
+    codeHint: 'Qabulxona xodimiga shu kodni ayting.',
     validUntil: 'Ariza {time} gacha amal qiladi.',
     newForm: 'Yangi anketa',
   },

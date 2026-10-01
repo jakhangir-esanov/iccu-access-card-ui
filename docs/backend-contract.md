@@ -141,7 +141,7 @@ HTTP klient body bo'sh yoki JSON bo'lmagan javobni ham xatoga aylantira olishi k
 | `ReaderCategory` | 0 Pupil (O'quvchi), 1 Student (Talaba), 2 Master (Magistr), 3 PhD, 4 DSc, 5 Professor, 6 Employee (Xodim), 7 User (Foydalanuvchi) |
 | `Gender` | 0 Male (Erkak), 1 Female (Ayol) |
 | `Citizenship` | 0 Uzbekistan (O'zbekiston fuqarosi), 1 Foreign (Chet el fuqarosi) |
-| `RegistrationSource` | 0 Reception (Resepshn), 1 SelfService (QR anketa) |
+| `RegistrationSource` | 0 Reception (Qabulxona), 1 SelfService (QR anketa) |
 | `RegistrationRequestStatus` | 0 Pending, 1 Approved, 2 Rejected, 3 Expired |
 | `CardStatus` (faqat filtr) | 0 Active, 1 ExpiringSoon (30 kun ichida tugaydi), 2 Expired |
 | `ReportGrouping` | 0 Day, 1 Month |
@@ -268,7 +268,7 @@ SubmitRegistrationRequest {
 - Rate limit: 10 daqiqada 60 ta (IP). Kutubxona Wi-Fi'sidagi hamma tashrif buyuruvchi bitta IP bilan chiqishi mumkin, shuning uchun limit 20 kishilik navbatga yetadigan qilib olingan.
 - `consentGiven` `true` bo'lishi shart (`RegistrationRequest.ConsentRequired`).
 - `photoFileId` topilmasa `404 StoredFile.NotFound`.
-- Javobdagi `code` tashrif buyuruvchiga katta qilib ko'rsatiladi. U resepshnga shu kodni aytadi. Ariza 24 soat amal qiladi.
+- Javobdagi `code` tashrif buyuruvchiga katta qilib ko'rsatiladi. U qabulxona xodimiga shu kodni aytadi. Ariza 24 soat amal qiladi.
 
 ### 6.5 Arizalar navbati (User)
 
