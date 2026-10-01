@@ -12,7 +12,7 @@ interface IdCardFrontProps {
 export function IdCardFront({ face, onPhotoLoad }: IdCardFrontProps) {
   return (
     <div className="id-card id-card-sheet">
-      <header className="id-card__header">
+      <header className="id-card__band id-card__header">
         <img src={emblemUrl} alt="" className="id-card__logo" />
         <p className="id-card__title">
           {CARD_TEXT.titleLines.map((line) => (
@@ -44,9 +44,9 @@ export function IdCardFront({ face, onPhotoLoad }: IdCardFrontProps) {
         onLoad={onPhotoLoad}
       />
       <p className="id-card__number">{face.cardNumber}</p>
-      <footer className="id-card__footer">
-        <span className="id-card__website">{CARD_TEXT.website}</span>
-        <span className="id-card__phone">{CARD_TEXT.phone}</span>
+      <footer className="id-card__band id-card__footer">
+        <span>{CARD_TEXT.website}</span>
+        <span>{CARD_TEXT.phone}</span>
       </footer>
     </div>
   );

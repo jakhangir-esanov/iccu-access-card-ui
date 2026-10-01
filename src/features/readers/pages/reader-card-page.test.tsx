@@ -47,9 +47,18 @@ describe('ReaderCardPage', () => {
     await renderCardPage();
 
     expect(screen.getByText('KARIMOVA GULNOZA ANVAR QIZI')).toBeInTheDocument();
-    expect(screen.getByText('STUDENT')).toBeInTheDocument();
+    expect(screen.getByText('TALABA')).toBeInTheDocument();
     expect(screen.getByText('0000001')).toBeInTheDocument();
     expect(screen.getByText('Orqa tomoni')).toBeInTheDocument();
+  });
+
+  it('should print the Uzbek front text and a barcode of the card number when the reader is loaded', async () => {
+    await renderCardPage();
+
+    expect(screen.getByText('Oʻzbekistondagi Islom sivilizatsiyasi')).toBeInTheDocument();
+    expect(screen.getByText('Berilgan sana: 26.09.2026')).toBeInTheDocument();
+    expect(screen.getByText('Amal qilish muddati: 26.09.2028')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: '0000001' })).toBeInTheDocument();
   });
 
   it('should record the print when the user confirms the card came out', async () => {

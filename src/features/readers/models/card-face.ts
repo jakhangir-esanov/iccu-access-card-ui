@@ -5,14 +5,14 @@ import { READER_CATEGORY_LABELS } from '@shared/models/reader-category';
 import type { Reader } from './reader';
 
 export const CARD_TEXT = {
-  titleLines: ['Library of Islamic Civilization', 'Center in Uzbekistan'],
-  issuedOn: 'Date of issue',
-  expiresOn: 'Date of Expiry',
+  titleLines: ['Oʻzbekistondagi Islom sivilizatsiyasi', 'markazi'],
+  issuedOn: 'Berilgan sana',
+  expiresOn: 'Amal qilish muddati',
   website: 'elibrary.cisc.uz',
-  phone: 'Tel: +998(71) 227 15 48',
+  phone: 'Tel.: +998 55 511 23 06',
 } as const;
 
-const CARD_LOCALE = 'en';
+const CARD_LOCALE = 'uz';
 const LONG_NAME_FROM = 30;
 const translateForCard = createTranslator(DICTIONARIES[CARD_LOCALE]);
 

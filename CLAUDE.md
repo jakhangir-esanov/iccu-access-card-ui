@@ -185,9 +185,9 @@ page / component  →  queries hook  →  service  →  core/http api-client  �
 - No magic strings/numbers: constants, `const` objects or union types.
 - No UI text in code: every label, message, toast, title and placeholder is a typed `core/i18n` key with
   `uz`, `ru` and `en` values. A missing translation breaks the build.
-  One exception: the printed access card is always English (the user decided this), so its fixed text
-  lives in `features/readers/models/card-face.ts` (`CARD_TEXT`); its category label comes from the `en`
-  dictionary.
+  One exception: the front of the printed access card is always Uzbek (the user decided this), so its
+  fixed text lives in `features/readers/models/card-face.ts` (`CARD_TEXT`); its category label comes
+  from the `uz` dictionary.
 - No `any` of any kind, no `as unknown as`, no non-null `!`, no `@ts-ignore`, no `eslint-disable`.
 - No dead code, no commented-out code, no `console.log`.
 - `readonly` data, early returns, no clever one-liners.
