@@ -3,7 +3,8 @@ import type { Dictionary } from './dictionary';
 export const en: Dictionary = {
   app: {
     name: 'ICCU',
-    fullName: 'Center for Islamic Civilization under the Cabinet of Ministers',
+    fullName:
+      'Center for Islamic Civilization under the Cabinet of Ministers of the Republic of Uzbekistan',
     center: 'Center for Islamic Civilization in Uzbekistan',
     libraryName: 'Library of the Center for Islamic Civilization in Uzbekistan',
     library: 'Library',
@@ -25,7 +26,7 @@ export const en: Dictionary = {
     pickDate: 'Pick a date',
   },
   roles: {
-    receptionist: 'Receptionist',
+    receptionist: 'Reception',
     admin: 'Administrator',
   },
   nav: {
@@ -165,12 +166,12 @@ export const en: Dictionary = {
   },
   publicRegistration: {
     title: 'Library registration',
-    subtitle: 'Fill in the form, then tell the reception your request code.',
+    subtitle: 'Fill in the form, then tell the reception staff your request code.',
     consent: 'I agree that my personal data is processed to issue a library card.',
     submit: 'Send',
     successTitle: 'Your request is received',
     codeLabel: 'Request code',
-    codeHint: 'Tell this code at the reception.',
+    codeHint: 'Tell this code to the reception staff.',
     validUntil: 'The request is valid until {time}.',
     newForm: 'New form',
   },

@@ -3,7 +3,7 @@ import type { Dictionary } from './dictionary';
 export const ru: Dictionary = {
   app: {
     name: 'ICCU',
-    fullName: 'Центр исламской цивилизации при Кабинете Министров',
+    fullName: 'Центр исламской цивилизации при Кабинете Министров Республики Узбекистан',
     center: 'Центр исламской цивилизации в Узбекистане',
     libraryName: 'Библиотека Центра исламской цивилизации в Узбекистане',
     library: 'Библиотека',
@@ -25,7 +25,7 @@ export const ru: Dictionary = {
     pickDate: 'Выберите дату',
   },
   roles: {
-    receptionist: 'Ресепшн',
+    receptionist: 'Приёмная',
     admin: 'Администратор',
   },
   nav: {
@@ -127,7 +127,7 @@ export const ru: Dictionary = {
     },
     notSpecified: 'Не указано',
     registrationSource: {
-      reception: 'Ресепшн',
+      reception: 'Приёмная',
       selfService: 'QR-анкета',
     },
     cardStatus: {
@@ -165,13 +165,13 @@ export const ru: Dictionary = {
   },
   publicRegistration: {
     title: 'Регистрация в библиотеке',
-    subtitle: 'Заполните анкету и назовите код заявки на ресепшне.',
+    subtitle: 'Заполните анкету, затем назовите код заявки сотруднику приёмной.',
     consent:
       'Я согласен(на) на обработку моих персональных данных для оформления читательского билета.',
     submit: 'Отправить',
     successTitle: 'Заявка принята',
     codeLabel: 'Код заявки',
-    codeHint: 'Назовите этот код на ресепшне.',
+    codeHint: 'Назовите этот код сотруднику приёмной.',
     validUntil: 'Заявка действует до {time}.',
     newForm: 'Новая анкета',
   },
@@ -341,7 +341,7 @@ export const ru: Dictionary = {
     online: 'Зарегистрировались онлайн',
     byPeriod: {
       title: 'По периодам',
-      subtitle: 'Ресепшн и QR-анкета',
+      subtitle: 'Приёмная и QR-анкета',
     },
     byCategory: {
       title: 'По категориям',

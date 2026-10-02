@@ -1,7 +1,8 @@
 export const uz = {
   app: {
     name: 'ICCU',
-    fullName: 'Vazirlar Mahkamasi huzuridagi Islom sivilizatsiyasi markazi',
+    fullName:
+      'O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Islom sivilizatsiyasi markazi',
     center: "O'zbekistondagi Islom sivilizatsiyasi markazi",
     libraryName: "O'zbekistondagi Islom sivilizatsiyasi markazi kutubxonasi",
     library: 'Kutubxona',
