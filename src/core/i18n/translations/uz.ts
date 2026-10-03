@@ -161,6 +161,15 @@ export const uz = {
     uploading: 'Rasm yuklanmoqda...',
     unreadable: "Rasmni ochib bo'lmadi. Boshqa rasm tanlang.",
     preview: 'Tanlangan rasm',
+    cameraTitle: 'Kameradan rasmga olish',
+    cameraHint: "Kitobxon kameraga to'g'ri qarasin, so'ng «Rasmga olish» tugmasini bosing.",
+    capture: 'Rasmga olish',
+    cameraStarting: 'Kamera yoqilmoqda...',
+    cameraDenied:
+      'Kameraga ruxsat berilmagan. Brauzer manzil satridagi kamera belgisi orqali ruxsat bering.',
+    cameraNotFound: 'Kamera topilmadi. Kamera kompyuterga ulanganini tekshiring.',
+    cameraBusy: "Kamerani ochib bo'lmadi: u boshqa dasturda band bo'lishi mumkin.",
+    cameraUnavailable: 'Bu brauzerda kamera ishlamaydi. Rasmni galereyadan tanlang.',
   },
   publicRegistration: {
     title: "Kutubxonaga ro'yxatdan o'tish",

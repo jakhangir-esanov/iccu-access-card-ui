@@ -25,10 +25,7 @@ export async function cropToJpeg(source: string, area: Area): Promise<Blob> {
   const canvas = document.createElement('canvas');
   canvas.width = PHOTO_OUTPUT_WIDTH;
   canvas.height = PHOTO_OUTPUT_HEIGHT;
-  const context = canvas.getContext('2d');
-  if (context === null) {
-    throw new Error('Canvas 2D context is not available');
-  }
+  const context = drawingContext(canvas);
   context.imageSmoothingQuality = 'high';
   context.drawImage(
     image,
@@ -42,6 +39,22 @@ export async function cropToJpeg(source: string, area: Area): Promise<Blob> {
     PHOTO_OUTPUT_HEIGHT,
   );
   return toJpegBlob(canvas);
+}
+
+export async function captureFrame(video: HTMLVideoElement): Promise<Blob> {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  drawingContext(canvas).drawImage(video, 0, 0);
+  return toJpegBlob(canvas);
+}
+
+function drawingContext(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
+  const context = canvas.getContext('2d');
+  if (context === null) {
+    throw new Error('Canvas 2D context is not available');
+  }
+  return context;
 }
 
 function toJpegBlob(canvas: HTMLCanvasElement): Promise<Blob> {

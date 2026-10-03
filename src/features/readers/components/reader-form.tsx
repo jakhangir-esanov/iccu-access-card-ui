@@ -7,6 +7,7 @@ import { toTashkentDateOnly } from '@core/i18n/date-format';
 import { useT } from '@core/i18n/use-i18n';
 import { applyServerErrors } from '@shared/components/form/apply-server-errors';
 import { FormAlert } from '@shared/components/form/form-alert';
+import { PhotoCamera } from '@shared/components/photo/camera';
 import { PhotoField } from '@shared/components/photo/photo-field';
 import { PersonDetailsFields } from '@shared/person-details/person-details-fields';
 import { Button } from '@shared/ui/button';
@@ -68,6 +69,7 @@ export function ReaderForm({
             render={({ field, fieldState }) => (
               <PhotoField
                 id="photo"
+                camera={PhotoCamera.Webcam}
                 upload={upload.mutateAsync}
                 currentPhoto={currentPhoto}
                 error={fieldState.error?.message}

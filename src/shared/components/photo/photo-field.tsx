@@ -6,9 +6,11 @@ import { isTranslationKey } from '@core/i18n/translation-key';
 import { useT } from '@core/i18n/use-i18n';
 import { Button } from '@shared/ui/button';
 import { Label } from '@shared/ui/label';
+import { PhotoCamera } from './camera';
 import { cropToJpeg, loadImage } from './crop-image';
 import { PhotoCropDialog } from './photo-crop-dialog';
 import { canDecodeImage, useObjectUrl } from './use-object-url';
+import { WebcamDialog } from './webcam-dialog';
 
 const IMAGE_ACCEPT = 'image/*';
 const FRONT_CAMERA = 'user';
@@ -19,9 +21,17 @@ interface PhotoFieldProps {
   readonly upload: (photo: Blob) => Promise<string>;
   readonly error?: string | undefined;
   readonly currentPhoto?: ReactNode;
+  readonly camera?: PhotoCamera;
 }
 
-export function PhotoField({ id, onChange, upload, error, currentPhoto }: PhotoFieldProps) {
+export function PhotoField({
+  id,
+  onChange,
+  upload,
+  error,
+  currentPhoto,
+  camera = PhotoCamera.Device,
+}: PhotoFieldProps) {
   const t = useT();
   const errorMessage = useErrorMessage();
   const galleryInput = useRef<HTMLInputElement>(null);
@@ -29,7 +39,22 @@ export function PhotoField({ id, onChange, upload, error, currentPhoto }: PhotoF
   const [source, setSource] = useObjectUrl();
   const [preview, setPreview] = useObjectUrl();
   const [isUploading, setUploading] = useState(false);
+  const [isWebcamOpen, setWebcamOpen] = useState(false);
   const [failure, setFailure] = useState<string | null>(null);
+
+  const openCamera = () => {
+    if (camera === PhotoCamera.Webcam) {
+      setWebcamOpen(true);
+      return;
+    }
+    cameraInput.current?.click();
+  };
+
+  const takeFrame = (frame: Blob) => {
+    setWebcamOpen(false);
+    setFailure(null);
+    setSource(frame);
+  };
 
   const pick = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -101,12 +126,7 @@ export function PhotoField({ id, onChange, upload, error, currentPhoto }: PhotoF
               <ImageIcon aria-hidden />
               {t(preview === null ? 'photo.fromGallery' : 'photo.change')}
             </Button>
-            <Button
-              type="button"
-              variant="outline"
-              disabled={isUploading}
-              onClick={() => cameraInput.current?.click()}
-            >
+            <Button type="button" variant="outline" disabled={isUploading} onClick={openCamera}>
               <CameraIcon aria-hidden />
               {t('photo.fromCamera')}
             </Button>
@@ -122,18 +142,32 @@ export function PhotoField({ id, onChange, upload, error, currentPhoto }: PhotoF
         tabIndex={-1}
         onChange={(event) => void pick(event)}
       />
-      <input
-        ref={cameraInput}
-        type="file"
-        accept={IMAGE_ACCEPT}
-        capture={FRONT_CAMERA}
-        className="sr-only"
-        tabIndex={-1}
-        aria-hidden
-        onChange={(event) => void pick(event)}
-      />
+      {camera === PhotoCamera.Device && (
+        <input
+          ref={cameraInput}
+          type="file"
+          accept={IMAGE_ACCEPT}
+          capture={FRONT_CAMERA}
+          className="sr-only"
+          tabIndex={-1}
+          aria-hidden
+          onChange={(event) => void pick(event)}
+        />
+      )}
       {shownError !== undefined && shownError !== '' && (
         <p className="text-sm text-destructive">{shownError}</p>
+      )}
+      {isWebcamOpen && (
+        <WebcamDialog
+          onCancel={() => {
+            setWebcamOpen(false);
+          }}
+          onCapture={takeFrame}
+          onError={() => {
+            setWebcamOpen(false);
+            setFailure(t('photo.unreadable'));
+          }}
+        />
       )}
       <PhotoCropDialog
         key={source}

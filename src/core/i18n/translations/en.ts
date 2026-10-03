@@ -163,6 +163,15 @@ export const en: Dictionary = {
     uploading: 'Uploading the photo...',
     unreadable: 'The photo cannot be opened. Choose another one.',
     preview: 'Chosen photo',
+    cameraTitle: 'Take a photo',
+    cameraHint: 'Ask the reader to look straight into the camera, then press Capture.',
+    capture: 'Capture',
+    cameraStarting: 'Starting the camera...',
+    cameraDenied: 'Camera access is blocked. Allow it from the camera icon in the address bar.',
+    cameraNotFound: 'No camera found. Check that it is connected to the computer.',
+    cameraBusy: 'The camera cannot be opened; another program may be using it.',
+    cameraUnavailable:
+      'The camera is not available in this browser. Choose a photo from the gallery.',
   },
   publicRegistration: {
     title: 'Library registration',
